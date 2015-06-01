@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F20F06C51B1CA3B5007007AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20F06C41B1CA3B5007007AF /* AppDelegate.swift */; };
-		F20F06C71B1CA3B5007007AF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20F06C61B1CA3B5007007AF /* ViewController.swift */; };
+		F20F06C71B1CA3B5007007AF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20F06C61B1CA3B5007007AF /* HomeViewController.swift */; };
 		F20F06CA1B1CA3B5007007AF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F20F06C81B1CA3B5007007AF /* Main.storyboard */; };
 		F20F06CC1B1CA3B5007007AF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F20F06CB1B1CA3B5007007AF /* Images.xcassets */; };
 		F20F06CF1B1CA3B5007007AF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F20F06CD1B1CA3B5007007AF /* LaunchScreen.xib */; };
@@ -29,7 +29,7 @@
 		F20F06BF1B1CA3B5007007AF /* Glimp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Glimp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F20F06C31B1CA3B5007007AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F20F06C41B1CA3B5007007AF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F20F06C61B1CA3B5007007AF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F20F06C61B1CA3B5007007AF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		F20F06C91B1CA3B5007007AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F20F06CB1B1CA3B5007007AF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F20F06CE1B1CA3B5007007AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -78,7 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				F20F06C41B1CA3B5007007AF /* AppDelegate.swift */,
-				F20F06C61B1CA3B5007007AF /* ViewController.swift */,
+				F20F06C61B1CA3B5007007AF /* HomeViewController.swift */,
 				F20F06C81B1CA3B5007007AF /* Main.storyboard */,
 				F20F06CB1B1CA3B5007007AF /* Images.xcassets */,
 				F20F06CD1B1CA3B5007007AF /* LaunchScreen.xib */,
@@ -212,7 +212,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F20F06C71B1CA3B5007007AF /* ViewController.swift in Sources */,
+				F20F06C71B1CA3B5007007AF /* HomeViewController.swift in Sources */,
 				F20F06C51B1CA3B5007007AF /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -405,6 +405,7 @@
 				F20F06E01B1CA3B6007007AF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F20F06E11B1CA3B6007007AF /* Build configuration list for PBXNativeTarget "GlimpTests" */ = {
 			isa = XCConfigurationList;
@@ -413,6 +414,7 @@
 				F20F06E31B1CA3B6007007AF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
