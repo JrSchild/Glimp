@@ -1,0 +1,420 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F20F06C51B1CA3B5007007AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20F06C41B1CA3B5007007AF /* AppDelegate.swift */; };
+		F20F06C71B1CA3B5007007AF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20F06C61B1CA3B5007007AF /* ViewController.swift */; };
+		F20F06CA1B1CA3B5007007AF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F20F06C81B1CA3B5007007AF /* Main.storyboard */; };
+		F20F06CC1B1CA3B5007007AF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F20F06CB1B1CA3B5007007AF /* Images.xcassets */; };
+		F20F06CF1B1CA3B5007007AF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F20F06CD1B1CA3B5007007AF /* LaunchScreen.xib */; };
+		F20F06DB1B1CA3B6007007AF /* GlimpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20F06DA1B1CA3B6007007AF /* GlimpTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F20F06D51B1CA3B6007007AF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F20F06B71B1CA3B5007007AF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F20F06BE1B1CA3B5007007AF;
+			remoteInfo = Glimp;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F20F06BF1B1CA3B5007007AF /* Glimp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Glimp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F20F06C31B1CA3B5007007AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F20F06C41B1CA3B5007007AF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F20F06C61B1CA3B5007007AF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F20F06C91B1CA3B5007007AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F20F06CB1B1CA3B5007007AF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		F20F06CE1B1CA3B5007007AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		F20F06D41B1CA3B6007007AF /* GlimpTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GlimpTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F20F06D91B1CA3B6007007AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F20F06DA1B1CA3B6007007AF /* GlimpTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlimpTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F20F06BC1B1CA3B5007007AF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F20F06D11B1CA3B6007007AF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F20F06B61B1CA3B5007007AF = {
+			isa = PBXGroup;
+			children = (
+				F20F06C11B1CA3B5007007AF /* Glimp */,
+				F20F06D71B1CA3B6007007AF /* GlimpTests */,
+				F20F06C01B1CA3B5007007AF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F20F06C01B1CA3B5007007AF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F20F06BF1B1CA3B5007007AF /* Glimp.app */,
+				F20F06D41B1CA3B6007007AF /* GlimpTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F20F06C11B1CA3B5007007AF /* Glimp */ = {
+			isa = PBXGroup;
+			children = (
+				F20F06C41B1CA3B5007007AF /* AppDelegate.swift */,
+				F20F06C61B1CA3B5007007AF /* ViewController.swift */,
+				F20F06C81B1CA3B5007007AF /* Main.storyboard */,
+				F20F06CB1B1CA3B5007007AF /* Images.xcassets */,
+				F20F06CD1B1CA3B5007007AF /* LaunchScreen.xib */,
+				F20F06C21B1CA3B5007007AF /* Supporting Files */,
+			);
+			path = Glimp;
+			sourceTree = "<group>";
+		};
+		F20F06C21B1CA3B5007007AF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F20F06C31B1CA3B5007007AF /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F20F06D71B1CA3B6007007AF /* GlimpTests */ = {
+			isa = PBXGroup;
+			children = (
+				F20F06DA1B1CA3B6007007AF /* GlimpTests.swift */,
+				F20F06D81B1CA3B6007007AF /* Supporting Files */,
+			);
+			path = GlimpTests;
+			sourceTree = "<group>";
+		};
+		F20F06D81B1CA3B6007007AF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F20F06D91B1CA3B6007007AF /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F20F06BE1B1CA3B5007007AF /* Glimp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F20F06DE1B1CA3B6007007AF /* Build configuration list for PBXNativeTarget "Glimp" */;
+			buildPhases = (
+				F20F06BB1B1CA3B5007007AF /* Sources */,
+				F20F06BC1B1CA3B5007007AF /* Frameworks */,
+				F20F06BD1B1CA3B5007007AF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Glimp;
+			productName = Glimp;
+			productReference = F20F06BF1B1CA3B5007007AF /* Glimp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F20F06D31B1CA3B6007007AF /* GlimpTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F20F06E11B1CA3B6007007AF /* Build configuration list for PBXNativeTarget "GlimpTests" */;
+			buildPhases = (
+				F20F06D01B1CA3B6007007AF /* Sources */,
+				F20F06D11B1CA3B6007007AF /* Frameworks */,
+				F20F06D21B1CA3B6007007AF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F20F06D61B1CA3B6007007AF /* PBXTargetDependency */,
+			);
+			name = GlimpTests;
+			productName = GlimpTests;
+			productReference = F20F06D41B1CA3B6007007AF /* GlimpTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F20F06B71B1CA3B5007007AF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Joram Ruitenschild";
+				TargetAttributes = {
+					F20F06BE1B1CA3B5007007AF = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					F20F06D31B1CA3B6007007AF = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = F20F06BE1B1CA3B5007007AF;
+					};
+				};
+			};
+			buildConfigurationList = F20F06BA1B1CA3B5007007AF /* Build configuration list for PBXProject "Glimp" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F20F06B61B1CA3B5007007AF;
+			productRefGroup = F20F06C01B1CA3B5007007AF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F20F06BE1B1CA3B5007007AF /* Glimp */,
+				F20F06D31B1CA3B6007007AF /* GlimpTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F20F06BD1B1CA3B5007007AF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F20F06CA1B1CA3B5007007AF /* Main.storyboard in Resources */,
+				F20F06CF1B1CA3B5007007AF /* LaunchScreen.xib in Resources */,
+				F20F06CC1B1CA3B5007007AF /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F20F06D21B1CA3B6007007AF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F20F06BB1B1CA3B5007007AF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F20F06C71B1CA3B5007007AF /* ViewController.swift in Sources */,
+				F20F06C51B1CA3B5007007AF /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F20F06D01B1CA3B6007007AF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F20F06DB1B1CA3B6007007AF /* GlimpTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F20F06D61B1CA3B6007007AF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F20F06BE1B1CA3B5007007AF /* Glimp */;
+			targetProxy = F20F06D51B1CA3B6007007AF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F20F06C81B1CA3B5007007AF /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F20F06C91B1CA3B5007007AF /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F20F06CD1B1CA3B5007007AF /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F20F06CE1B1CA3B5007007AF /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F20F06DC1B1CA3B6007007AF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F20F06DD1B1CA3B6007007AF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F20F06DF1B1CA3B6007007AF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Glimp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F20F06E01B1CA3B6007007AF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Glimp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		F20F06E21B1CA3B6007007AF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = GlimpTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Glimp.app/Glimp";
+			};
+			name = Debug;
+		};
+		F20F06E31B1CA3B6007007AF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = GlimpTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Glimp.app/Glimp";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F20F06BA1B1CA3B5007007AF /* Build configuration list for PBXProject "Glimp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F20F06DC1B1CA3B6007007AF /* Debug */,
+				F20F06DD1B1CA3B6007007AF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F20F06DE1B1CA3B6007007AF /* Build configuration list for PBXNativeTarget "Glimp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F20F06DF1B1CA3B6007007AF /* Debug */,
+				F20F06E01B1CA3B6007007AF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		F20F06E11B1CA3B6007007AF /* Build configuration list for PBXNativeTarget "GlimpTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F20F06E21B1CA3B6007007AF /* Debug */,
+				F20F06E31B1CA3B6007007AF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F20F06B71B1CA3B5007007AF /* Project object */;
+}

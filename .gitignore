@@ -17,6 +17,5 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
-
-# *.xcworkspace
-# !default.xcworkspace
+*.xcworkspace
+!default.xcworkspace
