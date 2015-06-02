@@ -40,3 +40,6 @@ This is a timesensitive project, so there is not much room for error. A requirem
 
 ### Kittens
 ![Kittens](/doc/kittens.gif)
+
+### Links
+- http://stackoverflow.com/questions/28325277/how-to-set-cell-spacing-and-uicollectionview-uicollectionviewflowlayout-size-r
