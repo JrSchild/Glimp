@@ -13,7 +13,9 @@ class HomeViewController: UIViewController {
     let screenSize : CGRect
     let screenWidth: CGFloat!
     let screenHeight: CGFloat!
-    let columns = 4 as CGFloat
+    let columns = CGFloat(4)
+    
+    let homeData = HomeData()
     
     required init(coder aDecoder: NSCoder) {
         screenSize = UIScreen.mainScreen().bounds
@@ -27,7 +29,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         layout.itemSize = CGSize(width: screenWidth / columns, height: screenWidth / columns)
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
@@ -35,6 +37,8 @@ class HomeViewController: UIViewController {
         collectionView!.dataSource = self
         collectionView!.delegate = self
         collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "UICollectionViewCell")
+        collectionView!.registerClass(AnswerHeaderCollectionViewCell.self, forCellWithReuseIdentifier: "AnswerHeaderCollectionViewCell")
+        collectionView!.registerClass(AskHeaderCollectionViewCell.self, forCellWithReuseIdentifier: "AskHeaderCollectionViewCell")
         collectionView!.backgroundColor = UIColor.whiteColor()
         self.view.addSubview(collectionView!)
     }
@@ -44,28 +48,43 @@ extension HomeViewController: UICollectionViewDataSource {
     
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 1
+        return 4
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 60
+        if section == 0 || section == 2 {
+            return 1
+        }
+        return homeData.data[(section - 1) / 2].count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("UICollectionViewCell", forIndexPath: indexPath) as UICollectionViewCell
-        cell.backgroundColor = UIColor.whiteColor()
-        cell.layer.borderColor = UIColor.blackColor().CGColor
-        cell.layer.borderWidth = 0
-        cell.frame.size.width = screenWidth / columns
-        cell.frame.size.height = screenWidth / columns
+        var cell : UICollectionViewCell
         
-        var randomRed:CGFloat = CGFloat(drand48())
-        var randomGreen:CGFloat = CGFloat(drand48())
-        var randomBlue:CGFloat = CGFloat(drand48())
-        
-        cell.backgroundColor = UIColor(red: randomRed, green: randomGreen, blue: randomBlue, alpha: 1.0)
+        if indexPath.section == 0 || indexPath.section == 2 {
+            let cellIdentifier = indexPath.section == 0 ? "AnswerHeaderCollectionViewCell" : "AskHeaderCollectionViewCell"
+            cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as UICollectionViewCell
+            cell.frame.size.width = screenWidth
+            cell.frame.size.height = 46
+            cell.backgroundColor = UIColor.whiteColor()
+        } else {
+            cell = collectionView.dequeueReusableCellWithReuseIdentifier("UICollectionViewCell", forIndexPath: indexPath) as UICollectionViewCell
+            cell.frame.size.width = screenWidth / columns
+            cell.frame.size.height = screenWidth / columns
+            cell.backgroundColor = UIColor(red: CGFloat(drand48()), green: CGFloat(drand48()), blue: CGFloat(drand48()), alpha: 1.0)
+        }
         
         return cell
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        
+        if indexPath.section == 0 || indexPath.section == 2
+        {
+            return CGSize(width: screenWidth, height: 46)
+        }
+        return CGSize(width: screenWidth / columns, height: screenWidth / columns);
+        
     }
 }
 

@@ -13,6 +13,8 @@
 		F20F06CC1B1CA3B5007007AF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F20F06CB1B1CA3B5007007AF /* Images.xcassets */; };
 		F20F06CF1B1CA3B5007007AF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F20F06CD1B1CA3B5007007AF /* LaunchScreen.xib */; };
 		F20F06DB1B1CA3B6007007AF /* GlimpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20F06DA1B1CA3B6007007AF /* GlimpTests.swift */; };
+		F2DD3D5E1B1DB4E40085762F /* HomeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DD3D5D1B1DB4E40085762F /* HomeData.swift */; };
+		F2DD3D621B1DBC560085762F /* HeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DD3D611B1DBC560085762F /* HeaderCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +38,8 @@
 		F20F06D41B1CA3B6007007AF /* GlimpTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GlimpTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F20F06D91B1CA3B6007007AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F20F06DA1B1CA3B6007007AF /* GlimpTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlimpTests.swift; sourceTree = "<group>"; };
+		F2DD3D5D1B1DB4E40085762F /* HomeData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeData.swift; sourceTree = "<group>"; };
+		F2DD3D611B1DBC560085762F /* HeaderCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +87,8 @@
 				F20F06CB1B1CA3B5007007AF /* Images.xcassets */,
 				F20F06CD1B1CA3B5007007AF /* LaunchScreen.xib */,
 				F20F06C21B1CA3B5007007AF /* Supporting Files */,
+				F2DD3D5D1B1DB4E40085762F /* HomeData.swift */,
+				F2DD3D611B1DBC560085762F /* HeaderCollectionViewCell.swift */,
 			);
 			path = Glimp;
 			sourceTree = "<group>";
@@ -213,7 +219,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				F20F06C71B1CA3B5007007AF /* HomeViewController.swift in Sources */,
+				F2DD3D621B1DBC560085762F /* HeaderCollectionViewCell.swift in Sources */,
 				F20F06C51B1CA3B5007007AF /* AppDelegate.swift in Sources */,
+				F2DD3D5E1B1DB4E40085762F /* HomeData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
