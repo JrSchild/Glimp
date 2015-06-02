@@ -15,6 +15,7 @@ class HomeViewController: UIViewController {
     let screenHeight: CGFloat!
     let columns = CGFloat(4)
     let homeData = HomeData()
+    var selectedIndexes = [Int:Bool]()
     
     @IBOutlet weak var sendBar: UIView!
     
@@ -42,9 +43,21 @@ class HomeViewController: UIViewController {
         collectionView!.registerClass(AnswerHeaderCollectionViewCell.self, forCellWithReuseIdentifier: "AnswerHeaderCollectionViewCell")
         collectionView!.registerClass(AskHeaderCollectionViewCell.self, forCellWithReuseIdentifier: "AskHeaderCollectionViewCell")
         self.view.addSubview(collectionView!)
-        collectionView!.layer.zPosition = 10
-        sendBar.layer.zPosition = 100
+        collectionView!.layer.zPosition = 5
+        sendBar.layer.zPosition = 10
+        setSendBar()
     }
+    
+    func setSendBar() {
+        if countElements(selectedIndexes) != 0 {
+            collectionView!.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height - 60)
+            sendBar.hidden = false
+        } else {
+            collectionView!.frame = self.view.frame
+            sendBar.hidden = true
+        }
+    }
+    
 }
 
 extension HomeViewController: UICollectionViewDataSource {
@@ -100,6 +113,12 @@ extension HomeViewController: UICollectionViewDataSource {
         if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? ThumbnailCollectionViewCell {
             cell.isSelected = !cell.isSelected
             cell.setSelected()
+            if (cell.isSelected) {
+                selectedIndexes[indexPath.row] = true
+            } else {
+                selectedIndexes.removeValueForKey(indexPath.row)
+            }
+            setSendBar()
         }
     }
 }
