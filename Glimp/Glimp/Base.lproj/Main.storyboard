@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13F1066" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Home View Controller-->
@@ -15,9 +16,59 @@
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5yb-pm-tmW">
+                                <rect key="frame" x="0.0" y="607" width="375" height="60"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZaB-aY-Dox">
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="60"/>
+                                        <color key="backgroundColor" red="0.13333333333333333" green="0.75294117647058822" blue="0.39215686274509803" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="Onr-8p-NdO"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="13"/>
+                                        <state key="normal" title="ALL">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="diK-xU-O7g">
+                                        <rect key="frame" x="101" y="0.0" width="274" height="60"/>
+                                        <color key="backgroundColor" red="0.1333333333" green="0.75294117650000003" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="274" id="XDn-91-uju"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="13"/>
+                                        <state key="normal" title="SEND">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="diK-xU-O7g" secondAttribute="bottom" id="1qq-AK-yZ7"/>
+                                    <constraint firstAttribute="trailing" secondItem="diK-xU-O7g" secondAttribute="trailing" id="6GN-J1-2JM"/>
+                                    <constraint firstAttribute="height" constant="60" id="DyQ-Vc-4hV"/>
+                                    <constraint firstItem="diK-xU-O7g" firstAttribute="top" secondItem="5yb-pm-tmW" secondAttribute="top" id="OIO-TN-qMZ"/>
+                                    <constraint firstItem="diK-xU-O7g" firstAttribute="leading" secondItem="5yb-pm-tmW" secondAttribute="leading" constant="101" id="ZsH-wb-MZl"/>
+                                    <constraint firstAttribute="bottom" secondItem="ZaB-aY-Dox" secondAttribute="bottom" id="jE5-g8-Kez"/>
+                                    <constraint firstItem="ZaB-aY-Dox" firstAttribute="leading" secondItem="5yb-pm-tmW" secondAttribute="leading" id="jy5-b4-GmE"/>
+                                    <constraint firstItem="ZaB-aY-Dox" firstAttribute="top" secondItem="5yb-pm-tmW" secondAttribute="top" id="x5E-k6-D3j"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="5yb-pm-tmW" secondAttribute="trailing" constant="-16" id="Bnq-VG-V17"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="5yb-pm-tmW" secondAttribute="bottom" id="NI5-5i-gks"/>
+                            <constraint firstItem="5yb-pm-tmW" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="gOW-Qf-Pwg"/>
+                        </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="sendBar" destination="5yb-pm-tmW" id="A88-Ri-XfN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>

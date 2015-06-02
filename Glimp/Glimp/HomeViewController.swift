@@ -16,6 +16,8 @@ class HomeViewController: UIViewController {
     let columns = CGFloat(4)
     let homeData = HomeData()
     
+    @IBOutlet weak var sendBar: UIView!
+    
     required init(coder aDecoder: NSCoder) {
         screenSize = UIScreen.mainScreen().bounds
         screenWidth = screenSize.width
@@ -36,10 +38,12 @@ class HomeViewController: UIViewController {
         collectionView!.dataSource = self
         collectionView!.delegate = self
         collectionView!.backgroundColor = UIColor.whiteColor()
-        collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "UICollectionViewCell")
+        collectionView!.registerClass(ThumbnailCollectionViewCell.self, forCellWithReuseIdentifier: "UICollectionViewCell")
         collectionView!.registerClass(AnswerHeaderCollectionViewCell.self, forCellWithReuseIdentifier: "AnswerHeaderCollectionViewCell")
         collectionView!.registerClass(AskHeaderCollectionViewCell.self, forCellWithReuseIdentifier: "AskHeaderCollectionViewCell")
         self.view.addSubview(collectionView!)
+        collectionView!.layer.zPosition = 10
+        sendBar.layer.zPosition = 100
     }
 }
 
@@ -91,7 +95,21 @@ extension HomeViewController: UICollectionViewDataSource {
         return CGSize(width: screenWidth / columns, height: screenWidth / columns);
         
     }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? ThumbnailCollectionViewCell {
+            cell.isSelected = !cell.isSelected
+            cell.setSelected()
+        }
+    }
 }
 
-extension HomeViewController: UICollectionViewDelegate {}
+extension HomeViewController: UICollectionViewDelegate {
+    func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+        if indexPath.section == 3 && indexPath.row != 0 {
+            return true
+        }
+        return false
+    }
+}
 extension HomeViewController: UICollectionViewDelegateFlowLayout {}

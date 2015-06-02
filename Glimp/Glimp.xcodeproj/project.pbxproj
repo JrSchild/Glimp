@@ -15,6 +15,7 @@
 		F20F06DB1B1CA3B6007007AF /* GlimpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20F06DA1B1CA3B6007007AF /* GlimpTests.swift */; };
 		F2DD3D5E1B1DB4E40085762F /* HomeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DD3D5D1B1DB4E40085762F /* HomeData.swift */; };
 		F2DD3D621B1DBC560085762F /* HeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DD3D611B1DBC560085762F /* HeaderCollectionViewCell.swift */; };
+		F2DD3D641B1DD35F0085762F /* ThumbnailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DD3D631B1DD35F0085762F /* ThumbnailCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		F20F06DA1B1CA3B6007007AF /* GlimpTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlimpTests.swift; sourceTree = "<group>"; };
 		F2DD3D5D1B1DB4E40085762F /* HomeData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeData.swift; sourceTree = "<group>"; };
 		F2DD3D611B1DBC560085762F /* HeaderCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderCollectionViewCell.swift; sourceTree = "<group>"; };
+		F2DD3D631B1DD35F0085762F /* ThumbnailCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 				F20F06C21B1CA3B5007007AF /* Supporting Files */,
 				F2DD3D5D1B1DB4E40085762F /* HomeData.swift */,
 				F2DD3D611B1DBC560085762F /* HeaderCollectionViewCell.swift */,
+				F2DD3D631B1DD35F0085762F /* ThumbnailCollectionViewCell.swift */,
 			);
 			path = Glimp;
 			sourceTree = "<group>";
@@ -221,6 +224,7 @@
 				F20F06C71B1CA3B5007007AF /* HomeViewController.swift in Sources */,
 				F2DD3D621B1DBC560085762F /* HeaderCollectionViewCell.swift in Sources */,
 				F20F06C51B1CA3B5007007AF /* AppDelegate.swift in Sources */,
+				F2DD3D641B1DD35F0085762F /* ThumbnailCollectionViewCell.swift in Sources */,
 				F2DD3D5E1B1DB4E40085762F /* HomeData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
