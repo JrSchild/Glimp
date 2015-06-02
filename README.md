@@ -37,6 +37,21 @@ This is a timesensitive project, so there is not much room for error. A requirem
 |4 | Final release | Clean up code and refactor where necessary |
 
 ### Sketches
+![Sketches](/doc/sketches.png)
+
+#### Login View
+The first view where the user can login or sign up for an account. After logging in, the Home View will appear.
+
+#### Main View
+Contains most of the apps core functionality. In this view the user can send answer a Glimp and ask for a glimp. When a single friend is selected, a send bar appears with two buttons. All: To select all friends, Send: to send the request.  
+The timer can be set with in the 'Ask a Glimp'-bar. In the 'Answer a Glimp'-bar are the friends that currently asked you for a Glimp. Each thumbnail has an animated overview showing how much time you have left to answer.
+By pressing the 'Plus' button, the user can add new friends. When sliding left the Glimp View will appear.
+
+#### Glimp View
+Provides an overview of all Glimps received. There is a tab menu on the top that shows either the Glimps sent or the Glimps received. When tapping the profile picture on the top right, the Profile View will appear.
+
+#### Profile View
+Shows the user information and settings.
 
 ### Kittens
 ![Kittens](/doc/kittens.gif)
