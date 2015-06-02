@@ -14,7 +14,6 @@ class HomeViewController: UIViewController {
     let screenWidth: CGFloat!
     let screenHeight: CGFloat!
     let columns = CGFloat(4)
-    
     let homeData = HomeData()
     
     required init(coder aDecoder: NSCoder) {
@@ -36,16 +35,15 @@ class HomeViewController: UIViewController {
         collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
         collectionView!.dataSource = self
         collectionView!.delegate = self
+        collectionView!.backgroundColor = UIColor.whiteColor()
         collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "UICollectionViewCell")
         collectionView!.registerClass(AnswerHeaderCollectionViewCell.self, forCellWithReuseIdentifier: "AnswerHeaderCollectionViewCell")
         collectionView!.registerClass(AskHeaderCollectionViewCell.self, forCellWithReuseIdentifier: "AskHeaderCollectionViewCell")
-        collectionView!.backgroundColor = UIColor.whiteColor()
         self.view.addSubview(collectionView!)
     }
 }
 
 extension HomeViewController: UICollectionViewDataSource {
-    
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 4
@@ -71,7 +69,14 @@ extension HomeViewController: UICollectionViewDataSource {
             cell = collectionView.dequeueReusableCellWithReuseIdentifier("UICollectionViewCell", forIndexPath: indexPath) as UICollectionViewCell
             cell.frame.size.width = screenWidth / columns
             cell.frame.size.height = screenWidth / columns
-            cell.backgroundColor = UIColor(red: CGFloat(drand48()), green: CGFloat(drand48()), blue: CGFloat(drand48()), alpha: 1.0)
+            if indexPath.section == 3 && indexPath.row == 0 {
+                cell.backgroundColor = UIColor(red: CGFloat(228) / 255.0, green: CGFloat(228) / 255.0, blue: CGFloat(228) / 255.0, alpha: 1.0)
+                let imageView = UIImageView(image: UIImage(named: "add-friend")!)
+                imageView.frame = CGRect(x: (cell.frame.width - imageView.frame.width) / 2, y: (cell.frame.height - imageView.frame.height) / 2, width: imageView.frame.width, height: imageView.frame.height)
+                cell.addSubview(imageView)
+            } else {
+                cell.backgroundColor = UIColor(red: CGFloat(drand48()), green: CGFloat(drand48()), blue: CGFloat(drand48()), alpha: 1.0)
+            }
         }
         
         return cell
