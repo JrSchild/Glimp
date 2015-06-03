@@ -46,6 +46,10 @@ class HomeViewController: UIViewController {
         collectionView!.layer.zPosition = 5
         sendBar.layer.zPosition = 10
         setSendBar()
+        
+        var swipeGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "showGlimps")
+        swipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.Right
+        collectionView!.addGestureRecognizer(swipeGestureRecognizer)
     }
     
     func setSendBar() {
@@ -57,6 +61,29 @@ class HomeViewController: UIViewController {
             sendBar.hidden = true
         }
     }
+    
+    func showGlimps() {
+        self.performSegueWithIdentifier("showGlimps", sender: self)
+    }
+    
+    // Segue specific code from http://www.appcoda.com/custom-segue-animations/
+    override func segueForUnwindingToViewController(toViewController: UIViewController, fromViewController: UIViewController, identifier: String?) -> UIStoryboardSegue {
+        
+        if let id = identifier {
+            if id == "hideGlimps" {
+                let unwindSegue = FirstCustomSegueUnwind(identifier: id, source: fromViewController, destination: toViewController, performHandler: { () -> Void in
+                })
+                return unwindSegue
+            }
+        }
+        
+        return super.segueForUnwindingToViewController(toViewController, fromViewController: fromViewController, identifier: identifier)
+    }
+    
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {}
+    
+    @IBAction func returnFromSegueActions(sender: UIStoryboardSegue) {}
     
 }
 

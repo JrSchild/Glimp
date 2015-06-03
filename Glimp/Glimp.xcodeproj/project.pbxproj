@@ -16,6 +16,9 @@
 		F2DD3D5E1B1DB4E40085762F /* HomeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DD3D5D1B1DB4E40085762F /* HomeData.swift */; };
 		F2DD3D621B1DBC560085762F /* HeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DD3D611B1DBC560085762F /* HeaderCollectionViewCell.swift */; };
 		F2DD3D641B1DD35F0085762F /* ThumbnailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DD3D631B1DD35F0085762F /* ThumbnailCollectionViewCell.swift */; };
+		F2DD3D6A1B1EFE720085762F /* GlimpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DD3D691B1EFE720085762F /* GlimpViewController.swift */; };
+		F2DD3D771B1F05410085762F /* FirstCustomSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DD3D731B1F05410085762F /* FirstCustomSegue.swift */; };
+		F2DD3D781B1F05410085762F /* FirstCustomSegueUnwind.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DD3D741B1F05410085762F /* FirstCustomSegueUnwind.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +45,9 @@
 		F2DD3D5D1B1DB4E40085762F /* HomeData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeData.swift; sourceTree = "<group>"; };
 		F2DD3D611B1DBC560085762F /* HeaderCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderCollectionViewCell.swift; sourceTree = "<group>"; };
 		F2DD3D631B1DD35F0085762F /* ThumbnailCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailCollectionViewCell.swift; sourceTree = "<group>"; };
+		F2DD3D691B1EFE720085762F /* GlimpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlimpViewController.swift; sourceTree = "<group>"; };
+		F2DD3D731B1F05410085762F /* FirstCustomSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstCustomSegue.swift; sourceTree = "<group>"; };
+		F2DD3D741B1F05410085762F /* FirstCustomSegueUnwind.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstCustomSegueUnwind.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,10 +91,13 @@
 			children = (
 				F20F06C41B1CA3B5007007AF /* AppDelegate.swift */,
 				F20F06C61B1CA3B5007007AF /* HomeViewController.swift */,
+				F2DD3D691B1EFE720085762F /* GlimpViewController.swift */,
 				F20F06C81B1CA3B5007007AF /* Main.storyboard */,
 				F20F06CB1B1CA3B5007007AF /* Images.xcassets */,
 				F20F06CD1B1CA3B5007007AF /* LaunchScreen.xib */,
 				F20F06C21B1CA3B5007007AF /* Supporting Files */,
+				F2DD3D731B1F05410085762F /* FirstCustomSegue.swift */,
+				F2DD3D741B1F05410085762F /* FirstCustomSegueUnwind.swift */,
 				F2DD3D5D1B1DB4E40085762F /* HomeData.swift */,
 				F2DD3D611B1DBC560085762F /* HeaderCollectionViewCell.swift */,
 				F2DD3D631B1DD35F0085762F /* ThumbnailCollectionViewCell.swift */,
@@ -221,10 +230,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2DD3D781B1F05410085762F /* FirstCustomSegueUnwind.swift in Sources */,
 				F20F06C71B1CA3B5007007AF /* HomeViewController.swift in Sources */,
 				F2DD3D621B1DBC560085762F /* HeaderCollectionViewCell.swift in Sources */,
 				F20F06C51B1CA3B5007007AF /* AppDelegate.swift in Sources */,
+				F2DD3D771B1F05410085762F /* FirstCustomSegue.swift in Sources */,
 				F2DD3D641B1DD35F0085762F /* ThumbnailCollectionViewCell.swift in Sources */,
+				F2DD3D6A1B1EFE720085762F /* GlimpViewController.swift in Sources */,
 				F2DD3D5E1B1DB4E40085762F /* HomeData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
