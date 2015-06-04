@@ -95,14 +95,45 @@ class HomeViewController: UIViewController {
 
             var friendRequest = PFObject(className: "FriendRequest")
             friendRequest["fromUser"] = user
-            friendRequest["toUser"] = friend
+            friendRequest["toUser"] = friend!.objectId
             friendRequest.saveInBackground()
             println("added friend \(friend)")
         })
     }
     
-    func acceptFriend() {
+    func addOrIgnoreFriend(request: Int) {
+        let sheet: UIActionSheet = UIActionSheet();
+        sheet.delegate = self;
+        sheet.addButtonWithTitle("Accept Request");
+        sheet.addButtonWithTitle("Delete Request");
+        sheet.addButtonWithTitle("Cancel");
+        sheet.cancelButtonIndex = 2;
+        sheet.tag = request
+        sheet.showInView(self.view);
+    }
+    
+    func acceptFriend(requestIndex: Int) {
+        var user = PFUser.currentUser()!
+        var request: AnyObject = Requests[requestIndex]
+        var friend = request["fromUser"] as PFObject
         
+        // Update data in memory
+        user["Friends"].addObject(friend.objectId)
+        Friends.append(friend)
+        Requests.removeAtIndex(requestIndex)
+        
+        // Persist changes to the database
+        user.saveInBackground()
+        request.deleteInBackground()
+        
+        collectionView!.reloadData()
+    }
+    
+    func ignoreFriend(requestIndex: Int) {
+        Requests[requestIndex].deleteInBackground()
+        Requests.removeAtIndex(requestIndex)
+        
+        collectionView!.reloadData()
     }
     
     func couldNotFindFriend() {}
@@ -124,7 +155,7 @@ extension HomeViewController: UICollectionViewDataSource {
             return 1
         }
         if section == 3 {
-            return Friends.count + 1
+            return Friends.count + Requests.count + 1
         }
         return homeData.data[(section - 1) / 2].count
     }
@@ -144,6 +175,7 @@ extension HomeViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ThumbnailCell", forIndexPath: indexPath) as ThumbnailCollectionViewCell
         cell.frame.size.width = screenWidth / columns
         cell.frame.size.height = screenWidth / columns
+        cell.reset()
         
         if indexPath.section == 3 && indexPath.row == 0 {
             cell.isAddFriendButton()
@@ -151,7 +183,12 @@ extension HomeViewController: UICollectionViewDataSource {
             cell.setRandomBackgroundColor()
             
             if indexPath.section == 3 && indexPath.row > 0 {
-                cell.setLabel(Friends[indexPath.row - 1]["username"] as String)
+                if indexPath.row <= Friends.count {
+                    cell.setLabel(Friends[indexPath.row - 1]["username"] as String)
+                } else {
+                    cell.setLabel((Requests[indexPath.row - Friends.count - 1]["fromUser"]! as PFObject)["username"] as String)
+                    cell.requestOverlay!.hidden = false
+                }
             }
         }
         return cell
@@ -182,6 +219,11 @@ extension HomeViewController: UICollectionViewDataSource {
         }
         
         if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? ThumbnailCollectionViewCell {
+            if indexPath.row > Friends.count {
+                addOrIgnoreFriend(indexPath.row - Friends.count - 1)
+                return
+            }
+            
             cell.isSelected = !cell.isSelected
             cell.setSelected()
             if (cell.isSelected) {
@@ -203,3 +245,13 @@ extension HomeViewController: UICollectionViewDelegate {
     }
 }
 extension HomeViewController: UICollectionViewDelegateFlowLayout {}
+
+extension HomeViewController: UIActionSheetDelegate {
+    func actionSheet(sheet: UIActionSheet!, clickedButtonAtIndex buttonIndex: Int) {
+        if buttonIndex == 0 {
+            acceptFriend(sheet.tag)
+        } else if buttonIndex == 1 {
+            ignoreFriend(sheet.tag)
+        }
+    }
+}

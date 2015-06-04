@@ -11,10 +11,16 @@ import Parse
 import ParseUI
 
 var Friends = [PFObject]()
+var Requests = [AnyObject]()
 
 class LoginViewController: UIViewController, PFLogInViewControllerDelegate {
     
     var logInController : PFLogInViewController!
+    
+    override func viewDidLoad() {
+        PFUser.logOut()
+        super.viewDidLoad()
+    }
     
     override func viewDidAppear(animated: Bool) {
         
@@ -30,7 +36,30 @@ class LoginViewController: UIViewController, PFLogInViewControllerDelegate {
                     println("ERROR \(error)")
                 }
                 Friends = (friends ?? Friends) as [PFObject]
-                self.performSegueWithIdentifier("dismissLogin", sender: nil)
+                
+                // Retrieve all friend requests.
+                let friendRequestQuery = PFQuery(className: "FriendRequest")
+                friendRequestQuery.whereKey("toUser", equalTo: currentUser.objectId)
+                friendRequestQuery.includeKey("fromUser")
+                friendRequestQuery.findObjectsInBackgroundWithBlock({ (requests: [AnyObject]?, error: NSError?) -> Void in
+                    if error != nil {
+                        println("ERROR \(error)")
+                    }
+                    
+                    // Filter requests and delete the doubles or ones already in friend lists.
+                    var tmpRequests = [String:Bool]()
+                    for request in requests! {
+                        let requestFromUser = request["fromUser"] as PFObject
+                        let fromUserId = requestFromUser.objectId
+                        if tmpRequests[fromUserId] != nil || contains(currentUser["Friends"] as [String], fromUserId) {
+                            request.deleteInBackground()
+                        }
+                        tmpRequests[fromUserId] = true
+                        Requests.append(request)
+                    }
+                    
+                    self.performSegueWithIdentifier("dismissLogin", sender: nil)
+                })
             })
         } else {
             logInController = PFLogInViewController()

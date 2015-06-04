@@ -12,6 +12,7 @@ class ThumbnailCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var addFriendImage: UIImageView!
+    @IBOutlet weak var requestOverlay: UILabel!
     
     var timer : Int?
     var canSelect = false
@@ -45,5 +46,13 @@ class ThumbnailCollectionViewCell: UICollectionViewCell {
     
     func setRandomBackgroundColor() {
         backgroundColor = UIColor(red: CGFloat(drand48()), green: CGFloat(drand48()), blue: CGFloat(drand48()), alpha: 1.0)
+    }
+    
+    func reset() {
+        label!.text = ""
+        label!.hidden = true
+        requestOverlay.hidden = true
+        addFriendImage.hidden = true
+        imageView.hidden = true
     }
 }

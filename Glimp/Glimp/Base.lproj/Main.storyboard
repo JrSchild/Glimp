@@ -79,17 +79,28 @@
                                                         <constraint firstAttribute="height" constant="26" id="zid-3X-QUT"/>
                                                     </constraints>
                                                 </imageView>
+                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MzA-od-5EP">
+                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
+                                                    <color key="backgroundColor" red="0.078431372549019607" green="0.078431372549019607" blue="0.078431372549019607" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="30"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
                                             <constraint firstAttribute="trailingMargin" secondItem="95C-kj-Sa5" secondAttribute="trailing" constant="-8" id="2xN-vz-1aB"/>
                                             <constraint firstAttribute="centerY" secondItem="t7I-0o-vu1" secondAttribute="centerY" constant="0.5" id="4Qa-1p-yhi"/>
+                                            <constraint firstItem="MzA-od-5EP" firstAttribute="top" secondItem="DCb-mO-gPd" secondAttribute="topMargin" constant="-8" id="6Kv-Wv-KXq"/>
                                             <constraint firstItem="95C-kj-Sa5" firstAttribute="top" secondItem="DCb-mO-gPd" secondAttribute="topMargin" constant="-8" id="9Q5-bo-ffv"/>
                                             <constraint firstItem="0Yt-qW-TqM" firstAttribute="leading" secondItem="DCb-mO-gPd" secondAttribute="leadingMargin" constant="-3" id="Bj7-wx-Dy3"/>
                                             <constraint firstAttribute="centerY" secondItem="t7I-0o-vu1" secondAttribute="centerY" id="CQg-Ap-wTj"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="MzA-od-5EP" secondAttribute="bottom" constant="-8" id="Wsc-Yf-eoA"/>
+                                            <constraint firstItem="MzA-od-5EP" firstAttribute="leading" secondItem="DCb-mO-gPd" secondAttribute="leadingMargin" constant="-8" id="bH2-9t-c53"/>
                                             <constraint firstItem="95C-kj-Sa5" firstAttribute="leading" secondItem="DCb-mO-gPd" secondAttribute="leadingMargin" constant="-8" id="gSf-Vi-bOK"/>
                                             <constraint firstAttribute="centerX" secondItem="t7I-0o-vu1" secondAttribute="centerX" id="hG4-Ku-b9b"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="MzA-od-5EP" secondAttribute="trailing" constant="-8" id="u2g-2N-KeB"/>
                                             <constraint firstAttribute="centerX" secondItem="t7I-0o-vu1" secondAttribute="centerX" constant="-0.5" id="x8r-3v-oi3"/>
                                             <constraint firstAttribute="bottomMargin" secondItem="0Yt-qW-TqM" secondAttribute="bottom" constant="-3" id="zsi-qc-EdZ"/>
                                         </constraints>
@@ -103,6 +114,7 @@
                                             <outlet property="addFriendImage" destination="t7I-0o-vu1" id="fqY-ud-W9I"/>
                                             <outlet property="imageView" destination="0Yt-qW-TqM" id="hN9-RR-KvI"/>
                                             <outlet property="label" destination="95C-kj-Sa5" id="iE9-qh-zhz"/>
+                                            <outlet property="requestOverlay" destination="MzA-od-5EP" id="keL-NV-ygt"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
