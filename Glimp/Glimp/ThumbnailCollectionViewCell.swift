@@ -2,29 +2,27 @@
 //  ThumbnailCollectionViewCell.swift
 //  Glimp
 //
-//  Created by Joram Ruitenschild on 02-06-15.
+//  Created by Joram Ruitenschild on 04-06-15.
 //  Copyright (c) 2015 Joram Ruitenschild. All rights reserved.
 //
 
 import UIKit
 
 class ThumbnailCollectionViewCell: UICollectionViewCell {
+    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var addFriendImage: UIImageView!
+    
     var timer : Int?
-    let offset = 5
     var canSelect = false
     var isSelected = false
-    var imageView : UIImageView?
     
     func showCheck() {
-        if imageView == nil {
-            imageView = UIImageView(image: UIImage(named: "check-friend")!)
-            imageView!.frame = CGRect(x: CGFloat(offset), y: self.frame.height - imageView!.frame.height - CGFloat(offset), width: imageView!.frame.width, height: imageView!.frame.height)
-        }
-        self.addSubview(imageView!)
+        imageView.hidden = false
     }
     
     func hideCheck() {
-        imageView!.removeFromSuperview()
+        imageView.hidden = true
     }
     
     func setSelected() {
@@ -33,5 +31,19 @@ class ThumbnailCollectionViewCell: UICollectionViewCell {
         } else {
             hideCheck()
         }
+    }
+    
+    func isAddFriendButton() {
+        backgroundColor = UIColor(red: CGFloat(228) / 255.0, green: CGFloat(228) / 255.0, blue: CGFloat(228) / 255.0, alpha: 1.0)
+        addFriendImage.hidden = false
+    }
+    
+    func setLabel(text: String) {
+        label!.hidden = false
+        label!.text = text
+    }
+    
+    func setRandomBackgroundColor() {
+        backgroundColor = UIColor(red: CGFloat(drand48()), green: CGFloat(drand48()), blue: CGFloat(drand48()), alpha: 1.0)
     }
 }

@@ -10,7 +10,6 @@ import UIKit
 import Parse
 
 class HomeViewController: UIViewController {
-    var collectionView: UICollectionView?
     let screenSize : CGRect
     let screenWidth: CGFloat!
     let screenHeight: CGFloat!
@@ -18,6 +17,7 @@ class HomeViewController: UIViewController {
     let homeData = HomeData()
     var selectedIndexes = [Int:Bool]()
     
+    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var sendBar: UIView!
     
     required init(coder aDecoder: NSCoder) {
@@ -31,16 +31,9 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        let layout = collectionView!.collectionViewLayout as UICollectionViewFlowLayout
         layout.itemSize = CGSize(width: screenWidth / columns, height: screenWidth / columns)
-        layout.minimumInteritemSpacing = 0
-        layout.minimumLineSpacing = 0
-        collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
-        collectionView!.dataSource = self
-        collectionView!.delegate = self
-        collectionView!.backgroundColor = UIColor.whiteColor()
-        collectionView!.registerClass(ThumbnailCollectionViewCell.self, forCellWithReuseIdentifier: "UICollectionViewCell")
+        
         collectionView!.registerClass(AnswerHeaderCollectionViewCell.self, forCellWithReuseIdentifier: "AnswerHeaderCollectionViewCell")
         collectionView!.registerClass(AskHeaderCollectionViewCell.self, forCellWithReuseIdentifier: "AskHeaderCollectionViewCell")
         self.view.addSubview(collectionView!)
@@ -137,36 +130,30 @@ extension HomeViewController: UICollectionViewDataSource {
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        var cell : UICollectionViewCell
         
         if indexPath.section == 0 || indexPath.section == 2 {
             let cellIdentifier = indexPath.section == 0 ? "AnswerHeaderCollectionViewCell" : "AskHeaderCollectionViewCell"
-            cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as UICollectionViewCell
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as UICollectionViewCell
             cell.frame.size.width = screenWidth
             cell.frame.size.height = 46
             cell.backgroundColor = UIColor.whiteColor()
-        } else {
-            cell = collectionView.dequeueReusableCellWithReuseIdentifier("UICollectionViewCell", forIndexPath: indexPath) as UICollectionViewCell
-            cell.frame.size.width = screenWidth / columns
-            cell.frame.size.height = screenWidth / columns
-            if indexPath.section == 3 && indexPath.row == 0 {
-                cell.backgroundColor = UIColor(red: CGFloat(228) / 255.0, green: CGFloat(228) / 255.0, blue: CGFloat(228) / 255.0, alpha: 1.0)
-                let imageView = UIImageView(image: UIImage(named: "add-friend")!)
-                imageView.frame = CGRect(x: (cell.frame.width - imageView.frame.width) / 2, y: (cell.frame.height - imageView.frame.height) / 2, width: imageView.frame.width, height: imageView.frame.height)
-                cell.addSubview(imageView)
-            } else {
-                cell.backgroundColor = UIColor(red: CGFloat(drand48()), green: CGFloat(drand48()), blue: CGFloat(drand48()), alpha: 1.0)
-                
-                if indexPath.section == 3 && indexPath.row > 0 {
-                    var label = UILabel()
-                    label.text = String(Friends[indexPath.row - 1]["username"] as NSString)
-                    label.frame = CGRect(x: 0, y: 0, width: screenWidth / columns, height: 50)
-                    label.font = UIFont(name: label.font.familyName, size: 12)
-                    cell.addSubview(label)
-                }
-            }
+            
+            return cell
         }
         
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ThumbnailCell", forIndexPath: indexPath) as ThumbnailCollectionViewCell
+        cell.frame.size.width = screenWidth / columns
+        cell.frame.size.height = screenWidth / columns
+        
+        if indexPath.section == 3 && indexPath.row == 0 {
+            cell.isAddFriendButton()
+        } else {
+            cell.setRandomBackgroundColor()
+            
+            if indexPath.section == 3 && indexPath.row > 0 {
+                cell.setLabel(Friends[indexPath.row - 1]["username"] as String)
+            }
+        }
         return cell
     }
     
