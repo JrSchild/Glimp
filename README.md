@@ -58,3 +58,5 @@ Shows the user information and settings.
 
 ### Links
 - http://stackoverflow.com/questions/28325277/how-to-set-cell-spacing-and-uicollectionview-uicollectionviewflowlayout-size-r
+- https://www.parse.com/tutorials/anypic#model
+- http://blog.parse.com/announcements/queries-for-relational-data/

@@ -145,20 +145,20 @@
 		F20F06C11B1CA3B5007007AF /* Glimp */ = {
 			isa = PBXGroup;
 			children = (
-				F2DD3E3E1B1F26F70085762F /* Framework */,
+				F20F06C81B1CA3B5007007AF /* Main.storyboard */,
 				F20F06C41B1CA3B5007007AF /* AppDelegate.swift */,
 				F2DD3E3F1B1F29370085762F /* LoginViewController.swift */,
 				F20F06C61B1CA3B5007007AF /* HomeViewController.swift */,
 				F2DD3D691B1EFE720085762F /* GlimpViewController.swift */,
-				F20F06C81B1CA3B5007007AF /* Main.storyboard */,
-				F20F06CB1B1CA3B5007007AF /* Images.xcassets */,
-				F20F06CD1B1CA3B5007007AF /* LaunchScreen.xib */,
-				F20F06C21B1CA3B5007007AF /* Supporting Files */,
 				F2DD3D731B1F05410085762F /* FirstCustomSegue.swift */,
 				F2DD3D741B1F05410085762F /* FirstCustomSegueUnwind.swift */,
 				F2DD3D5D1B1DB4E40085762F /* HomeData.swift */,
 				F2DD3D611B1DBC560085762F /* HeaderCollectionViewCell.swift */,
 				F2DD3D631B1DD35F0085762F /* ThumbnailCollectionViewCell.swift */,
+				F20F06CB1B1CA3B5007007AF /* Images.xcassets */,
+				F20F06CD1B1CA3B5007007AF /* LaunchScreen.xib */,
+				F2DD3E3E1B1F26F70085762F /* Framework */,
+				F20F06C21B1CA3B5007007AF /* Supporting Files */,
 			);
 			path = Glimp;
 			sourceTree = "<group>";

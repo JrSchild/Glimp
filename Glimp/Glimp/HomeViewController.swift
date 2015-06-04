@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 class HomeViewController: UIViewController {
     var collectionView: UICollectionView?
@@ -80,6 +81,38 @@ class HomeViewController: UIViewController {
         return super.segueForUnwindingToViewController(toViewController, fromViewController: fromViewController, identifier: identifier)
     }
     
+    func addFriend(username: String) {
+        // Find the user if he exists.
+        var query = PFUser.query()
+        query.whereKey("username", equalTo: username)
+        query.getFirstObjectInBackgroundWithBlock({ (friend: PFObject?, error: NSError?) -> Void in
+            if error != nil {
+                println("Found error retrieving user: \(error)")
+                return
+            }
+            if friend == nil {
+                self.couldNotFindFriend()
+                return
+            }
+            
+            let user = PFUser.currentUser()
+            user["Friends"] = user["Friends"] ?? [String]()
+            user["Friends"].addObject(friend!.objectId) // TODO: check if already exists.
+            user.saveInBackground()
+
+            var friendRequest = PFObject(className: "FriendRequest")
+            friendRequest["fromUser"] = user
+            friendRequest["toUser"] = friend
+            friendRequest.saveInBackground()
+            println("added friend \(friend)")
+        })
+    }
+    
+    func acceptFriend() {
+        
+    }
+    
+    func couldNotFindFriend() {}
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {}
     
@@ -96,6 +129,9 @@ extension HomeViewController: UICollectionViewDataSource {
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 0 || section == 2 {
             return 1
+        }
+        if section == 3 {
+            return Friends.count + 1
         }
         return homeData.data[(section - 1) / 2].count
     }
@@ -120,6 +156,14 @@ extension HomeViewController: UICollectionViewDataSource {
                 cell.addSubview(imageView)
             } else {
                 cell.backgroundColor = UIColor(red: CGFloat(drand48()), green: CGFloat(drand48()), blue: CGFloat(drand48()), alpha: 1.0)
+                
+                if indexPath.section == 3 && indexPath.row > 0 {
+                    var label = UILabel()
+                    label.text = String(Friends[indexPath.row - 1]["username"] as NSString)
+                    label.frame = CGRect(x: 0, y: 0, width: screenWidth / columns, height: 50)
+                    label.font = UIFont(name: label.font.familyName, size: 12)
+                    cell.addSubview(label)
+                }
             }
         }
         
@@ -133,10 +177,23 @@ extension HomeViewController: UICollectionViewDataSource {
             return CGSize(width: screenWidth, height: 46)
         }
         return CGSize(width: screenWidth / columns, height: screenWidth / columns);
-        
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.section == 3 && indexPath.row == 0 {
+            var inputTextField: UITextField?
+            var alert = UIAlertController(title: "Add a friend", message: "Enter a username", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.Default, handler: { alertAction in
+                self.addFriend(inputTextField!.text)
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
+            alert.addTextFieldWithConfigurationHandler({ textField in
+                inputTextField = textField
+            })
+            self.presentViewController(alert, animated: true, completion: nil)
+            return
+        }
+        
         if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? ThumbnailCollectionViewCell {
             cell.isSelected = !cell.isSelected
             cell.setSelected()
@@ -152,7 +209,7 @@ extension HomeViewController: UICollectionViewDataSource {
 
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        if indexPath.section == 3 && indexPath.row != 0 {
+        if indexPath.section == 3 {
             return true
         }
         return false

@@ -10,14 +10,28 @@ import UIKit
 import Parse
 import ParseUI
 
+var Friends = [PFObject]()
+
 class LoginViewController: UIViewController, PFLogInViewControllerDelegate {
     
     var logInController : PFLogInViewController!
     
     override func viewDidAppear(animated: Bool) {
         
-        if var currentUser = PFUser.currentUser() {
-            self.performSegueWithIdentifier("dismissLogin", sender: nil)
+        if let currentUser = PFUser.currentUser() {
+            
+            // https://www.parse.com/questions/build-friend-relations-into-pfuser
+            let query = PFUser.query()
+            query.whereKey("objectId", containedIn: currentUser["Friends"] as? [AnyObject]!)
+            query.whereKey("Friends", equalTo: currentUser.objectId)
+            query.whereKey("objectId", notEqualTo: currentUser.objectId)
+            query.findObjectsInBackgroundWithBlock({ (friends: [AnyObject]?, error: NSError?) -> Void in
+                if error != nil {
+                    println("ERROR \(error)")
+                }
+                Friends = (friends ?? Friends) as [PFObject]
+                self.performSegueWithIdentifier("dismissLogin", sender: nil)
+            })
         } else {
             logInController = PFLogInViewController()
             logInController.delegate = self
