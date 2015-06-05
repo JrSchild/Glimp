@@ -1,1 +1,0 @@
-## Glimp Design Document
