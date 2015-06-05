@@ -112,6 +112,7 @@ class HomeViewController: UIViewController {
         sheet.showInView(self.view);
     }
     
+    // It would be more reliable to pass the request and find the index in the Request array. What if the data changes.
     func acceptFriend(requestIndex: Int) {
         var user = PFUser.currentUser()!
         var request: AnyObject = Requests[requestIndex]
