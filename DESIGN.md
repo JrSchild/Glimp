@@ -147,6 +147,8 @@ let user : PFUser *Hold a reference to the current user.*
 *Upload a new profile picture*  
 
 ### Database
+Parse provides excellent methods for storing data. Everything is abstracted out in objects and stored in Mongo, a no-relational database.  
+
 **User**  
 objectId : String  
 username : String  
@@ -193,7 +195,7 @@ All of the features above are considered to be part of the MVP (unless indicated
 - Create a slideshow for the Glimps received.
 - Also show which Glimps you've sent.
 - Show a view from a specific user with all the Glimps you have shared. (The rightmost column in the design image.)
-- Customize login and register view.
+- Customize login and register view. (Left bottom)
 
 ### And now the Design!
 ![Design](/doc/design.jpg)
