@@ -198,24 +198,17 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GLIMPS RECEIVED" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rt5-Z9-JYh">
                                 <rect key="frame" x="16" y="0.0" width="309" height="46"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="309" id="4Ow-A6-g7p"/>
                                     <constraint firstAttribute="height" constant="46" id="ePQ-K1-VOy"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="4Ow-A6-g7p"/>
-                                    </mask>
-                                </variation>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hcE-Al-5Tq">
                                 <rect key="frame" x="0.0" y="46" width="375" height="1"/>
                                 <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="DZA-2D-k5N"/>
-                                    <constraint firstAttribute="width" constant="375" id="PRL-UA-Udz"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -223,9 +216,9 @@
                         <constraints>
                             <constraint firstItem="hcE-Al-5Tq" firstAttribute="top" secondItem="rt5-Z9-JYh" secondAttribute="bottom" id="27d-UI-vgb"/>
                             <constraint firstItem="rt5-Z9-JYh" firstAttribute="leading" secondItem="rWh-mr-zv7" secondAttribute="leadingMargin" id="6li-ue-mcD"/>
-                            <constraint firstItem="hcE-Al-5Tq" firstAttribute="leading" secondItem="rWh-mr-zv7" secondAttribute="leadingMargin" constant="-16" id="Km6-C6-0Ke"/>
+                            <constraint firstItem="hcE-Al-5Tq" firstAttribute="leading" secondItem="rWh-mr-zv7" secondAttribute="leadingMargin" constant="-16" id="Jeh-eP-ckH"/>
                             <constraint firstAttribute="trailingMargin" secondItem="rt5-Z9-JYh" secondAttribute="trailing" constant="34" id="MpO-DG-Axs"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="hcE-Al-5Tq" secondAttribute="trailing" constant="-16" id="Rt0-PZ-PyW"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="hcE-Al-5Tq" secondAttribute="trailing" constant="-16" id="XO3-Sf-iTF"/>
                             <constraint firstItem="rt5-Z9-JYh" firstAttribute="top" secondItem="rWh-mr-zv7" secondAttribute="top" id="kCt-n8-Enc"/>
                         </constraints>
                     </view>

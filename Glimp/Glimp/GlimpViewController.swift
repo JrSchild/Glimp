@@ -12,7 +12,6 @@ class GlimpViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        println("loaded")
         
         var swipeGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "hideGlimps")
         swipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.Left
