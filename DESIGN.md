@@ -163,6 +163,7 @@ toUser : String *objectId of receiver*
 
 **Glimp**  
 *The status of a glimp can be seen by which fields are entered. It is expired when the expiresAt surpasses the current date, it is active when the current date is between createdAt and expiresAt, and it is answered when photo is filled in. Due to this nature, all pending requests can be queried from this table.*  
+objectId : String  
 fromUser : String *objectId of sender*  
 toUser : String *objectId of receiver*  
 createdAt : Date  
