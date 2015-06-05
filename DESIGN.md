@@ -1,6 +1,6 @@
 ## Glimp Design Document
 
-### Framworks and APIs
+### Frameworks and APIs
 - Parse: Contains all data handling/querying, user management, security, configuration.
 - ParseUI: User interface element for loging in.
 - Bolts: For keeping asynchronous actions off the main thread.
