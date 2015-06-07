@@ -10,8 +10,8 @@ import Foundation
 import Parse
 
 class FriendRequestsCollection : Collection {
-    var requestsIn = [AnyObject]() // TODO: Try to make these [PFObject]
-    var requestsOut = [AnyObject]() // TODO: Try to make these [PFObject]
+    var requestsIn = [PFObject]()
+    var requestsOut = [PFObject]()
     
     override func query(callback: (() -> Void)!) {
         
@@ -46,23 +46,27 @@ class FriendRequestsCollection : Collection {
                     if toUserId == self.user!.objectId {
                         if tmpRequestsIn[fromUserId] != nil || contains(friends, fromUserId) {
                             request.deleteInBackground()
+                        } else {
+                            tmpRequestsIn[fromUserId] = true
+                            self.requestsIn.append(request as PFObject)
                         }
-                        tmpRequestsIn[fromUserId] = true
-                        self.requestsIn.append(request)
                     
                     // Request is from me
                     } else if fromUserId == self.user!.objectId {
-                        if tmpRequestsOut[toUserId] != nil || contains(friends, toUserId) {
+                        if tmpRequestsOut[toUserId] != nil || contains(requestToUser["Friends"] as [String], toUserId) {
                             request.deleteInBackground()
+                        } else {
+                            tmpRequestsOut[toUserId] = true
+                            self.requestsOut.append(request as PFObject)
                         }
-                        tmpRequestsOut[toUserId] = true
-                        self.requestsOut.append(request)
                     }
                 }
             }
             callback()
         })
     }
+    
+    func invite(username: String) {}
     
     override func destroy() {
         super.destroy()

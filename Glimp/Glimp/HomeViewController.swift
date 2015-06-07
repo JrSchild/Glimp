@@ -10,12 +10,13 @@ import UIKit
 import Parse
 
 class HomeViewController: UIViewController {
-    let screenSize : CGRect
+    let screenSize: CGRect
     let screenWidth: CGFloat!
     let screenHeight: CGFloat!
     let columns = CGFloat(4)
     let homeData = HomeData()
     var selectedIndexes = [Int:Bool]()
+    var currentActionSheet: String!
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var sendBar: UIView!
@@ -93,20 +94,30 @@ class HomeViewController: UIViewController {
                 return
             }
             
+            if Requests.requestsOut.filter({ $0["toUser"].objectId == friend!.objectId}).count > 0 {
+                return
+            }
+            
             let user = PFUser.currentUser()
             user["Friends"] = user["Friends"] ?? [String]()
-            user["Friends"].addObject(friend!.objectId) // TODO: check if already exists.
-            user.saveInBackground()
+            if !contains(user["Friends"] as [String], friend!.objectId) {
+                user["Friends"].addObject(friend!.objectId)
+                user.saveInBackground()
+            }
 
             var friendRequest = PFObject(className: "FriendRequest")
             friendRequest["fromUser"] = user
             friendRequest["toUser"] = friend!
-            friendRequest.saveInBackground()
-            println("added friend \(friend)")
+            friendRequest.saveInBackgroundWithBlock({ (success: Bool, error: NSError!) -> Void in
+                if success {
+                    Requests.requestsOut.append(friendRequest)
+                    self.collectionView!.reloadData()
+                }
+            })
         })
     }
     
-    func addOrIgnoreFriend(request: Int) {
+    func addOrIgnoreFriendRequestIn(request: Int) {
         let sheet: UIActionSheet = UIActionSheet();
         sheet.delegate = self;
         sheet.addButtonWithTitle("Accept Request");
@@ -115,11 +126,23 @@ class HomeViewController: UIViewController {
         sheet.cancelButtonIndex = 2;
         sheet.tag = request
         sheet.showInView(self.view);
+        currentActionSheet = "requestIn"
+    }
+    
+    func addOrIgnoreFriendRequestOut(request: Int) {
+        let sheet: UIActionSheet = UIActionSheet();
+        sheet.delegate = self;
+        sheet.addButtonWithTitle("Delete Request");
+        sheet.addButtonWithTitle("Cancel");
+        sheet.cancelButtonIndex = 1;
+        sheet.tag = request
+        sheet.showInView(self.view);
+        currentActionSheet = "requestOut"
     }
     
     // It would be more reliable to pass the request and find the index in the Request array. This breaks if the data has changed in between.
     // Rename to acceptRequest
-    func acceptFriend(requestIndex: Int) {
+    func acceptFriendRequestIn(requestIndex: Int) {
         var user = PFUser.currentUser()!
         var request: AnyObject = Requests.requestsIn[requestIndex]
         var friend = request["fromUser"] as PFObject
@@ -136,10 +159,24 @@ class HomeViewController: UIViewController {
         collectionView!.reloadData()
     }
     
-    // Rename to deleteRequest
-    func ignoreFriend(requestIndex: Int) {
+    func deleteFriendRequestIn(requestIndex: Int) {
         Requests.requestsIn[requestIndex].deleteInBackground()
         Requests.requestsIn.removeAtIndex(requestIndex)
+        
+        collectionView!.reloadData()
+    }
+    
+    func deleteFriendRequestOut(requestIndex: Int) {
+        var user = PFUser.currentUser()
+        var friends = user["Friends"] as [String]
+        if let index = find(friends, Requests.requestsOut[requestIndex]["toUser"].objectId) {
+            friends.removeAtIndex(index)
+            user["Friends"] = friends
+            user.saveInBackground()
+        }
+        
+        Requests.requestsOut[requestIndex].deleteInBackground()
+        Requests.requestsOut.removeAtIndex(requestIndex)
         
         collectionView!.reloadData()
     }
@@ -163,7 +200,7 @@ extension HomeViewController: UICollectionViewDataSource {
             return 1
         }
         if section == 3 {
-            return Friends.friends.count + Requests.requestsIn.count + 1
+            return Friends.friends.count + Requests.requestsIn.count + Requests.requestsOut.count + 1
         }
         return homeData.data[(section - 1) / 2].count
     }
@@ -193,9 +230,12 @@ extension HomeViewController: UICollectionViewDataSource {
             if indexPath.section == 3 && indexPath.row > 0 {
                 if indexPath.row <= Friends.friends.count {
                     cell.setLabel(Friends.friends[indexPath.row - 1]["username"] as String)
-                } else {
-                    cell.setLabel((Requests.requestsIn[indexPath.row - Friends.friends.count - 1]["fromUser"]! as PFObject)["username"] as String)
+                } else if indexPath.row <= Friends.friends.count + Requests.requestsIn.count {
+                    cell.setLabel(Requests.requestsIn[indexPath.row - Friends.friends.count - 1]["fromUser"]!["username"] as String)
                     cell.requestInOverlay!.hidden = false
+                } else {
+                    cell.setLabel(Requests.requestsOut[indexPath.row - Friends.friends.count - Requests.requestsIn.count - 1]["toUser"]!["username"] as String)
+                    cell.requestOutOverlay!.hidden = false
                 }
             }
         }
@@ -227,8 +267,11 @@ extension HomeViewController: UICollectionViewDataSource {
         }
         
         if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? ThumbnailCollectionViewCell {
-            if indexPath.row > Friends.friends.count {
-                addOrIgnoreFriend(indexPath.row - Friends.friends.count - 1)
+            if indexPath.row > Friends.friends.count && indexPath.row <= Friends.friends.count + Requests.requestsIn.count {
+                addOrIgnoreFriendRequestIn(indexPath.row - Friends.friends.count - 1)
+                return
+            } else if indexPath.row > Friends.friends.count + Requests.requestsIn.count {
+                addOrIgnoreFriendRequestOut(indexPath.row - Friends.friends.count - Requests.requestsIn.count - 1)
                 return
             }
             
@@ -256,10 +299,16 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {}
 
 extension HomeViewController: UIActionSheetDelegate {
     func actionSheet(sheet: UIActionSheet!, clickedButtonAtIndex buttonIndex: Int) {
-        if buttonIndex == 0 {
-            acceptFriend(sheet.tag)
-        } else if buttonIndex == 1 {
-            ignoreFriend(sheet.tag)
+        if currentActionSheet == "requestIn" {
+            if buttonIndex == 0 {
+                acceptFriendRequestIn(sheet.tag)
+            } else if buttonIndex == 1 {
+                deleteFriendRequestIn(sheet.tag)
+            }
+        } else if currentActionSheet! == "requestOut" {
+            if buttonIndex == 0 {
+                deleteFriendRequestOut(sheet.tag)
+            }
         }
     }
 }
