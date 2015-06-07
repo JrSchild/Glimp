@@ -81,39 +81,10 @@ class HomeViewController: UIViewController {
     }
     
     func addFriend(username: String) {
-        // Find the user if he exists.
-        var query = PFUser.query()
-        query.whereKey("username", equalTo: username)
-        query.getFirstObjectInBackgroundWithBlock({ (friend: PFObject?, error: NSError?) -> Void in
-            if error != nil {
-                println("Found error retrieving user: \(error)")
-                return
+        Requests.invite(username, callback: { (success, error) -> Void in
+            if success {
+                self.collectionView!.reloadData()
             }
-            if friend == nil {
-                self.couldNotFindFriend()
-                return
-            }
-            
-            if Requests.requestsOut.filter({ $0["toUser"].objectId == friend!.objectId}).count > 0 {
-                return
-            }
-            
-            let user = PFUser.currentUser()
-            user["Friends"] = user["Friends"] ?? [String]()
-            if !contains(user["Friends"] as [String], friend!.objectId) {
-                user["Friends"].addObject(friend!.objectId)
-                user.saveInBackground()
-            }
-
-            var friendRequest = PFObject(className: "FriendRequest")
-            friendRequest["fromUser"] = user
-            friendRequest["toUser"] = friend!
-            friendRequest.saveInBackgroundWithBlock({ (success: Bool, error: NSError!) -> Void in
-                if success {
-                    Requests.requestsOut.append(friendRequest)
-                    self.collectionView!.reloadData()
-                }
-            })
         })
     }
     
@@ -167,21 +138,15 @@ class HomeViewController: UIViewController {
     }
     
     func deleteFriendRequestOut(requestIndex: Int) {
-        var user = PFUser.currentUser()
-        var friends = user["Friends"] as [String]
-        if let index = find(friends, Requests.requestsOut[requestIndex]["toUser"].objectId) {
-            friends.removeAtIndex(index)
-            user["Friends"] = friends
-            user.saveInBackground()
-        }
+        let user = PFUser.currentUser()
+        user.removeObject(Requests.requestsOut[requestIndex]["toUser"].objectId, forKey: "Friends")
+        user.saveInBackground()
         
         Requests.requestsOut[requestIndex].deleteInBackground()
         Requests.requestsOut.removeAtIndex(requestIndex)
         
         collectionView!.reloadData()
     }
-    
-    func couldNotFindFriend() {}
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {}
     

@@ -60,3 +60,4 @@ Shows the user information and settings.
 - http://stackoverflow.com/questions/28325277/how-to-set-cell-spacing-and-uicollectionview-uicollectionviewflowlayout-size-r
 - https://www.parse.com/tutorials/anypic#model
 - http://blog.parse.com/announcements/queries-for-relational-data/
+- http://stackoverflow.com/questions/28100847/checking-for-multiple-asynchronous-responses-from-alamofire-and-swift

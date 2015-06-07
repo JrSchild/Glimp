@@ -66,7 +66,41 @@ class FriendRequestsCollection : Collection {
         })
     }
     
-    func invite(username: String) {}
+    func invite(username: String, callback: ((success: Bool, error: String!) -> Void)) {
+        
+        // Find the user if he exists.
+        var query = PFUser.query()
+        query.whereKey("username", equalTo: username)
+        query.getFirstObjectInBackgroundWithBlock({ (friend: PFObject?, error: NSError?) -> Void in
+            if error != nil {
+                return callback(success: false, error: "Found error retrieving user: \(error)")
+            }
+            if friend == nil {
+                return callback(success: false, error: "FriendNotFound")
+            }
+            
+            if Requests.requestsOut.filter({ $0["toUser"].objectId == friend!.objectId}).count > 0 {
+                return callback(success: false, error: "UserAlreadyFriends")
+            }
+            
+            var friendRequest = PFObject(className: "FriendRequest")
+            friendRequest["fromUser"] = self.user!
+            friendRequest["toUser"] = friend!
+            friendRequest.saveInBackgroundWithBlock({ (_success: Bool, error: NSError!) -> Void in
+                if error != nil {
+                    return callback(success: false, error: "ServerError: \(error)")
+                }
+                Requests.requestsOut.append(friendRequest)
+                
+                if !contains(self.user!["Friends"] as [String], friend!.objectId) {
+                    self.user!.addObject(friend!.objectId, forKey: "Friends")
+                    self.user!.saveInBackground()
+                }
+
+                return callback(success: true, error: nil)
+            })
+        })
+    }
     
     override func destroy() {
         super.destroy()
