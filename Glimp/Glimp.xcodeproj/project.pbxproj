@@ -8,12 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		F20D36111B20BEC0000C7937 /* ThumbnailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20D36101B20BEC0000C7937 /* ThumbnailCollectionViewCell.swift */; };
+		F20D361A1B2219E7000C7937 /* FriendsCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20D36191B2219E7000C7937 /* FriendsCollection.swift */; };
+		F20D361C1B221A07000C7937 /* FriendRequestsCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20D361B1B221A07000C7937 /* FriendRequestsCollection.swift */; };
 		F20F06C51B1CA3B5007007AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20F06C41B1CA3B5007007AF /* AppDelegate.swift */; };
 		F20F06C71B1CA3B5007007AF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20F06C61B1CA3B5007007AF /* HomeViewController.swift */; };
 		F20F06CA1B1CA3B5007007AF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F20F06C81B1CA3B5007007AF /* Main.storyboard */; };
 		F20F06CC1B1CA3B5007007AF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F20F06CB1B1CA3B5007007AF /* Images.xcassets */; };
 		F20F06CF1B1CA3B5007007AF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F20F06CD1B1CA3B5007007AF /* LaunchScreen.xib */; };
 		F20F06DB1B1CA3B6007007AF /* GlimpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20F06DA1B1CA3B6007007AF /* GlimpTests.swift */; };
+		F2719F0E1B22205800E923D5 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2719F0D1B22205800E923D5 /* Collection.swift */; };
 		F2DD3D5E1B1DB4E40085762F /* HomeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DD3D5D1B1DB4E40085762F /* HomeData.swift */; };
 		F2DD3D621B1DBC560085762F /* HeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DD3D611B1DBC560085762F /* HeaderCollectionViewCell.swift */; };
 		F2DD3D6A1B1EFE720085762F /* GlimpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DD3D691B1EFE720085762F /* GlimpViewController.swift */; };
@@ -52,6 +55,8 @@
 
 /* Begin PBXFileReference section */
 		F20D36101B20BEC0000C7937 /* ThumbnailCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailCollectionViewCell.swift; sourceTree = "<group>"; };
+		F20D36191B2219E7000C7937 /* FriendsCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FriendsCollection.swift; path = Models/FriendsCollection.swift; sourceTree = "<group>"; };
+		F20D361B1B221A07000C7937 /* FriendRequestsCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FriendRequestsCollection.swift; path = Models/FriendRequestsCollection.swift; sourceTree = "<group>"; };
 		F20F06BF1B1CA3B5007007AF /* Glimp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Glimp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F20F06C31B1CA3B5007007AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F20F06C41B1CA3B5007007AF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -62,6 +67,7 @@
 		F20F06D41B1CA3B6007007AF /* GlimpTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GlimpTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F20F06D91B1CA3B6007007AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F20F06DA1B1CA3B6007007AF /* GlimpTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlimpTests.swift; sourceTree = "<group>"; };
+		F2719F0D1B22205800E923D5 /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Collection.swift; path = Models/Collection.swift; sourceTree = "<group>"; };
 		F2DD3D5D1B1DB4E40085762F /* HomeData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeData.swift; sourceTree = "<group>"; };
 		F2DD3D611B1DBC560085762F /* HeaderCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderCollectionViewCell.swift; sourceTree = "<group>"; };
 		F2DD3D691B1EFE720085762F /* GlimpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlimpViewController.swift; sourceTree = "<group>"; };
@@ -124,6 +130,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F20D36121B221878000C7937 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F20D36191B2219E7000C7937 /* FriendsCollection.swift */,
+				F20D361B1B221A07000C7937 /* FriendRequestsCollection.swift */,
+				F2719F0D1B22205800E923D5 /* Collection.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		F20F06B61B1CA3B5007007AF = {
 			isa = PBXGroup;
 			children = (
@@ -145,6 +161,7 @@
 		F20F06C11B1CA3B5007007AF /* Glimp */ = {
 			isa = PBXGroup;
 			children = (
+				F20D36121B221878000C7937 /* Models */,
 				F20F06C81B1CA3B5007007AF /* Main.storyboard */,
 				F20F06C41B1CA3B5007007AF /* AppDelegate.swift */,
 				F2DD3E3F1B1F29370085762F /* LoginViewController.swift */,
@@ -314,7 +331,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F2DD3E401B1F29370085762F /* LoginViewController.swift in Sources */,
+				F20D361C1B221A07000C7937 /* FriendRequestsCollection.swift in Sources */,
 				F2DD3D781B1F05410085762F /* FirstCustomSegueUnwind.swift in Sources */,
+				F2719F0E1B22205800E923D5 /* Collection.swift in Sources */,
+				F20D361A1B2219E7000C7937 /* FriendsCollection.swift in Sources */,
 				F20D36111B20BEC0000C7937 /* ThumbnailCollectionViewCell.swift in Sources */,
 				F20F06C71B1CA3B5007007AF /* HomeViewController.swift in Sources */,
 				F2DD3D621B1DBC560085762F /* HeaderCollectionViewCell.swift in Sources */,

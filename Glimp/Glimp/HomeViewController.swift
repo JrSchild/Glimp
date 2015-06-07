@@ -39,6 +39,11 @@ class HomeViewController: UIViewController {
         self.view.addSubview(collectionView!)
         collectionView!.layer.zPosition = 5
         sendBar.layer.zPosition = 10
+        
+//        let refreshControl = UIRefreshControl()
+//        collectionView.addSubview(refreshControl)
+//        collectionView.alwaysBounceVertical = true
+        
         setSendBar()
         
         var swipeGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "showGlimps")
@@ -95,7 +100,7 @@ class HomeViewController: UIViewController {
 
             var friendRequest = PFObject(className: "FriendRequest")
             friendRequest["fromUser"] = user
-            friendRequest["toUser"] = friend!.objectId
+            friendRequest["toUser"] = friend!
             friendRequest.saveInBackground()
             println("added friend \(friend)")
         })
@@ -112,16 +117,17 @@ class HomeViewController: UIViewController {
         sheet.showInView(self.view);
     }
     
-    // It would be more reliable to pass the request and find the index in the Request array. What if the data changes.
+    // It would be more reliable to pass the request and find the index in the Request array. This breaks if the data has changed in between.
+    // Rename to acceptRequest
     func acceptFriend(requestIndex: Int) {
         var user = PFUser.currentUser()!
-        var request: AnyObject = Requests[requestIndex]
+        var request: AnyObject = Requests.requestsIn[requestIndex]
         var friend = request["fromUser"] as PFObject
         
         // Update data in memory
         user["Friends"].addObject(friend.objectId)
-        Friends.append(friend)
-        Requests.removeAtIndex(requestIndex)
+        Friends.friends.append(friend)
+        Requests.requestsIn.removeAtIndex(requestIndex)
         
         // Persist changes to the database
         user.saveInBackground()
@@ -130,9 +136,10 @@ class HomeViewController: UIViewController {
         collectionView!.reloadData()
     }
     
+    // Rename to deleteRequest
     func ignoreFriend(requestIndex: Int) {
-        Requests[requestIndex].deleteInBackground()
-        Requests.removeAtIndex(requestIndex)
+        Requests.requestsIn[requestIndex].deleteInBackground()
+        Requests.requestsIn.removeAtIndex(requestIndex)
         
         collectionView!.reloadData()
     }
@@ -156,7 +163,7 @@ extension HomeViewController: UICollectionViewDataSource {
             return 1
         }
         if section == 3 {
-            return Friends.count + Requests.count + 1
+            return Friends.friends.count + Requests.requestsIn.count + 1
         }
         return homeData.data[(section - 1) / 2].count
     }
@@ -184,11 +191,11 @@ extension HomeViewController: UICollectionViewDataSource {
             cell.setRandomBackgroundColor()
             
             if indexPath.section == 3 && indexPath.row > 0 {
-                if indexPath.row <= Friends.count {
-                    cell.setLabel(Friends[indexPath.row - 1]["username"] as String)
+                if indexPath.row <= Friends.friends.count {
+                    cell.setLabel(Friends.friends[indexPath.row - 1]["username"] as String)
                 } else {
-                    cell.setLabel((Requests[indexPath.row - Friends.count - 1]["fromUser"]! as PFObject)["username"] as String)
-                    cell.requestOverlay!.hidden = false
+                    cell.setLabel((Requests.requestsIn[indexPath.row - Friends.friends.count - 1]["fromUser"]! as PFObject)["username"] as String)
+                    cell.requestInOverlay!.hidden = false
                 }
             }
         }
@@ -220,8 +227,8 @@ extension HomeViewController: UICollectionViewDataSource {
         }
         
         if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? ThumbnailCollectionViewCell {
-            if indexPath.row > Friends.count {
-                addOrIgnoreFriend(indexPath.row - Friends.count - 1)
+            if indexPath.row > Friends.friends.count {
+                addOrIgnoreFriend(indexPath.row - Friends.friends.count - 1)
                 return
             }
             

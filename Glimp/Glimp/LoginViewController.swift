@@ -10,15 +10,15 @@ import UIKit
 import Parse
 import ParseUI
 
-var Friends = [PFObject]()
-var Requests = [AnyObject]()
+var Friends = FriendsCollection()
+var Requests = FriendRequestsCollection()
 
 class LoginViewController: UIViewController, PFLogInViewControllerDelegate {
     
     var logInController : PFLogInViewController!
     
     override func viewDidLoad() {
-        PFUser.logOut()
+//        PFUser.logOut()
         super.viewDidLoad()
     }
     
@@ -27,37 +27,8 @@ class LoginViewController: UIViewController, PFLogInViewControllerDelegate {
         if let currentUser = PFUser.currentUser() {
             
             // https://www.parse.com/questions/build-friend-relations-into-pfuser
-            let query = PFUser.query()
-            query.whereKey("objectId", containedIn: currentUser["Friends"] as? [AnyObject]!)
-            query.whereKey("Friends", equalTo: currentUser.objectId)
-            query.whereKey("objectId", notEqualTo: currentUser.objectId)
-            query.findObjectsInBackgroundWithBlock({ (friends: [AnyObject]?, error: NSError?) -> Void in
-                if error != nil {
-                    println("ERROR \(error)")
-                }
-                Friends = (friends ?? Friends) as [PFObject]
-                
-                // Retrieve all friend requests.
-                let friendRequestQuery = PFQuery(className: "FriendRequest")
-                friendRequestQuery.whereKey("toUser", equalTo: currentUser.objectId)
-                friendRequestQuery.includeKey("fromUser")
-                friendRequestQuery.findObjectsInBackgroundWithBlock({ (requests: [AnyObject]?, error: NSError?) -> Void in
-                    if error != nil {
-                        println("ERROR \(error)")
-                    }
-                    
-                    // Filter requests and delete the doubles or ones already in friend lists.
-                    var tmpRequests = [String:Bool]()
-                    for request in requests! {
-                        let requestFromUser = request["fromUser"] as PFObject
-                        let fromUserId = requestFromUser.objectId
-                        if tmpRequests[fromUserId] != nil || contains(currentUser["Friends"] as [String], fromUserId) {
-                            request.deleteInBackground()
-                        }
-                        tmpRequests[fromUserId] = true
-                        Requests.append(request)
-                    }
-                    
+            Friends.load({
+                Requests.load({
                     self.performSegueWithIdentifier("dismissLogin", sender: nil)
                 })
             })

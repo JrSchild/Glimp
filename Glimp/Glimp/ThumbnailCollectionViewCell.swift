@@ -12,7 +12,8 @@ class ThumbnailCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var addFriendImage: UIImageView!
-    @IBOutlet weak var requestOverlay: UILabel!
+    @IBOutlet weak var requestInOverlay: UIImageView!
+    @IBOutlet weak var requestOutOverlay: UIImageView!
     
     var timer : Int?
     var canSelect = false
@@ -51,7 +52,8 @@ class ThumbnailCollectionViewCell: UICollectionViewCell {
     func reset() {
         label!.text = ""
         label!.hidden = true
-        requestOverlay.hidden = true
+        requestInOverlay.hidden = true
+        requestOutOverlay.hidden = true
         addFriendImage.hidden = true
         imageView.hidden = true
     }
