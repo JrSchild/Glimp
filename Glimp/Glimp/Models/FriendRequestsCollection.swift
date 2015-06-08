@@ -29,6 +29,8 @@ class FriendRequestsCollection : Collection {
             if error != nil {
                 println("ERROR \(error)")
             }
+            self.requestsIn = []
+            self.requestsOut = []
             
             // Filter requests and delete the doubles or ones already in friend lists.
             if requests != nil {

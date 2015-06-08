@@ -19,7 +19,6 @@ class Collection {
     }
     
     func load(callback: (() -> Void)!) {
-        destroy()
         if let user = PFUser.currentUser() {
             self.user = user
             query(callback)
