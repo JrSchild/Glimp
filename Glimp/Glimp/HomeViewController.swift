@@ -15,7 +15,7 @@ class HomeViewController: UIViewController {
     let screenHeight: CGFloat!
     let columns = CGFloat(4)
     let homeData = HomeData()
-    var selectedIndexes = [Int:Bool]()
+    var selectedIndexes = [String:Bool]()
     var currentActionSheet: String!
     let refreshControl = UIRefreshControl()
     
@@ -163,7 +163,7 @@ class HomeViewController: UIViewController {
     @IBAction func returnFromSegueActions(sender: UIStoryboardSegue) {}
     
     @IBAction func sendGlimpRequest(sender: UIButton) {
-        println(selectedIndexes)
+        println(selectedIndexes.keys.array)
     }
 }
 
@@ -207,7 +207,12 @@ extension HomeViewController: UICollectionViewDataSource {
             
             if indexPath.section == 3 && indexPath.row > 0 {
                 if indexPath.row <= Friends.friends.count {
-                    cell.setLabel(Friends.friends[indexPath.row - 1]["username"] as String)
+                    let friend = Friends.friends[indexPath.row - 1]
+                    cell.setLabel(friend["username"] as String)
+                    if selectedIndexes[friend.objectId] != nil {
+                        cell.isSelected = true
+                        cell.setSelected()
+                    }
                 } else if indexPath.row <= Friends.friends.count + Requests.requestsIn.count {
                     cell.setLabel(Requests.requestsIn[indexPath.row - Friends.friends.count - 1]["fromUser"]!["username"] as String)
                     cell.requestInOverlay!.hidden = false
@@ -256,9 +261,9 @@ extension HomeViewController: UICollectionViewDataSource {
             cell.isSelected = !cell.isSelected
             cell.setSelected()
             if (cell.isSelected) {
-                selectedIndexes[indexPath.row] = true
+                selectedIndexes[Friends.friends[indexPath.row - 1].objectId] = true
             } else {
-                selectedIndexes.removeValueForKey(indexPath.row)
+                selectedIndexes.removeValueForKey(Friends.friends[indexPath.row - 1].objectId)
             }
             setSendBar()
         }
