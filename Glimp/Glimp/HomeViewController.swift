@@ -17,6 +17,7 @@ class HomeViewController: UIViewController {
     let homeData = HomeData()
     var selectedIndexes = [Int:Bool]()
     var currentActionSheet: String!
+    let refreshControl = UIRefreshControl()
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var sendBar: UIView!
@@ -41,9 +42,9 @@ class HomeViewController: UIViewController {
         collectionView!.layer.zPosition = 5
         sendBar.layer.zPosition = 10
         
-//        let refreshControl = UIRefreshControl()
-//        collectionView.addSubview(refreshControl)
-//        collectionView.alwaysBounceVertical = true
+        refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        collectionView.addSubview(refreshControl)
+        collectionView.alwaysBounceVertical = true
         
         setSendBar()
         
@@ -148,10 +149,22 @@ class HomeViewController: UIViewController {
         collectionView!.reloadData()
     }
     
+    func refresh(sender: AnyObject) {
+        Friends.load({ () -> Void in
+            Requests.load({ () -> Void in
+                self.refreshControl.endRefreshing()
+                self.collectionView!.reloadData()
+            })
+        })
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {}
     
     @IBAction func returnFromSegueActions(sender: UIStoryboardSegue) {}
     
+    @IBAction func sendGlimpRequest(sender: UIButton) {
+        println(selectedIndexes)
+    }
 }
 
 extension HomeViewController: UICollectionViewDataSource {
