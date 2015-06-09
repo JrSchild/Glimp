@@ -62,3 +62,4 @@ Shows the user information and settings.
 - http://blog.parse.com/announcements/queries-for-relational-data/
 - http://stackoverflow.com/questions/28100847/checking-for-multiple-asynchronous-responses-from-alamofire-and-swift
 - http://stackoverflow.com/questions/12590471/uitableview-registernibforcellreuseidentifier
+- http://stackoverflow.com/questions/27182023/getting-the-difference-between-two-nsdates-in-months-days-hours-minutes-seconds

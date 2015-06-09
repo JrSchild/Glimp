@@ -18,12 +18,61 @@ class GlimpsCollection : Collection {
     
     override func query(callback: (() -> Void)!) {
         
-        // Constraints for the query:
-        // - requestsIn: toUser:me and expiresAt:beforeNow
-        // - requestsOut: fromUser:me and expiresAt:beforeNow
-        // - glimpsIn: toUser:me and photo:not-null
-        // - glimpsOut: fromUser:me and photo:not-null
+        // Retrieve all in- and outcoming requests, plus received and sent Glimps.
+        let requestsInQuery = PFQuery(className: "Glimp")
+            .whereKey("toUser", equalTo: user!)
+            .whereKey("expiresAt", greaterThan: NSDate())
+            .whereKeyDoesNotExist("photo")
         
+        let requestsOutQuery = PFQuery(className: "Glimp")
+            .whereKey("fromUser", equalTo: user!)
+            .whereKey("expiresAt", greaterThan: NSDate())
+            .whereKeyDoesNotExist("photo")
+        
+        let glimpsInQuery = PFQuery(className: "Glimp")
+            .whereKey("toUser", equalTo: user!)
+            .whereKeyExists("photo")
+        
+        let glimpsOutQuery = PFQuery(className: "Glimp")
+            .whereKey("fromUser", equalTo: user!)
+            .whereKeyExists("photo")
+        
+        let query = PFQuery.orQueryWithSubqueries([requestsInQuery, requestsOutQuery, glimpsInQuery, glimpsOutQuery])
+            .includeKey("fromUser")
+            .includeKey("toUser")
+        
+        query.findObjectsInBackgroundWithBlock({ (glimps: [AnyObject]?, error: NSError?) -> Void in
+            if error != nil {
+                println("ERROR \(error)")
+            }
+            self.requestsIn = []
+            self.requestsOut = []
+            self.glimpsIn = []
+            self.glimpsOut = []
+            
+            // Place each glimp in their corresponding array. If a photo is set it is a glimp, otherwise it's a request.
+            if glimps != nil {
+                for glimp in glimps! as [PFObject] {
+                    let fromUserId = glimp["fromUser"].objectId
+                    let toUserId = glimp["toUser"].objectId
+
+                    if glimp.objectForKey("photo") != nil {
+                        if toUserId == self.user!.objectId {
+                            self.glimpsOut.append(glimp)
+                        } else {
+                            self.glimpsIn.append(glimp)
+                        }
+                    } else {
+                        if toUserId == self.user!.objectId {
+                            self.addRequestIn(glimp)
+                        } else {
+                            self.addRequestOut(glimp)
+                        }
+                    }
+                }
+            }
+            callback()
+        })
     }
     
     func sendRequests(friends: [String], time: Int, callback: (() -> Void)) {
@@ -52,20 +101,29 @@ class GlimpsCollection : Collection {
     
     func addRequestOut(request: PFObject) {
         let expiresAt = request["expiresAt"] as NSDate
-        println(expiresAt)
-        // http://stackoverflow.com/questions/27182023/getting-the-difference-between-two-nsdates-in-months-days-hours-minutes-seconds
-        var seconds = calendar.components(NSCalendarUnit.CalendarUnitSecond, fromDate: NSDate(), toDate: expiresAt, options: nil).second
-        
-//        let delay = Double(seconds) * Double(NSEC_PER_SEC)
-        let delay = 4.5 * Double(NSEC_PER_SEC)
+        let seconds = calendar.components(NSCalendarUnit.CalendarUnitSecond, fromDate: NSDate(), toDate: expiresAt, options: nil).second
+
+        let delay = Double(seconds) * Double(NSEC_PER_SEC)
         let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
         requestsOut.append(request)
-        println(requestsOut)
         dispatch_after(time, dispatch_get_main_queue()) {
             if let index = find(self.requestsOut, request) {
                 self.requestsOut.removeAtIndex(index)
             }
-            println(self.requestsOut)
+        }
+    }
+    
+    func addRequestIn(request: PFObject) {
+        let expiresAt = request["expiresAt"] as NSDate
+        let seconds = calendar.components(NSCalendarUnit.CalendarUnitSecond, fromDate: NSDate(), toDate: expiresAt, options: nil).second
+        
+        let delay = Double(seconds) * Double(NSEC_PER_SEC)
+        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        requestsIn.append(request)
+        dispatch_after(time, dispatch_get_main_queue()) {
+            if let index = find(self.requestsOut, request) {
+                self.requestsIn.removeAtIndex(index)
+            }
         }
     }
     
@@ -77,5 +135,3 @@ class GlimpsCollection : Collection {
         glimpsOut = []
     }
 }
-
-

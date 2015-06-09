@@ -30,7 +30,9 @@ class LoginViewController: UIViewController, PFLogInViewControllerDelegate {
             // https://www.parse.com/questions/build-friend-relations-into-pfuser
             Friends.load({
                 Requests.load({
-                    self.performSegueWithIdentifier("dismissLogin", sender: nil)
+                    Glimps.load({
+                        self.performSegueWithIdentifier("dismissLogin", sender: nil)
+                    })
                 })
             })
         } else {
