@@ -11,6 +11,7 @@ import Parse
 
 class FriendsCollection : Collection {
     var friends = [PFObject]()
+    let friendsUpdated = Event<[PFObject]>()
     
     override func query(callback: (() -> Void)!) {
         let query = PFUser.query()
@@ -24,6 +25,7 @@ class FriendsCollection : Collection {
             if friends != nil {
                 self.friends = friends as [PFObject]
             }
+            self.friendsUpdated.raise(self.friends)
             callback()
         })
     }
@@ -31,5 +33,14 @@ class FriendsCollection : Collection {
     override func destroy() {
         super.destroy()
         friends = []
+    }
+    
+    func findById(objectId: String) -> PFObject? {
+        for friend in friends {
+            if friend.objectId == objectId {
+                return friend
+            }
+        }
+        return nil
     }
 }

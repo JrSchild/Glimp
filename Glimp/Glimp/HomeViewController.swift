@@ -163,7 +163,8 @@ class HomeViewController: UIViewController {
     @IBAction func returnFromSegueActions(sender: UIStoryboardSegue) {}
     
     @IBAction func sendGlimpRequest(sender: UIButton) {
-        println(selectedIndexes.keys.array)
+        // For now time is 60 minutes.
+        Glimps.sendRequests(selectedIndexes.keys.array, time: 60, callback: {() -> Void in})
     }
 }
 
@@ -212,6 +213,7 @@ extension HomeViewController: UICollectionViewDataSource {
                     if selectedIndexes[friend.objectId] != nil {
                         cell.isSelected = true
                         cell.setSelected()
+                        setSendBar()
                     }
                 } else if indexPath.row <= Friends.friends.count + Requests.requestsIn.count {
                     cell.setLabel(Requests.requestsIn[indexPath.row - Friends.friends.count - 1]["fromUser"]!["username"] as String)

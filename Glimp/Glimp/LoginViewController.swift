@@ -12,6 +12,7 @@ import ParseUI
 
 var Friends = FriendsCollection()
 var Requests = FriendRequestsCollection()
+var Glimps = GlimpsCollection()
 
 class LoginViewController: UIViewController, PFLogInViewControllerDelegate {
     

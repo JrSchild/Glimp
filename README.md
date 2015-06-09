@@ -61,3 +61,4 @@ Shows the user information and settings.
 - https://www.parse.com/tutorials/anypic#model
 - http://blog.parse.com/announcements/queries-for-relational-data/
 - http://stackoverflow.com/questions/28100847/checking-for-multiple-asynchronous-responses-from-alamofire-and-swift
+- http://stackoverflow.com/questions/12590471/uitableview-registernibforcellreuseidentifier
