@@ -18,7 +18,7 @@
 		F20F06DB1B1CA3B6007007AF /* GlimpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20F06DA1B1CA3B6007007AF /* GlimpTests.swift */; };
 		F2719F0E1B22205800E923D5 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2719F0D1B22205800E923D5 /* Collection.swift */; };
 		F2719F101B25980000E923D5 /* GlimpsCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2719F0F1B25980000E923D5 /* GlimpsCollection.swift */; };
-		F2719F121B26F67600E923D5 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2719F111B26F67600E923D5 /* EventManager.swift */; };
+		F2719F121B26F67600E923D5 /* EventEmiter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2719F111B26F67600E923D5 /* EventEmiter.swift */; };
 		F2DD3D5E1B1DB4E40085762F /* HomeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DD3D5D1B1DB4E40085762F /* HomeData.swift */; };
 		F2DD3D621B1DBC560085762F /* HeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DD3D611B1DBC560085762F /* HeaderCollectionViewCell.swift */; };
 		F2DD3D6A1B1EFE720085762F /* GlimpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DD3D691B1EFE720085762F /* GlimpViewController.swift */; };
@@ -71,7 +71,7 @@
 		F20F06DA1B1CA3B6007007AF /* GlimpTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlimpTests.swift; sourceTree = "<group>"; };
 		F2719F0D1B22205800E923D5 /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Collection.swift; path = Models/Collection.swift; sourceTree = "<group>"; };
 		F2719F0F1B25980000E923D5 /* GlimpsCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GlimpsCollection.swift; path = Models/GlimpsCollection.swift; sourceTree = "<group>"; };
-		F2719F111B26F67600E923D5 /* EventManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
+		F2719F111B26F67600E923D5 /* EventEmiter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventEmiter.swift; sourceTree = "<group>"; };
 		F2DD3D5D1B1DB4E40085762F /* HomeData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeData.swift; sourceTree = "<group>"; };
 		F2DD3D611B1DBC560085762F /* HeaderCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderCollectionViewCell.swift; sourceTree = "<group>"; };
 		F2DD3D691B1EFE720085762F /* GlimpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlimpViewController.swift; sourceTree = "<group>"; };
@@ -177,7 +177,7 @@
 				F2DD3D5D1B1DB4E40085762F /* HomeData.swift */,
 				F2DD3D611B1DBC560085762F /* HeaderCollectionViewCell.swift */,
 				F20D36101B20BEC0000C7937 /* ThumbnailCollectionViewCell.swift */,
-				F2719F111B26F67600E923D5 /* EventManager.swift */,
+				F2719F111B26F67600E923D5 /* EventEmiter.swift */,
 				F20F06CB1B1CA3B5007007AF /* Images.xcassets */,
 				F20F06CD1B1CA3B5007007AF /* LaunchScreen.xib */,
 				F2DD3E3E1B1F26F70085762F /* Framework */,
@@ -336,7 +336,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F2719F121B26F67600E923D5 /* EventManager.swift in Sources */,
+				F2719F121B26F67600E923D5 /* EventEmiter.swift in Sources */,
 				F2DD3E401B1F29370085762F /* LoginViewController.swift in Sources */,
 				F20D361C1B221A07000C7937 /* FriendRequestsCollection.swift in Sources */,
 				F2DD3D781B1F05410085762F /* FirstCustomSegueUnwind.swift in Sources */,
