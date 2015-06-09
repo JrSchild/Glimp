@@ -5,7 +5,7 @@
 //  Copyright (c) 2014 Stephen Haney
 //  MIT License
 //
-// https://github.com/StephenHaney/Swift-Custom-Events
+// http://blog.scottlogic.com/2015/02/05/swift-events.html
 
 import Foundation
 
