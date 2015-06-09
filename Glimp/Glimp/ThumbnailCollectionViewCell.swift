@@ -14,6 +14,7 @@ class ThumbnailCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var addFriendImage: UIImageView!
     @IBOutlet weak var requestInOverlay: UIImageView!
     @IBOutlet weak var requestOutOverlay: UIImageView!
+    @IBOutlet weak var timerOverlay: UILabel!
     
     var timer : Int?
     var canSelect = false
