@@ -63,3 +63,4 @@ Shows the user information and settings.
 - http://stackoverflow.com/questions/28100847/checking-for-multiple-asynchronous-responses-from-alamofire-and-swift
 - http://stackoverflow.com/questions/12590471/uitableview-registernibforcellreuseidentifier
 - http://stackoverflow.com/questions/27182023/getting-the-difference-between-two-nsdates-in-months-days-hours-minutes-seconds
+- http://rshankar.com/simple-stopwatch-app-in-swift/

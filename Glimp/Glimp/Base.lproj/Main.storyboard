@@ -94,20 +94,31 @@
                                                     </constraints>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1D4-dj-gOS">
-                                                    <rect key="frame" x="0.0" y="0.0" width="15" height="90"/>
                                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
                                                 </view>
+                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gby-be-htx">
+                                                    <rect key="frame" x="43" y="67" width="42" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="42" id="ONq-YX-fQf"/>
+                                                        <constraint firstAttribute="height" constant="21" id="eSY-q0-8aV"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="11"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
                                             <constraint firstAttribute="trailingMargin" secondItem="95C-kj-Sa5" secondAttribute="trailing" constant="-8" id="2xN-vz-1aB"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="gby-be-htx" secondAttribute="trailing" constant="-3" id="8DM-8e-P4U"/>
                                             <constraint firstItem="95C-kj-Sa5" firstAttribute="top" secondItem="DCb-mO-gPd" secondAttribute="topMargin" constant="-8" id="9Q5-bo-ffv"/>
                                             <constraint firstItem="0Yt-qW-TqM" firstAttribute="leading" secondItem="DCb-mO-gPd" secondAttribute="leadingMargin" constant="-3" id="Bj7-wx-Dy3"/>
                                             <constraint firstAttribute="centerY" secondItem="t7I-0o-vu1" secondAttribute="centerY" id="CQg-Ap-wTj"/>
                                             <constraint firstAttribute="centerY" secondItem="jEm-Mb-Wzz" secondAttribute="centerY" id="PPL-1N-dya"/>
                                             <constraint firstAttribute="centerY" secondItem="2Kj-Sj-Nv9" secondAttribute="centerY" id="Xuy-bQ-NPr"/>
                                             <constraint firstAttribute="centerX" secondItem="jEm-Mb-Wzz" secondAttribute="centerX" id="Zef-q5-rYU"/>
+                                            <constraint firstItem="gby-be-htx" firstAttribute="bottom" secondItem="DCb-mO-gPd" secondAttribute="bottomMargin" constant="6" id="cOP-o3-cas"/>
                                             <constraint firstItem="95C-kj-Sa5" firstAttribute="leading" secondItem="DCb-mO-gPd" secondAttribute="leadingMargin" constant="-8" id="gSf-Vi-bOK"/>
                                             <constraint firstAttribute="centerX" secondItem="t7I-0o-vu1" secondAttribute="centerX" id="hG4-Ku-b9b"/>
                                             <constraint firstAttribute="centerX" secondItem="2Kj-Sj-Nv9" secondAttribute="centerX" id="l9B-ol-Lv6"/>
@@ -119,6 +130,7 @@
                                             <outlet property="label" destination="95C-kj-Sa5" id="iE9-qh-zhz"/>
                                             <outlet property="requestInOverlay" destination="2Kj-Sj-Nv9" id="cvu-m2-2Ix"/>
                                             <outlet property="requestOutOverlay" destination="jEm-Mb-Wzz" id="gAr-9k-7Az"/>
+                                            <outlet property="timerLabel" destination="gby-be-htx" id="r6D-yH-puB"/>
                                             <outlet property="timerOverlay" destination="1D4-dj-gOS" id="vCe-ud-3KM"/>
                                         </connections>
                                     </collectionViewCell>

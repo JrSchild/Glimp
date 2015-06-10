@@ -17,11 +17,13 @@ class ThumbnailCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var requestInOverlay: UIImageView!
     @IBOutlet weak var requestOutOverlay: UIImageView!
     @IBOutlet weak var timerOverlay: UIView!
+    @IBOutlet weak var timerLabel: UILabel!
     
-    var timer: Int?
+    let calendar = NSCalendar.currentCalendar()
+    var timer : NSTimer!
     var canSelect = false
     var isSelected = false
-    var request: PFObject?
+    var request: PFObject!
     
     // Show or hide selected-image.
     func setSelected() {
@@ -46,23 +48,73 @@ class ThumbnailCollectionViewCell: UICollectionViewCell {
         backgroundColor = UIColor(red: CGFloat(drand48()), green: CGFloat(drand48()), blue: CGFloat(drand48()), alpha: 1.0)
     }
     
+    // Work in Progress
     func setRequest(request: PFObject) {
-        println("set request")
-        // Calculate time left, set frame of timerOverlay and hit up the animation.
-        self.request = request
-        timerOverlay.hidden = false
-        let calendar = NSCalendar.currentCalendar()
-        let length = calendar.components(.CalendarUnitSecond, fromDate: request.createdAt, toDate: request["expiresAt"] as NSDate, options: nil).second
-        let expires = calendar.components(.CalendarUnitSecond, fromDate: request.createdAt, toDate: NSDate(), options: nil).second
-        dispatch_async(dispatch_get_main_queue(), {
-            println(self.timerOverlay!.frame)
-            self.timerOverlay!.frame = CGRect(x: 0, y: 0, width: 80, height: 90)
-        });
         
-//        timerOverlay.reloadInputViews()
-//        self.reloadInputViews()
-        println(length)
-        println(expires)
+        // Set request, calculate time left.
+        self.request = request
+        timerOverlay!.hidden = false
+        timerLabel!.hidden = false
+        
+        let (currentTime, endTime) = getTimeLeft()!
+        let width = (currentTime / endTime) * Float(self.frame.width)
+        
+        self.resetTimerOverlaySize()
+        
+        // Set frame of timerOverlay with width of 0, defer this until the cell is in the view.
+        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
+        dispatch_after(time, dispatch_get_main_queue()) {
+            self.timerOverlay!.frame = CGRect(x: 0, y: 0, width: CGFloat(width), height: self.frame.height)
+            
+            // Start the animation.
+            UIView.animateWithDuration(Double(endTime - currentTime), delay: 0, options: .CurveLinear, animations: {
+                self.timerOverlay!.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
+            }, completion: {(finished: Bool) -> Void in
+                self.timerOverlay!.hidden = true
+                self.timerLabel!.hidden = true
+                self.resetTimerOverlaySize()
+                self.request = nil
+            })
+        }
+        
+        // Start the clock.
+        self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateTime", userInfo: nil, repeats: true)
+    }
+    
+    func updateTime() {
+        let timeLeft = getTimeLeft()
+        if timeLeft == nil {
+            return
+        }
+        
+        let (currentTime, endTime) = timeLeft!
+        let elapsedTime = Int(endTime) - Int(currentTime)
+        let minutes = elapsedTime / 60
+        let seconds = elapsedTime - (minutes * 60)
+        var strTimeLeft : String
+        
+        if minutes == 0 {
+            // http://rshankar.com/simple-stopwatch-app-in-swift/
+            strTimeLeft = String(format: "%02d", seconds) + "s"
+        } else {
+            strTimeLeft = "\(minutes)m"
+        }
+
+        timerLabel!.text = strTimeLeft
+    }
+    
+    func resetTimerOverlaySize() {
+        self.timerOverlay!.frame = CGRect(x: 0, y: 0, width: 0, height: self.frame.height)
+    }
+    
+    func getTimeLeft() -> (Float, Float)? {
+        if request == nil {
+            return nil
+        }
+        let currentTime = Float(calendar.components(.CalendarUnitSecond, fromDate: request.createdAt, toDate: NSDate(), options: nil).second)
+        let endTime = Float(calendar.components(.CalendarUnitSecond, fromDate: request.createdAt, toDate: request["expiresAt"] as NSDate, options: nil).second)
+        
+        return (currentTime, endTime)
     }
     
     func reset() {
@@ -74,5 +126,11 @@ class ThumbnailCollectionViewCell: UICollectionViewCell {
         imageView.hidden = true
         timerOverlay.hidden = true
         request = nil
+        timerLabel!.hidden = true
+        timerLabel!.text = ""
+        if timer != nil {
+            timer.invalidate()
+            timer = nil
+        }
     }
 }

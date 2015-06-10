@@ -16,7 +16,7 @@ var Glimps = GlimpsCollection()
 
 class LoginViewController: UIViewController, PFLogInViewControllerDelegate {
     
-    var logInController : PFLogInViewController!
+    var logInController: PFLogInViewController!
     
     override func viewDidLoad() {
 //        PFUser.logOut()

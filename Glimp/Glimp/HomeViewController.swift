@@ -313,7 +313,10 @@ extension HomeViewController: UICollectionViewDataSource {
                 return addOrIgnoreFriendRequestOut(indexPath.row - Friends.friends.count - Requests.requestsIn.count - 1)
             }
             
-            // Otherwise the cell is a normal friend, toggle the select.
+            // Otherwise the cell is a normal friend, toggle the select, but only if there is no request on it.
+            if cell.request != nil {
+                return
+            }
             cell.isSelected = !cell.isSelected
             cell.setSelected()
             
