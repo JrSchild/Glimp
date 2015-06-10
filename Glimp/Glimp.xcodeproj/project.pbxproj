@@ -19,7 +19,6 @@
 		F2719F0E1B22205800E923D5 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2719F0D1B22205800E923D5 /* Collection.swift */; };
 		F2719F101B25980000E923D5 /* GlimpsCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2719F0F1B25980000E923D5 /* GlimpsCollection.swift */; };
 		F2719F121B26F67600E923D5 /* EventEmiter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2719F111B26F67600E923D5 /* EventEmiter.swift */; };
-		F2DD3D5E1B1DB4E40085762F /* HomeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DD3D5D1B1DB4E40085762F /* HomeData.swift */; };
 		F2DD3D621B1DBC560085762F /* HeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DD3D611B1DBC560085762F /* HeaderCollectionViewCell.swift */; };
 		F2DD3D6A1B1EFE720085762F /* GlimpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DD3D691B1EFE720085762F /* GlimpViewController.swift */; };
 		F2DD3D771B1F05410085762F /* FirstCustomSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DD3D731B1F05410085762F /* FirstCustomSegue.swift */; };
@@ -72,7 +71,6 @@
 		F2719F0D1B22205800E923D5 /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Collection.swift; path = Models/Collection.swift; sourceTree = "<group>"; };
 		F2719F0F1B25980000E923D5 /* GlimpsCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GlimpsCollection.swift; path = Models/GlimpsCollection.swift; sourceTree = "<group>"; };
 		F2719F111B26F67600E923D5 /* EventEmiter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventEmiter.swift; sourceTree = "<group>"; };
-		F2DD3D5D1B1DB4E40085762F /* HomeData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeData.swift; sourceTree = "<group>"; };
 		F2DD3D611B1DBC560085762F /* HeaderCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderCollectionViewCell.swift; sourceTree = "<group>"; };
 		F2DD3D691B1EFE720085762F /* GlimpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlimpViewController.swift; sourceTree = "<group>"; };
 		F2DD3D731B1F05410085762F /* FirstCustomSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstCustomSegue.swift; sourceTree = "<group>"; };
@@ -174,7 +172,6 @@
 				F2DD3D691B1EFE720085762F /* GlimpViewController.swift */,
 				F2DD3D731B1F05410085762F /* FirstCustomSegue.swift */,
 				F2DD3D741B1F05410085762F /* FirstCustomSegueUnwind.swift */,
-				F2DD3D5D1B1DB4E40085762F /* HomeData.swift */,
 				F2DD3D611B1DBC560085762F /* HeaderCollectionViewCell.swift */,
 				F20D36101B20BEC0000C7937 /* ThumbnailCollectionViewCell.swift */,
 				F2719F111B26F67600E923D5 /* EventEmiter.swift */,
@@ -349,7 +346,6 @@
 				F20F06C51B1CA3B5007007AF /* AppDelegate.swift in Sources */,
 				F2DD3D771B1F05410085762F /* FirstCustomSegue.swift in Sources */,
 				F2DD3D6A1B1EFE720085762F /* GlimpViewController.swift in Sources */,
-				F2DD3D5E1B1DB4E40085762F /* HomeData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

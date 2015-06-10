@@ -14,7 +14,6 @@ class HomeViewController: UIViewController {
     let screenWidth: CGFloat!
     let screenHeight: CGFloat!
     let columns = CGFloat(4)
-    let homeData = HomeData()
     var selectedIndexes = [String:Bool]()
     var currentActionSheet: String!
     let refreshControl = UIRefreshControl()
@@ -211,7 +210,11 @@ extension HomeViewController: UICollectionViewDataSource {
         }
         
         // Section 1 is incoming glimp requests: Use dummy data.
-        return homeData.data[(section - 1) / 2].count
+        // If there are no requests, show a cell explaining there are no requests.
+        if Requests.requestsIn.count == 0 {
+            return 1
+        }
+        return Requests.requestsIn.count
     }
     
     // Returns the cell to be rendered.
@@ -234,8 +237,19 @@ extension HomeViewController: UICollectionViewDataSource {
         } else {
             cell.setRandomBackgroundColor()
             
+            if indexPath.section == 1 {
+                if Glimps.requestsIn.count == 0 {
+                    return collectionView.dequeueReusableCellWithReuseIdentifier("NoGlimpRequestsCell", forIndexPath: indexPath) as UICollectionViewCell
+                } else {
+                    let request = Glimps.requestsIn[indexPath.row]
+                    cell.setLabel(request["fromUser"]!["username"]! as String)
+                    cell.setRequest(request)
+                    
+                    return cell
+                }
+                
             // If the cell is in the last section and is not the add-friend button...
-            if indexPath.section == 3 && indexPath.row > 0 {
+            } else if indexPath.section == 3 && indexPath.row > 0 {
                 
                 // The cell is a friend.
                 if indexPath.row <= Friends.friends.count {
@@ -278,6 +292,10 @@ extension HomeViewController: UICollectionViewDataSource {
             return CGSize(width: screenWidth, height: 46)
         }
         
+        if indexPath.section == 1 && Glimps.requestsIn.count == 0 {
+            return CGSize(width: screenWidth, height: 46)
+        }
+        
         // Otherwise create four column thumbnails.
         return CGSize(width: screenWidth / columns, height: screenWidth / columns);
     }
@@ -299,6 +317,11 @@ extension HomeViewController: UICollectionViewDataSource {
                 inputTextField = textField
             })
             self.presentViewController(alert, animated: true, completion: nil)
+            return
+        }
+        
+        if indexPath.section == 1 {
+            println("take photo")
             return
         }
         
@@ -337,7 +360,7 @@ extension HomeViewController: UICollectionViewDelegate {
     func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
         
         // For now only cells in the last section can be selected.
-        if indexPath.section == 3 {
+        if indexPath.section == 3 || (indexPath.section == 1 && Glimps.requestsIn.count > 0) {
             return true
         }
         return false
