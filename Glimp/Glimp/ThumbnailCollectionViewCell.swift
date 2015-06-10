@@ -5,6 +5,7 @@
 //  Created by Joram Ruitenschild on 04-06-15.
 //  Copyright (c) 2015 Joram Ruitenschild. All rights reserved.
 //
+//  A cell for thumbnail. Implements different properties and methods for different types of cells.
 
 import UIKit
 import Parse
@@ -22,19 +23,12 @@ class ThumbnailCollectionViewCell: UICollectionViewCell {
     var isSelected = false
     var request: PFObject?
     
-    func showCheck() {
-        imageView.hidden = false
-    }
-    
-    func hideCheck() {
-        imageView.hidden = true
-    }
-    
+    // Show or hide selected-image.
     func setSelected() {
         if selected {
-            showCheck()
+            imageView.hidden = false
         } else {
-            hideCheck()
+            imageView.hidden = true
         }
     }
     
@@ -53,9 +47,22 @@ class ThumbnailCollectionViewCell: UICollectionViewCell {
     }
     
     func setRequest(request: PFObject) {
+        println("set request")
         // Calculate time left, set frame of timerOverlay and hit up the animation.
         self.request = request
         timerOverlay.hidden = false
+        let calendar = NSCalendar.currentCalendar()
+        let length = calendar.components(.CalendarUnitSecond, fromDate: request.createdAt, toDate: request["expiresAt"] as NSDate, options: nil).second
+        let expires = calendar.components(.CalendarUnitSecond, fromDate: request.createdAt, toDate: NSDate(), options: nil).second
+        dispatch_async(dispatch_get_main_queue(), {
+            println(self.timerOverlay!.frame)
+            self.timerOverlay!.frame = CGRect(x: 0, y: 0, width: 80, height: 90)
+        });
+        
+//        timerOverlay.reloadInputViews()
+//        self.reloadInputViews()
+        println(length)
+        println(expires)
     }
     
     func reset() {

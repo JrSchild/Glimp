@@ -5,6 +5,7 @@
 //  Created by Joram Ruitenschild on 05-06-15.
 //  Copyright (c) 2015 Joram Ruitenschild. All rights reserved.
 //
+//  Keep and maintain a list of friends requests, in- and outcoming.
 
 import Foundation
 import Parse
@@ -15,26 +16,32 @@ class FriendRequestsCollection : Collection {
     
     override func query(callback: (() -> Void)!) {
         
-        // Retrieve all in- and outcoming requests.
+        // A friend request is either sent from me, or to me.
         let requestsInQuery = PFQuery(className: "FriendRequest")
-        requestsInQuery.whereKey("toUser", equalTo: user!)
-        
+            .whereKey("toUser", equalTo: user!)
+
         let requestsOutQuery = PFQuery(className: "FriendRequest")
-        requestsOutQuery.whereKey("fromUser", equalTo: user!)
+            .whereKey("fromUser", equalTo: user!)
         
+        // Include the user objects.
         let query = PFQuery.orQueryWithSubqueries([requestsInQuery, requestsOutQuery])
-        query.includeKey("fromUser")
-        query.includeKey("toUser")
+            .includeKey("fromUser")
+            .includeKey("toUser")
+        
         query.findObjectsInBackgroundWithBlock({ (requests: [AnyObject]?, error: NSError?) -> Void in
             if error != nil {
                 println("ERROR \(error)")
             }
+            
+            // Reset the data arrays.
             self.requestsIn = []
             self.requestsOut = []
             
             // Filter requests and delete the doubles or ones already in friend lists.
             if requests != nil {
                 let friends = self.user!["Friends"] as [String]
+                
+                // A temporary dictionary is created to remove double invitations.
                 var tmpRequestsIn = [String:Bool]()
                 var tmpRequestsOut = [String:Bool]()
                 
@@ -44,8 +51,10 @@ class FriendRequestsCollection : Collection {
                     let fromUserId = requestFromUser.objectId
                     let toUserId = requestToUser.objectId
                     
-                    // Request is to me
+                    // Request is to me.
                     if toUserId == self.user!.objectId {
+                        
+                        // A request can be deleted when the id is already in the others' friends-list.
                         if tmpRequestsIn[fromUserId] != nil || contains(friends, fromUserId) {
                             request.deleteInBackground()
                         } else {
@@ -68,11 +77,13 @@ class FriendRequestsCollection : Collection {
         })
     }
     
+    // Invite a friend by username.
     func invite(username: String, callback: ((success: Bool, error: String!) -> Void)) {
         
         // Find the user if he exists.
         var query = PFUser.query()
-        query.whereKey("username", equalTo: username)
+            .whereKey("username", equalTo: username)
+        
         query.getFirstObjectInBackgroundWithBlock({ (friend: PFObject?, error: NSError?) -> Void in
             if error != nil {
                 return callback(success: false, error: "Found error retrieving user: \(error)")
@@ -85,6 +96,7 @@ class FriendRequestsCollection : Collection {
                 return callback(success: false, error: "UserAlreadyFriends")
             }
             
+            // Create the friendRequest object, set the properties and save it.
             var friendRequest = PFObject(className: "FriendRequest")
             friendRequest["fromUser"] = self.user!
             friendRequest["toUser"] = friend!
@@ -94,6 +106,7 @@ class FriendRequestsCollection : Collection {
                 }
                 Requests.requestsOut.append(friendRequest)
                 
+                // If current user didn't already have the requestee's id as friend, add it and save.
                 if !contains(self.user!["Friends"] as [String], friend!.objectId) {
                     self.user!.addObject(friend!.objectId, forKey: "Friends")
                     self.user!.saveInBackground()

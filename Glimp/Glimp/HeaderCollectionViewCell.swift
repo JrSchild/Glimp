@@ -5,6 +5,7 @@
 //  Created by Joram Ruitenschild on 02-06-15.
 //  Copyright (c) 2015 Joram Ruitenschild. All rights reserved.
 //
+//  Basic Header cell with child classes with their own functionalities.
 
 import UIKit
 

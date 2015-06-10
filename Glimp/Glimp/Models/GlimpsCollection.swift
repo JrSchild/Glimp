@@ -5,6 +5,7 @@
 //  Created by Joram Ruitenschild on 08-06-15.
 //  Copyright (c) 2015 Joram Ruitenschild. All rights reserved.
 //
+//  Keep and maintain a list of glimps (sent + received) and glimp requests (sent + received).
 
 import Foundation
 import Parse
