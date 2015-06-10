@@ -127,6 +127,15 @@ class GlimpsCollection : Collection {
         }
     }
     
+    func findRequestOut(friend: PFObject) -> PFObject? {
+        for request in requestsOut {
+            if request["toUser"].objectId == friend.objectId {
+                return request
+            }
+        }
+        return nil
+    }
+    
     override func destroy() {
         super.destroy()
         requestsIn = []

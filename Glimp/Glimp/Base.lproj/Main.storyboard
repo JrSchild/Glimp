@@ -93,13 +93,10 @@
                                                         <constraint firstAttribute="width" constant="34" id="tYo-4y-L8P"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kv4-HC-s1d">
-                                                    <rect key="frame" x="0.0" y="0.0" width="12" height="90"/>
+                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1D4-dj-gOS">
+                                                    <rect key="frame" x="0.0" y="0.0" width="15" height="90"/>
                                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </label>
+                                                </view>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
@@ -122,7 +119,7 @@
                                             <outlet property="label" destination="95C-kj-Sa5" id="iE9-qh-zhz"/>
                                             <outlet property="requestInOverlay" destination="2Kj-Sj-Nv9" id="cvu-m2-2Ix"/>
                                             <outlet property="requestOutOverlay" destination="jEm-Mb-Wzz" id="gAr-9k-7Az"/>
-                                            <outlet property="timerOverlay" destination="kv4-HC-s1d" id="2EQ-mG-cko"/>
+                                            <outlet property="timerOverlay" destination="1D4-dj-gOS" id="vCe-ud-3KM"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>

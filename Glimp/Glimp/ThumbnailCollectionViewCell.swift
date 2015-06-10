@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 class ThumbnailCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var label: UILabel!
@@ -14,11 +15,12 @@ class ThumbnailCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var addFriendImage: UIImageView!
     @IBOutlet weak var requestInOverlay: UIImageView!
     @IBOutlet weak var requestOutOverlay: UIImageView!
-    @IBOutlet weak var timerOverlay: UILabel!
+    @IBOutlet weak var timerOverlay: UIView!
     
-    var timer : Int?
+    var timer: Int?
     var canSelect = false
     var isSelected = false
+    var request: PFObject?
     
     func showCheck() {
         imageView.hidden = false
@@ -50,6 +52,12 @@ class ThumbnailCollectionViewCell: UICollectionViewCell {
         backgroundColor = UIColor(red: CGFloat(drand48()), green: CGFloat(drand48()), blue: CGFloat(drand48()), alpha: 1.0)
     }
     
+    func setRequest(request: PFObject) {
+        // Calculate time left, set frame of timerOverlay and hit up the animation.
+        self.request = request
+        timerOverlay.hidden = false
+    }
+    
     func reset() {
         label!.text = ""
         label!.hidden = true
@@ -57,5 +65,7 @@ class ThumbnailCollectionViewCell: UICollectionViewCell {
         requestOutOverlay.hidden = true
         addFriendImage.hidden = true
         imageView.hidden = true
+        timerOverlay.hidden = true
+        request = nil
     }
 }

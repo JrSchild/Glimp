@@ -152,8 +152,10 @@ class HomeViewController: UIViewController {
     func refresh(sender: AnyObject) {
         Friends.load({ () -> Void in
             Requests.load({ () -> Void in
-                self.refreshControl.endRefreshing()
-                self.collectionView!.reloadData()
+                Glimps.load({ () -> Void in
+                    self.refreshControl.endRefreshing()
+                    self.collectionView!.reloadData()
+                })
             })
         })
     }
@@ -164,7 +166,12 @@ class HomeViewController: UIViewController {
     
     @IBAction func sendGlimpRequest(sender: UIButton) {
         // For now time is 60 minutes.
-        Glimps.sendRequests(selectedIndexes.keys.array, time: 60, callback: {() -> Void in})
+        let friendIds = selectedIndexes.keys.array
+        selectedIndexes = [:]
+        setSendBar()
+        Glimps.sendRequests(friendIds, time: 60, callback: {() -> Void in
+            self.collectionView!.reloadData()
+        })
     }
 }
 
@@ -210,6 +217,10 @@ extension HomeViewController: UICollectionViewDataSource {
                 if indexPath.row <= Friends.friends.count {
                     let friend = Friends.friends[indexPath.row - 1]
                     cell.setLabel(friend["username"] as String)
+
+                    if let request = Glimps.findRequestOut(friend) {
+                        cell.setRequest(request)
+                    }
                     if selectedIndexes[friend.objectId] != nil {
                         cell.isSelected = true
                         cell.setSelected()
