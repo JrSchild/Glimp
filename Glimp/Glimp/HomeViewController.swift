@@ -16,6 +16,7 @@ class HomeViewController: UIViewController {
     let columns = CGFloat(4)
     var selectedIndexes = [String:Bool]()
     var currentActionSheet: String!
+    var currentRequest: PFObject!
     let refreshControl = UIRefreshControl()
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -172,7 +173,14 @@ class HomeViewController: UIViewController {
         })
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {}
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showImagePicker" {
+            var imagePickerViewController = segue.destinationViewController as ImagePickerViewController
+            imagePickerViewController.callback = {(image: UIImage!) -> Void in
+                println(image)
+            }
+        }
+    }
     
     @IBAction func returnFromSegueActions(sender: UIStoryboardSegue) {}
     
@@ -186,6 +194,11 @@ class HomeViewController: UIViewController {
         Glimps.sendRequests(friendIds, time: 60, callback: {() -> Void in
             self.collectionView!.reloadData()
         })
+    }
+    
+    @IBAction func unwindToImagePickerViewController(segue: UIStoryboardSegue) {
+        println("unwinnnndddd")
+        println(segue)
     }
 }
 
@@ -317,15 +330,19 @@ extension HomeViewController: UICollectionViewDataSource {
                 inputTextField = textField
             })
             self.presentViewController(alert, animated: true, completion: nil)
-            return
-        }
         
-        if indexPath.section == 1 {
-            println("take photo")
-            return
-        }
-        
-        if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? ThumbnailCollectionViewCell {
+        // The cell is in the friend list.
+        } else if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? ThumbnailCollectionViewCell {
+
+            // Use ImagePickerViewController to grab a square photo.
+            if indexPath.section == 1 {
+                self.performSegueWithIdentifier("showImagePicker", sender: nil)
+                
+                if let request = cell.request {
+                    currentRequest = cell.request
+                }
+                return
+            }
             
             // If the cell is an incoming request.
             if indexPath.row > Friends.friends.count && indexPath.row <= Friends.friends.count + Requests.requestsIn.count {

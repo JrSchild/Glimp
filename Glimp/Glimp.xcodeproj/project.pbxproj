@@ -16,6 +16,8 @@
 		F20F06CC1B1CA3B5007007AF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F20F06CB1B1CA3B5007007AF /* Images.xcassets */; };
 		F20F06CF1B1CA3B5007007AF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F20F06CD1B1CA3B5007007AF /* LaunchScreen.xib */; };
 		F20F06DB1B1CA3B6007007AF /* GlimpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20F06DA1B1CA3B6007007AF /* GlimpTests.swift */; };
+		F23DF4511B2877D1002C35DC /* BABCropperView.m in Sources */ = {isa = PBXBuildFile; fileRef = F23DF4501B2877D1002C35DC /* BABCropperView.m */; };
+		F23DF4581B287DE5002C35DC /* ImagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23DF4571B287DE5002C35DC /* ImagePickerViewController.swift */; };
 		F2719F0E1B22205800E923D5 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2719F0D1B22205800E923D5 /* Collection.swift */; };
 		F2719F101B25980000E923D5 /* GlimpsCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2719F0F1B25980000E923D5 /* GlimpsCollection.swift */; };
 		F2719F121B26F67600E923D5 /* EventEmiter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2719F111B26F67600E923D5 /* EventEmiter.swift */; };
@@ -68,6 +70,10 @@
 		F20F06D41B1CA3B6007007AF /* GlimpTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GlimpTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F20F06D91B1CA3B6007007AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F20F06DA1B1CA3B6007007AF /* GlimpTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlimpTests.swift; sourceTree = "<group>"; };
+		F23DF44E1B2877D0002C35DC /* Glimp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Glimp-Bridging-Header.h"; sourceTree = "<group>"; };
+		F23DF44F1B2877D1002C35DC /* BABCropperView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BABCropperView.h; path = BABCropperView/BABCropperView.h; sourceTree = "<group>"; };
+		F23DF4501B2877D1002C35DC /* BABCropperView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BABCropperView.m; path = BABCropperView/BABCropperView.m; sourceTree = "<group>"; };
+		F23DF4571B287DE5002C35DC /* ImagePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerViewController.swift; sourceTree = "<group>"; };
 		F2719F0D1B22205800E923D5 /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Collection.swift; path = Models/Collection.swift; sourceTree = "<group>"; };
 		F2719F0F1B25980000E923D5 /* GlimpsCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GlimpsCollection.swift; path = Models/GlimpsCollection.swift; sourceTree = "<group>"; };
 		F2719F111B26F67600E923D5 /* EventEmiter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventEmiter.swift; sourceTree = "<group>"; };
@@ -164,12 +170,14 @@
 		F20F06C11B1CA3B5007007AF /* Glimp */ = {
 			isa = PBXGroup;
 			children = (
+				F23DF44D1B2877AD002C35DC /* BABCropperView */,
 				F20D36121B221878000C7937 /* Models */,
 				F20F06C81B1CA3B5007007AF /* Main.storyboard */,
 				F20F06C41B1CA3B5007007AF /* AppDelegate.swift */,
 				F2DD3E3F1B1F29370085762F /* LoginViewController.swift */,
 				F20F06C61B1CA3B5007007AF /* HomeViewController.swift */,
 				F2DD3D691B1EFE720085762F /* GlimpViewController.swift */,
+				F23DF4571B287DE5002C35DC /* ImagePickerViewController.swift */,
 				F2DD3D731B1F05410085762F /* FirstCustomSegue.swift */,
 				F2DD3D741B1F05410085762F /* FirstCustomSegueUnwind.swift */,
 				F2DD3D611B1DBC560085762F /* HeaderCollectionViewCell.swift */,
@@ -206,6 +214,16 @@
 				F20F06D91B1CA3B6007007AF /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F23DF44D1B2877AD002C35DC /* BABCropperView */ = {
+			isa = PBXGroup;
+			children = (
+				F23DF44F1B2877D1002C35DC /* BABCropperView.h */,
+				F23DF4501B2877D1002C35DC /* BABCropperView.m */,
+				F23DF44E1B2877D0002C35DC /* Glimp-Bridging-Header.h */,
+			);
+			name = BABCropperView;
 			sourceTree = "<group>";
 		};
 		F2DD3E3E1B1F26F70085762F /* Framework */ = {
@@ -340,11 +358,13 @@
 				F2719F0E1B22205800E923D5 /* Collection.swift in Sources */,
 				F20D361A1B2219E7000C7937 /* FriendsCollection.swift in Sources */,
 				F20D36111B20BEC0000C7937 /* ThumbnailCollectionViewCell.swift in Sources */,
+				F23DF4581B287DE5002C35DC /* ImagePickerViewController.swift in Sources */,
 				F20F06C71B1CA3B5007007AF /* HomeViewController.swift in Sources */,
 				F2719F101B25980000E923D5 /* GlimpsCollection.swift in Sources */,
 				F2DD3D621B1DBC560085762F /* HeaderCollectionViewCell.swift in Sources */,
 				F20F06C51B1CA3B5007007AF /* AppDelegate.swift in Sources */,
 				F2DD3D771B1F05410085762F /* FirstCustomSegue.swift in Sources */,
+				F23DF4511B2877D1002C35DC /* BABCropperView.m in Sources */,
 				F2DD3D6A1B1EFE720085762F /* GlimpViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -468,6 +488,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -476,6 +497,8 @@
 				INFOPLIST_FILE = Glimp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Glimp/Glimp-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -483,6 +506,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -491,6 +515,7 @@
 				INFOPLIST_FILE = Glimp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Glimp/Glimp-Bridging-Header.h";
 			};
 			name = Release;
 		};

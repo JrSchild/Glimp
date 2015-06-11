@@ -27,6 +27,82 @@
             </objects>
             <point key="canvasLocation" x="-375.5" y="136.5"/>
         </scene>
+        <!--Image Picker View Controller-->
+        <scene sceneID="UsN-Ix-pvd">
+            <objects>
+                <viewController id="Hcg-wu-UM5" customClass="ImagePickerViewController" customModule="Glimp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lgD-pR-ODx"/>
+                        <viewControllerLayoutGuide type="bottom" id="9Lj-aa-Acl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="31S-x0-9TS">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GGj-XV-uXc" customClass="BABCropperView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ksh-oH-ywM">
+                                <rect key="frame" x="31" y="460" width="90" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="81" id="2bi-eH-uxV"/>
+                                </constraints>
+                                <state key="normal" title="Take Another">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="2bi-eH-uxV"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="cropButtonPressed:" destination="Hcg-wu-UM5" eventType="touchUpInside" id="YBW-yq-R2z"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gGr-70-95v">
+                                <rect key="frame" x="264" y="460" width="30" height="30"/>
+                                <state key="normal" title="Use">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="chooseCurrentImage:" destination="Hcg-wu-UM5" eventType="touchUpInside" id="adI-ba-fcU"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5AI-V0-4qe">
+                                <rect key="frame" x="255" y="20" width="48" height="30"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancel:" destination="Hcg-wu-UM5" eventType="touchUpInside" id="dzY-3P-eux"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="5AI-V0-4qe" secondAttribute="trailing" constant="1" id="1lS-Rf-ZpK"/>
+                            <constraint firstItem="GGj-XV-uXc" firstAttribute="leading" secondItem="31S-x0-9TS" secondAttribute="leadingMargin" constant="-16" id="HBO-r4-8g0"/>
+                            <constraint firstItem="GGj-XV-uXc" firstAttribute="top" secondItem="lgD-pR-ODx" secondAttribute="bottom" constant="-20" id="HdR-Tg-pOH"/>
+                            <constraint firstItem="9Lj-aa-Acl" firstAttribute="top" secondItem="Ksh-oH-ywM" secondAttribute="bottom" constant="78" id="JeV-Oj-K9V"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="GGj-XV-uXc" secondAttribute="trailing" constant="-16" id="Js0-wi-E0d"/>
+                            <constraint firstItem="Ksh-oH-ywM" firstAttribute="leading" secondItem="31S-x0-9TS" secondAttribute="leadingMargin" constant="15" id="Nv6-cG-lUd"/>
+                            <constraint firstItem="9Lj-aa-Acl" firstAttribute="top" secondItem="GGj-XV-uXc" secondAttribute="bottom" id="Xhv-wM-Rwl"/>
+                            <constraint firstItem="5AI-V0-4qe" firstAttribute="top" secondItem="lgD-pR-ODx" secondAttribute="bottom" id="tVO-uO-WbJ"/>
+                            <constraint firstItem="9Lj-aa-Acl" firstAttribute="top" secondItem="gGr-70-95v" secondAttribute="bottom" constant="78" id="w2u-0b-uLe"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="gGr-70-95v" secondAttribute="trailing" constant="10" id="wyt-Im-sTM"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="cropButton" destination="Ksh-oH-ywM" id="I84-Dr-Bxh"/>
+                        <outlet property="cropperView" destination="GGj-XV-uXc" id="tX7-Q5-o7H"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DcA-fQ-bTi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="711.5" y="-677.5"/>
+        </scene>
         <!--Home View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
@@ -220,6 +296,7 @@
                         <outlet property="collectionView" destination="DsL-Cl-8Wz" id="QmG-Kv-uJG"/>
                         <outlet property="sendBar" destination="5yb-pm-tmW" id="A88-Ri-XfN"/>
                         <segue destination="6on-qz-Igt" kind="custom" identifier="showGlimps" customClass="FirstCustomSegue" customModule="Glimp" customModuleProvider="target" id="tqH-dp-OEp"/>
+                        <segue destination="Hcg-wu-UM5" kind="show" identifier="showImagePicker" id="liw-b8-xRL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -274,7 +351,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x3r-wP-nc1" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Fnw-Mt-1OV" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="718.5" y="136.5"/>
+            <point key="canvasLocation" x="711.5" y="136.5"/>
         </scene>
     </scenes>
     <resources>
