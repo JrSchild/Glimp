@@ -19,7 +19,7 @@ Glimp lets users ask for a glimp (glimpse) in someone’s life. The user is in c
 - Add a profile picture
 - Ask for a glimp with a timer
 - Answer a glimp (take a photo)
-- View shared glimps
+- View received glimps
 
 ### Possible Complications
 This is a timesensitive project, so there is not much room for error. A requirement of the project is the implementation of a server. At this time it is unknown how much time the implementation of these features will take. This results in a tight schedule. The following features are more prone to complications:
@@ -32,7 +32,7 @@ This is a timesensitive project, so there is not much room for error. A requirem
 | Week | Schedule | Features |
 |:------:|:------:|---------|
 |1 | Prototype UI | Set up views, basic interface elements/controllers, log in, add and see friends. |
-|2 | Beta version | Ask for a glimp, answer a glimp, profile pictures, shared glimps view |
+|2 | Beta version | Ask for a glimp, answer a glimp, profile pictures, received glimps view |
 |3 | Minimum Viable Product | Push notifications, profile view, delayed features |
 |4 | Final release | Clean up code and refactor where necessary |
 
