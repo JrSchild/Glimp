@@ -100,6 +100,21 @@ class GlimpsCollection : Collection {
         })
     }
     
+    func answerGlimpRequestIn(request: PFObject, image: UIImage, callback: () -> Void) {
+        if contains(requestsIn, request) {
+            request["photo"] = PFFile(data: UIImageJPEGRepresentation(image, 0.9))
+            request.saveInBackgroundWithBlock({ (success, error) -> Void in
+                if success {
+                    if let index = find(self.requestsIn, request) {
+                        self.requestsIn.removeAtIndex(index)
+                        self.glimpsOut.append(request)
+                    }
+                }
+                callback()
+            })
+        }
+    }
+    
     func addRequestOut(request: PFObject) {
         let expiresAt = request["expiresAt"] as NSDate
         let seconds = calendar.components(NSCalendarUnit.CalendarUnitSecond, fromDate: NSDate(), toDate: expiresAt, options: nil).second

@@ -182,6 +182,9 @@
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="w8M-vz-G2e">
+                                                    <rect key="frame" x="34" y="35" width="20" height="20"/>
+                                                </activityIndicatorView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
@@ -189,6 +192,7 @@
                                             <constraint firstAttribute="trailingMargin" secondItem="95C-kj-Sa5" secondAttribute="trailing" constant="-8" id="2xN-vz-1aB"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="gby-be-htx" secondAttribute="trailing" constant="-3" id="8DM-8e-P4U"/>
                                             <constraint firstItem="95C-kj-Sa5" firstAttribute="top" secondItem="DCb-mO-gPd" secondAttribute="topMargin" constant="-8" id="9Q5-bo-ffv"/>
+                                            <constraint firstAttribute="centerX" secondItem="w8M-vz-G2e" secondAttribute="centerX" constant="1" id="A8A-Gw-hF4"/>
                                             <constraint firstItem="0Yt-qW-TqM" firstAttribute="leading" secondItem="DCb-mO-gPd" secondAttribute="leadingMargin" constant="-3" id="Bj7-wx-Dy3"/>
                                             <constraint firstAttribute="centerY" secondItem="t7I-0o-vu1" secondAttribute="centerY" id="CQg-Ap-wTj"/>
                                             <constraint firstAttribute="centerY" secondItem="jEm-Mb-Wzz" secondAttribute="centerY" id="PPL-1N-dya"/>
@@ -197,12 +201,14 @@
                                             <constraint firstItem="gby-be-htx" firstAttribute="bottom" secondItem="DCb-mO-gPd" secondAttribute="bottomMargin" constant="6" id="cOP-o3-cas"/>
                                             <constraint firstItem="95C-kj-Sa5" firstAttribute="leading" secondItem="DCb-mO-gPd" secondAttribute="leadingMargin" constant="-8" id="gSf-Vi-bOK"/>
                                             <constraint firstAttribute="centerX" secondItem="t7I-0o-vu1" secondAttribute="centerX" id="hG4-Ku-b9b"/>
+                                            <constraint firstAttribute="centerY" secondItem="w8M-vz-G2e" secondAttribute="centerY" id="jMW-f2-T6t"/>
                                             <constraint firstAttribute="centerX" secondItem="2Kj-Sj-Nv9" secondAttribute="centerX" id="l9B-ol-Lv6"/>
                                             <constraint firstAttribute="bottomMargin" secondItem="0Yt-qW-TqM" secondAttribute="bottom" constant="-3" id="zsi-qc-EdZ"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="addFriendImage" destination="t7I-0o-vu1" id="fqY-ud-W9I"/>
                                             <outlet property="imageView" destination="0Yt-qW-TqM" id="hN9-RR-KvI"/>
+                                            <outlet property="isLoading" destination="w8M-vz-G2e" id="E8A-sX-8Se"/>
                                             <outlet property="label" destination="95C-kj-Sa5" id="iE9-qh-zhz"/>
                                             <outlet property="requestInOverlay" destination="2Kj-Sj-Nv9" id="cvu-m2-2Ix"/>
                                             <outlet property="requestOutOverlay" destination="jEm-Mb-Wzz" id="gAr-9k-7Az"/>

@@ -58,7 +58,11 @@ class ImagePickerViewController: UIViewController, UIImagePickerControllerDelega
     
     @IBAction func cancel(sender: UIButton) {
         croppedImage = nil
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismissViewControllerAnimated(true, completion: { () -> Void in
+            if self.callback != nil {
+                self.callback(self.croppedImage)
+            }
+        })
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {

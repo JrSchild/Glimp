@@ -16,6 +16,7 @@ class HomeViewController: UIViewController {
     let columns = CGFloat(4)
     var selectedIndexes = [String:Bool]()
     var currentActionSheet: String!
+    var currentCellRequest: ThumbnailCollectionViewCell!
     var currentRequest: PFObject!
     let refreshControl = UIRefreshControl()
     
@@ -51,6 +52,10 @@ class HomeViewController: UIViewController {
         var swipeGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "showGlimps")
         swipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.Right
         collectionView!.addGestureRecognizer(swipeGestureRecognizer)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        self.collectionView!.reloadData()
     }
     
     // Hides or shows the sendbar based on selected friends.
@@ -176,8 +181,19 @@ class HomeViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showImagePicker" {
             var imagePickerViewController = segue.destinationViewController as ImagePickerViewController
+            
+            // Attach callback to ImagePickerViewController, when it returns.
             imagePickerViewController.callback = {(image: UIImage!) -> Void in
-                println(image)
+                if image != nil && self.currentCellRequest != nil && self.currentRequest != nil {
+                    
+                    // Show loading indicator on cell and answer the glimp.
+                    self.currentCellRequest.isLoading!.hidden = false
+                    Glimps.answerGlimpRequestIn(self.currentRequest, image: image!, callback: { () -> Void in
+                        self.collectionView!.reloadData()
+                    })
+                }
+                self.currentCellRequest = nil
+                self.currentRequest = nil
             }
         }
     }
@@ -339,7 +355,8 @@ extension HomeViewController: UICollectionViewDataSource {
                 self.performSegueWithIdentifier("showImagePicker", sender: nil)
                 
                 if let request = cell.request {
-                    currentRequest = cell.request
+                    currentCellRequest = cell
+                    currentRequest = request
                 }
                 return
             }

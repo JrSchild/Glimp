@@ -18,6 +18,7 @@ class ThumbnailCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var requestOutOverlay: UIImageView!
     @IBOutlet weak var timerOverlay: UIView!
     @IBOutlet weak var timerLabel: UILabel!
+    @IBOutlet weak var isLoading: UIActivityIndicatorView!
     
     let calendar = NSCalendar.currentCalendar()
     var timer : NSTimer!
@@ -128,6 +129,7 @@ class ThumbnailCollectionViewCell: UICollectionViewCell {
         request = nil
         timerLabel!.hidden = true
         timerLabel!.text = ""
+        isLoading!.hidden = true
         if timer != nil {
             timer.invalidate()
             timer = nil
