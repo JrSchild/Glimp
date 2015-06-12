@@ -38,8 +38,8 @@ class HomeViewController: UIViewController {
         let layout = collectionView!.collectionViewLayout as UICollectionViewFlowLayout
         layout.itemSize = CGSize(width: screenWidth / columns, height: screenWidth / columns)
         
-        collectionView!.registerClass(AnswerHeaderCollectionViewCell.self, forCellWithReuseIdentifier: "AnswerHeaderCollectionViewCell")
-        collectionView!.registerClass(AskHeaderCollectionViewCell.self, forCellWithReuseIdentifier: "AskHeaderCollectionViewCell")
+        collectionView!.registerNib(UINib(nibName: "ThumbnailCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ThumbnailCollectionViewCell")
+        collectionView!.registerNib(UINib(nibName: "HeaderCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "HeaderCollectionViewCell")
         
         // Add the UIRefreshControl to the view and bind refresh event.
         refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
@@ -251,13 +251,14 @@ extension HomeViewController: UICollectionViewDataSource {
         
         // Render Header cell.
         if indexPath.section == 0 || indexPath.section == 2 {
-            let cellIdentifier = indexPath.section == 0 ? "AnswerHeaderCollectionViewCell" : "AskHeaderCollectionViewCell"
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("HeaderCollectionViewCell", forIndexPath: indexPath) as HeaderCollectionViewCell
+            cell.headerText!.text = indexPath.section == 0 ? "ANSWER A GLIMP" : "ASK A GLIMP"
             
-            return collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as UICollectionViewCell
+            return cell
         }
         
         // Use a thumbnail for the other cells and reset the properties, it might have been re-used.
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ThumbnailCell", forIndexPath: indexPath) as ThumbnailCollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ThumbnailCollectionViewCell", forIndexPath: indexPath) as ThumbnailCollectionViewCell
         cell.reset()
         
         // The first button is an add-friend button.
