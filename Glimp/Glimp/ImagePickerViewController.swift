@@ -67,13 +67,17 @@ class ImagePickerViewController: UIViewController, UIImagePickerControllerDelega
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         cropperView.image = info[UIImagePickerControllerOriginalImage] as UIImage
-        
-        picker.dismissViewControllerAnimated(true, completion: nil)
+        dismissPicker(picker)
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         didUserCancel = true
-        
-        picker.dismissViewControllerAnimated(true, completion: nil)
+        dismissPicker(picker)
+    }
+    
+    func dismissPicker(picker: UIImagePickerController) {
+        picker.dismissViewControllerAnimated(true, completion: { () -> Void in
+            UIApplication.sharedApplication().statusBarHidden = true
+        })
     }
 }
