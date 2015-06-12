@@ -102,17 +102,19 @@ class ThumbnailCollectionViewCell: UICollectionViewCell {
         
         let (currentTime, endTime) = timeLeft!
         let elapsedTime = Int(endTime) - Int(currentTime)
-        let minutes = elapsedTime / 60
-        let seconds = elapsedTime - (minutes * 60)
+        let hours = Int(elapsedTime / 3600)
+        let minutes = Int((elapsedTime - hours * 3600) / 60)
+        let seconds = Int(elapsedTime - hours * 3600 - minutes * 60)
         var strTimeLeft : String
         
-        if minutes == 0 {
-            // http://rshankar.com/simple-stopwatch-app-in-swift/
-            strTimeLeft = String(format: "%02d", seconds) + "s"
-        } else {
+        if hours > 0 {
+            strTimeLeft = "\(hours)h\(minutes)m"
+        } else if minutes > 0 {
             strTimeLeft = "\(minutes)m"
+        } else {
+            strTimeLeft = "\(seconds)s"
         }
-
+        
         timerLabel!.text = strTimeLeft
     }
     
