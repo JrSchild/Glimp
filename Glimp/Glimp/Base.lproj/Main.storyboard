@@ -36,15 +36,15 @@
                         <viewControllerLayoutGuide type="bottom" id="9Lj-aa-Acl"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="31S-x0-9TS">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GGj-XV-uXc" customClass="BABCropperView">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ksh-oH-ywM">
-                                <rect key="frame" x="31" y="460" width="90" height="30"/>
+                                <rect key="frame" x="31" y="559" width="90" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="81" id="2bi-eH-uxV"/>
                                 </constraints>
@@ -61,7 +61,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gGr-70-95v">
-                                <rect key="frame" x="264" y="460" width="30" height="30"/>
+                                <rect key="frame" x="319" y="559" width="30" height="30"/>
                                 <state key="normal" title="Use">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -70,7 +70,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5AI-V0-4qe">
-                                <rect key="frame" x="255" y="20" width="48" height="30"/>
+                                <rect key="frame" x="310" y="20" width="48" height="30"/>
                                 <state key="normal" title="Cancel">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -93,7 +93,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="gGr-70-95v" secondAttribute="trailing" constant="10" id="wyt-Im-sTM"/>
                         </constraints>
                     </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="cropButton" destination="Ksh-oH-ywM" id="I84-Dr-Bxh"/>
                         <outlet property="cropperView" destination="GGj-XV-uXc" id="tX7-Q5-o7H"/>
@@ -212,6 +212,7 @@
                         <outlet property="sendBar" destination="5yb-pm-tmW" id="A88-Ri-XfN"/>
                         <segue destination="6on-qz-Igt" kind="custom" identifier="showGlimps" customClass="SwipeRightSegue" customModule="Glimp" customModuleProvider="target" id="tqH-dp-OEp"/>
                         <segue destination="Hcg-wu-UM5" kind="show" identifier="showImagePicker" id="liw-b8-xRL"/>
+                        <segue destination="U1e-lw-FDq" kind="custom" identifier="showProfile" customClass="SwipeLeftSegue" customModule="Glimp" customModuleProvider="target" id="C5m-Dc-Omw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -289,6 +290,28 @@
                 <exit id="Fnw-Mt-1OV" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="711.5" y="136.5"/>
+        </scene>
+        <!--Profile View Controller-->
+        <scene sceneID="S0x-iv-MV2">
+            <objects>
+                <viewController id="U1e-lw-FDq" customClass="ProfileViewController" customModule="Glimp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="m8e-jA-UY2"/>
+                        <viewControllerLayoutGuide type="bottom" id="wX4-K4-HVE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="QgS-1m-gdJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <segue destination="Piu-Qt-95R" kind="unwind" identifier="hideProfile" unwindAction="returnFromSegueActions:" id="Ppr-nM-uPL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NCK-jU-tM5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Piu-Qt-95R" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="711.5" y="1011.5"/>
         </scene>
     </scenes>
 </document>

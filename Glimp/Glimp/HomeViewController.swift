@@ -49,9 +49,14 @@ class HomeViewController: UIViewController {
         setSendBar()
         
         // Initialize swipe right.
-        var swipeGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "showGlimps")
-        swipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.Right
-        collectionView!.addGestureRecognizer(swipeGestureRecognizer)
+        var swipeRightGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "showGlimps")
+        swipeRightGestureRecognizer.direction = UISwipeGestureRecognizerDirection.Right
+        collectionView!.addGestureRecognizer(swipeRightGestureRecognizer)
+        
+        // Initialize swipe left.
+        var swipeLeftGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "showProfile")
+        swipeLeftGestureRecognizer.direction = UISwipeGestureRecognizerDirection.Left
+        collectionView!.addGestureRecognizer(swipeLeftGestureRecognizer)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -75,6 +80,10 @@ class HomeViewController: UIViewController {
         self.performSegueWithIdentifier("showGlimps", sender: self)
     }
     
+    func showProfile() {
+        self.performSegueWithIdentifier("showProfile", sender: self)
+    }
+    
     // Segue specific code from http://www.appcoda.com/custom-segue-animations/
     // This segue gets called when returning from the GlimpViewController
     override func segueForUnwindingToViewController(toViewController: UIViewController, fromViewController: UIViewController, identifier: String?) -> UIStoryboardSegue {
@@ -82,6 +91,10 @@ class HomeViewController: UIViewController {
         if let id = identifier {
             if id == "hideGlimps" {
                 let unwindSegue = SwipeRightSegueUnwind(identifier: id, source: fromViewController, destination: toViewController, performHandler: { () -> Void in
+                })
+                return unwindSegue
+            } else if id == "hideProfile" {
+                let unwindSegue = SwipeLeftSegueUnwind(identifier: id, source: fromViewController, destination: toViewController, performHandler: { () -> Void in
                 })
                 return unwindSegue
             }
@@ -198,7 +211,8 @@ class HomeViewController: UIViewController {
         }
     }
     
-    @IBAction func returnFromSegueActions(sender: UIStoryboardSegue) {}
+    @IBAction func returnFromSegueActions(sender: UIStoryboardSegue) {
+    }
     
     @IBAction func sendGlimpRequest(sender: UIButton) {
         // Save copy of selected friends, clear selected friends and sendbar.
