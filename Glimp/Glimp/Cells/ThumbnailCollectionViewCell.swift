@@ -12,31 +12,33 @@ import Parse
 
 class ThumbnailCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var label: UILabel!
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var checkFriend: UIImageView!
     @IBOutlet weak var addFriendImage: UIImageView!
     @IBOutlet weak var requestInOverlay: UIImageView!
     @IBOutlet weak var requestOutOverlay: UIImageView!
     @IBOutlet weak var timerOverlay: UIView!
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var isLoading: UIActivityIndicatorView!
+    @IBOutlet weak var image: ThumbnailImageView!
     
     let calendar = NSCalendar.currentCalendar()
     var timer : NSTimer!
     var canSelect = false
     var isSelected = false
     var request: PFObject!
+    let greyBackground = UIColor(red: CGFloat(228) / 255.0, green: CGFloat(228) / 255.0, blue: CGFloat(228) / 255.0, alpha: 1.0)
     
     // Show or hide selected-image.
     func setSelected() {
         if selected {
-            imageView.hidden = false
+            checkFriend.hidden = false
         } else {
-            imageView.hidden = true
+            checkFriend.hidden = true
         }
     }
     
     func isAddFriendButton() {
-        backgroundColor = UIColor(red: CGFloat(228) / 255.0, green: CGFloat(228) / 255.0, blue: CGFloat(228) / 255.0, alpha: 1.0)
+        backgroundColor = greyBackground
         addFriendImage.hidden = false
     }
     
@@ -82,6 +84,16 @@ class ThumbnailCollectionViewCell: UICollectionViewCell {
         self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateTime", userInfo: nil, repeats: true)
     }
     
+    func setImage(backgroundImage: PFFile) {
+        backgroundColor = greyBackground
+        isLoading!.hidden = false
+        image!.hidden = false
+        image!.file = backgroundImage
+        image!.loadInBackground({(image, error) -> Void in
+            self.isLoading!.hidden = true
+        })
+    }
+    
     func updateTime() {
         let timeLeft = getTimeLeft()
         if timeLeft == nil {
@@ -121,17 +133,19 @@ class ThumbnailCollectionViewCell: UICollectionViewCell {
     func reset() {
         label!.text = ""
         label!.hidden = true
-        requestInOverlay.hidden = true
-        requestOutOverlay.hidden = true
-        addFriendImage.hidden = true
-        imageView.hidden = true
-        timerOverlay.hidden = true
+        requestInOverlay!.hidden = true
+        requestOutOverlay!.hidden = true
+        addFriendImage!.hidden = true
+        checkFriend!.hidden = true
+        timerOverlay!.hidden = true
         request = nil
         timerLabel!.hidden = true
         timerLabel!.text = ""
         isLoading!.hidden = true
+        image!.image = nil
+        image!.hidden = true
         if timer != nil {
-            timer.invalidate()
+            timer!.invalidate()
             timer = nil
         }
     }

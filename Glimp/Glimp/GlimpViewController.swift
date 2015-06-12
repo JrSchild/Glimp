@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 class GlimpViewController: UIViewController {
     let screenSize: CGRect
@@ -81,13 +82,16 @@ extension GlimpViewController: UICollectionViewDataSource {
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         if indexPath.section == 0 {
-            return collectionView.dequeueReusableCellWithReuseIdentifier("HeaderCollectionViewCell", forIndexPath: indexPath) as HeaderCollectionViewCell
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("HeaderCollectionViewCell", forIndexPath: indexPath) as HeaderCollectionViewCell
+            cell.headerText!.text = "GLIMPS RECEIVED"
+            
+            return cell
         }
         
         // Use a thumbnail for the other cells and reset the properties, it might have been re-used.
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ThumbnailCollectionViewCell", forIndexPath: indexPath) as ThumbnailCollectionViewCell
         cell.reset()
-        cell.setRandomBackgroundColor()
+        cell.setImage((Glimps.glimpsOut[indexPath.row] as PFObject)["photo"] as PFFile)
         
         return cell
     }

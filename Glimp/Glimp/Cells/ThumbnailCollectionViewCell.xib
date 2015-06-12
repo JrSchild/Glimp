@@ -13,6 +13,9 @@
                 <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eUw-Wp-9co" customClass="ThumbnailImageView" customModule="Glimp" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
+                    </imageView>
                     <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="check-friend" translatesAutoresizingMaskIntoConstraints="NO" id="AdP-UF-sfb">
                         <rect key="frame" x="5" y="57" width="28" height="28"/>
                         <constraints>
@@ -75,21 +78,26 @@
                 <constraint firstAttribute="centerY" secondItem="bfH-fW-M9h" secondAttribute="centerY" id="NRE-HW-oXH"/>
                 <constraint firstAttribute="centerX" secondItem="O1g-eu-g8q" secondAttribute="centerX" id="XdD-yo-XxU"/>
                 <constraint firstAttribute="centerX" secondItem="bfH-fW-M9h" secondAttribute="centerX" id="YEz-7J-9vU"/>
+                <constraint firstAttribute="bottom" secondItem="eUw-Wp-9co" secondAttribute="bottom" id="ZdZ-XN-Ifk"/>
                 <constraint firstAttribute="bottom" secondItem="FIt-et-c7W" secondAttribute="bottom" constant="2" id="eHc-pf-bNF"/>
                 <constraint firstAttribute="trailing" secondItem="FIt-et-c7W" secondAttribute="trailing" constant="5" id="etI-mw-N4q"/>
+                <constraint firstAttribute="trailing" secondItem="eUw-Wp-9co" secondAttribute="trailing" id="fz4-6p-A6k"/>
                 <constraint firstAttribute="centerY" secondItem="L0A-YP-tHB" secondAttribute="centerY" id="git-6S-dcr"/>
                 <constraint firstAttribute="centerX" secondItem="L0A-YP-tHB" secondAttribute="centerX" id="hDh-TN-nYK"/>
                 <constraint firstAttribute="trailing" secondItem="G9a-iB-6MZ" secondAttribute="trailing" id="hvV-3h-ddl"/>
+                <constraint firstItem="eUw-Wp-9co" firstAttribute="top" secondItem="OnX-Ey-8B3" secondAttribute="top" id="mWX-wN-KRS"/>
                 <constraint firstItem="AdP-UF-sfb" firstAttribute="leading" secondItem="OnX-Ey-8B3" secondAttribute="leading" constant="5" id="nfI-do-W6s"/>
                 <constraint firstItem="G9a-iB-6MZ" firstAttribute="top" secondItem="OnX-Ey-8B3" secondAttribute="top" id="o1k-xL-o3m"/>
                 <constraint firstItem="G9a-iB-6MZ" firstAttribute="leading" secondItem="OnX-Ey-8B3" secondAttribute="leading" id="o41-hX-868"/>
                 <constraint firstAttribute="centerY" secondItem="O1g-eu-g8q" secondAttribute="centerY" id="qf9-d5-oJN"/>
                 <constraint firstAttribute="centerX" secondItem="vNq-BW-J9N" secondAttribute="centerX" id="x0B-ZF-Rzc"/>
+                <constraint firstItem="eUw-Wp-9co" firstAttribute="leading" secondItem="OnX-Ey-8B3" secondAttribute="leading" id="yh6-Hi-Gnt"/>
             </constraints>
             <size key="customSize" width="174" height="166"/>
             <connections>
                 <outlet property="addFriendImage" destination="vNq-BW-J9N" id="MH3-me-ckU"/>
-                <outlet property="imageView" destination="AdP-UF-sfb" id="KOP-fO-7Q2"/>
+                <outlet property="checkFriend" destination="AdP-UF-sfb" id="Las-wl-g6X"/>
+                <outlet property="image" destination="eUw-Wp-9co" id="LYc-KD-JN9"/>
                 <outlet property="isLoading" destination="L0A-YP-tHB" id="fl5-SA-INi"/>
                 <outlet property="label" destination="G9a-iB-6MZ" id="sp6-YF-QWX"/>
                 <outlet property="requestInOverlay" destination="bfH-fW-M9h" id="Juw-jq-MWV"/>
