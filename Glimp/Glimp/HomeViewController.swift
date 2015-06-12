@@ -81,7 +81,7 @@ class HomeViewController: UIViewController {
         
         if let id = identifier {
             if id == "hideGlimps" {
-                let unwindSegue = FirstCustomSegueUnwind(identifier: id, source: fromViewController, destination: toViewController, performHandler: { () -> Void in
+                let unwindSegue = SwipeRightSegueUnwind(identifier: id, source: fromViewController, destination: toViewController, performHandler: { () -> Void in
                 })
                 return unwindSegue
             }

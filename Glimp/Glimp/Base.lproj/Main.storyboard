@@ -210,7 +210,7 @@
                     <connections>
                         <outlet property="collectionView" destination="DsL-Cl-8Wz" id="QmG-Kv-uJG"/>
                         <outlet property="sendBar" destination="5yb-pm-tmW" id="A88-Ri-XfN"/>
-                        <segue destination="6on-qz-Igt" kind="custom" identifier="showGlimps" customClass="FirstCustomSegue" customModule="Glimp" customModuleProvider="target" id="tqH-dp-OEp"/>
+                        <segue destination="6on-qz-Igt" kind="custom" identifier="showGlimps" customClass="SwipeRightSegue" customModule="Glimp" customModuleProvider="target" id="tqH-dp-OEp"/>
                         <segue destination="Hcg-wu-UM5" kind="show" identifier="showImagePicker" id="liw-b8-xRL"/>
                     </connections>
                 </viewController>

@@ -8,9 +8,10 @@
 
 import UIKit
 
-class FirstCustomSegueUnwind: UIStoryboardSegue {
+class SwipeRightSegueUnwind: UIStoryboardSegue {
  
     override func perform() {
+        
         // Assign the source and destination views to local variables.
         var secondVCView = self.sourceViewController.view as UIView!
         var firstVCView = self.destinationViewController.view as UIView!
@@ -29,5 +30,4 @@ class FirstCustomSegueUnwind: UIStoryboardSegue {
                 self.sourceViewController.dismissViewControllerAnimated(false, completion: nil)
         }
     }
-    
 }

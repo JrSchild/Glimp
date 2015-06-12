@@ -18,6 +18,8 @@
 		F23DF4511B2877D1002C35DC /* BABCropperView.m in Sources */ = {isa = PBXBuildFile; fileRef = F23DF4501B2877D1002C35DC /* BABCropperView.m */; };
 		F23DF4581B287DE5002C35DC /* ImagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23DF4571B287DE5002C35DC /* ImagePickerViewController.swift */; };
 		F24AE9A31B2ADC70000256ED /* ThumbnailImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AE9A21B2ADC70000256ED /* ThumbnailImageView.swift */; };
+		F24AE9A81B2B1100000256ED /* SwipeRightSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AE9A61B2B1100000256ED /* SwipeRightSegue.swift */; };
+		F24AE9A91B2B1100000256ED /* SwipeRightSegueUnwind.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AE9A71B2B1100000256ED /* SwipeRightSegueUnwind.swift */; };
 		F2719F0E1B22205800E923D5 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2719F0D1B22205800E923D5 /* Collection.swift */; };
 		F2719F101B25980000E923D5 /* GlimpsCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2719F0F1B25980000E923D5 /* GlimpsCollection.swift */; };
 		F2719F121B26F67600E923D5 /* EventEmiter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2719F111B26F67600E923D5 /* EventEmiter.swift */; };
@@ -26,8 +28,6 @@
 		F2A77A941B2AD05B00E439FD /* HeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2A77A931B2AD05B00E439FD /* HeaderCollectionViewCell.xib */; };
 		F2A77A961B2AD22A00E439FD /* HeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A77A951B2AD22A00E439FD /* HeaderCollectionViewCell.swift */; };
 		F2DD3D6A1B1EFE720085762F /* GlimpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DD3D691B1EFE720085762F /* GlimpViewController.swift */; };
-		F2DD3D771B1F05410085762F /* FirstCustomSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DD3D731B1F05410085762F /* FirstCustomSegue.swift */; };
-		F2DD3D781B1F05410085762F /* FirstCustomSegueUnwind.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DD3D741B1F05410085762F /* FirstCustomSegueUnwind.swift */; };
 		F2DD3E1F1B1F24F00085762F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2DD3E1E1B1F24F00085762F /* AudioToolbox.framework */; };
 		F2DD3E211B1F25020085762F /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F2DD3E201B1F25020085762F /* libsqlite3.0.dylib */; };
 		F2DD3E231B1F250E0085762F /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2DD3E221B1F250E0085762F /* Accounts.framework */; };
@@ -77,6 +77,8 @@
 		F23DF4501B2877D1002C35DC /* BABCropperView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BABCropperView.m; path = BABCropperView/BABCropperView.m; sourceTree = "<group>"; };
 		F23DF4571B287DE5002C35DC /* ImagePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerViewController.swift; sourceTree = "<group>"; };
 		F24AE9A21B2ADC70000256ED /* ThumbnailImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ThumbnailImageView.swift; path = Cells/ThumbnailImageView.swift; sourceTree = "<group>"; };
+		F24AE9A61B2B1100000256ED /* SwipeRightSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwipeRightSegue.swift; path = Segues/SwipeRightSegue.swift; sourceTree = "<group>"; };
+		F24AE9A71B2B1100000256ED /* SwipeRightSegueUnwind.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwipeRightSegueUnwind.swift; path = Segues/SwipeRightSegueUnwind.swift; sourceTree = "<group>"; };
 		F2719F0D1B22205800E923D5 /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Collection.swift; path = Models/Collection.swift; sourceTree = "<group>"; };
 		F2719F0F1B25980000E923D5 /* GlimpsCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GlimpsCollection.swift; path = Models/GlimpsCollection.swift; sourceTree = "<group>"; };
 		F2719F111B26F67600E923D5 /* EventEmiter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventEmiter.swift; sourceTree = "<group>"; };
@@ -85,8 +87,6 @@
 		F2A77A931B2AD05B00E439FD /* HeaderCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HeaderCollectionViewCell.xib; path = Cells/HeaderCollectionViewCell.xib; sourceTree = "<group>"; };
 		F2A77A951B2AD22A00E439FD /* HeaderCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HeaderCollectionViewCell.swift; path = Cells/HeaderCollectionViewCell.swift; sourceTree = "<group>"; };
 		F2DD3D691B1EFE720085762F /* GlimpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlimpViewController.swift; sourceTree = "<group>"; };
-		F2DD3D731B1F05410085762F /* FirstCustomSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstCustomSegue.swift; sourceTree = "<group>"; };
-		F2DD3D741B1F05410085762F /* FirstCustomSegueUnwind.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstCustomSegueUnwind.swift; sourceTree = "<group>"; };
 		F2DD3E1E1B1F24F00085762F /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		F2DD3E201B1F25020085762F /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		F2DD3E221B1F250E0085762F /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
@@ -178,14 +178,13 @@
 			children = (
 				F20D36121B221878000C7937 /* Models */,
 				F2A77A8A1B29D5B200E439FD /* Cells */,
+				F24AE9A51B2B10C9000256ED /* Segues */,
 				F20F06C81B1CA3B5007007AF /* Main.storyboard */,
 				F20F06C41B1CA3B5007007AF /* AppDelegate.swift */,
 				F2DD3E3F1B1F29370085762F /* LoginViewController.swift */,
 				F20F06C61B1CA3B5007007AF /* HomeViewController.swift */,
 				F2DD3D691B1EFE720085762F /* GlimpViewController.swift */,
 				F23DF4571B287DE5002C35DC /* ImagePickerViewController.swift */,
-				F2DD3D731B1F05410085762F /* FirstCustomSegue.swift */,
-				F2DD3D741B1F05410085762F /* FirstCustomSegueUnwind.swift */,
 				F2719F111B26F67600E923D5 /* EventEmiter.swift */,
 				F20F06CB1B1CA3B5007007AF /* Images.xcassets */,
 				F20F06CD1B1CA3B5007007AF /* LaunchScreen.xib */,
@@ -229,6 +228,15 @@
 				F23DF44E1B2877D0002C35DC /* Glimp-Bridging-Header.h */,
 			);
 			name = BABCropperView;
+			sourceTree = "<group>";
+		};
+		F24AE9A51B2B10C9000256ED /* Segues */ = {
+			isa = PBXGroup;
+			children = (
+				F24AE9A61B2B1100000256ED /* SwipeRightSegue.swift */,
+				F24AE9A71B2B1100000256ED /* SwipeRightSegueUnwind.swift */,
+			);
+			name = Segues;
 			sourceTree = "<group>";
 		};
 		F2A77A8A1B29D5B200E439FD /* Cells */ = {
@@ -373,7 +381,6 @@
 				F2719F121B26F67600E923D5 /* EventEmiter.swift in Sources */,
 				F2DD3E401B1F29370085762F /* LoginViewController.swift in Sources */,
 				F20D361C1B221A07000C7937 /* FriendRequestsCollection.swift in Sources */,
-				F2DD3D781B1F05410085762F /* FirstCustomSegueUnwind.swift in Sources */,
 				F2719F0E1B22205800E923D5 /* Collection.swift in Sources */,
 				F24AE9A31B2ADC70000256ED /* ThumbnailImageView.swift in Sources */,
 				F20D361A1B2219E7000C7937 /* FriendsCollection.swift in Sources */,
@@ -381,9 +388,10 @@
 				F2A77A8E1B29D62000E439FD /* ThumbnailCollectionViewCell.swift in Sources */,
 				F20F06C71B1CA3B5007007AF /* HomeViewController.swift in Sources */,
 				F2719F101B25980000E923D5 /* GlimpsCollection.swift in Sources */,
+				F24AE9A91B2B1100000256ED /* SwipeRightSegueUnwind.swift in Sources */,
 				F20F06C51B1CA3B5007007AF /* AppDelegate.swift in Sources */,
 				F2A77A961B2AD22A00E439FD /* HeaderCollectionViewCell.swift in Sources */,
-				F2DD3D771B1F05410085762F /* FirstCustomSegue.swift in Sources */,
+				F24AE9A81B2B1100000256ED /* SwipeRightSegue.swift in Sources */,
 				F23DF4511B2877D1002C35DC /* BABCropperView.m in Sources */,
 				F2DD3D6A1B1EFE720085762F /* GlimpViewController.swift in Sources */,
 			);

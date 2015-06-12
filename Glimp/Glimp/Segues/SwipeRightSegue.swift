@@ -8,9 +8,10 @@
 
 import UIKit
 
-class FirstCustomSegue: UIStoryboardSegue {
+class SwipeRightSegue: UIStoryboardSegue {
    
     override func perform() {
+        
         // Assign the source and destination views to local variables.
         var firstVCView = self.sourceViewController.view as UIView!
         var secondVCView = self.destinationViewController.view as UIView!
@@ -36,5 +37,4 @@ class FirstCustomSegue: UIStoryboardSegue {
                     completion: nil)
         }
     }
-    
 }
