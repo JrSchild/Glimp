@@ -240,10 +240,10 @@ extension HomeViewController: UICollectionViewDataSource {
         
         // Section 1 is incoming glimp requests: Use dummy data.
         // If there are no requests, show a cell explaining there are no requests.
-        if Requests.requestsIn.count == 0 {
+        if Glimps.requestsIn.count == 0 {
             return 1
         }
-        return Requests.requestsIn.count
+        return Glimps.requestsIn.count
     }
     
     // Returns the cell to be rendered.
