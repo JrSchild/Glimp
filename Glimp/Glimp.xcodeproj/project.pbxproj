@@ -50,6 +50,8 @@
 		F2DD3E461B1F33DA0085762F /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2DD3E431B1F33DA0085762F /* ParseUI.framework */; };
 		F2F2F7341B2B294D004E5EB4 /* SwipeLeftSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F2F7321B2B294D004E5EB4 /* SwipeLeftSegue.swift */; };
 		F2F2F7351B2B294D004E5EB4 /* SwipeLeftSegueUnwind.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F2F7331B2B294D004E5EB4 /* SwipeLeftSegueUnwind.swift */; };
+		F2F2F7371B2B4857004E5EB4 /* ProfileInformationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2F2F7361B2B4857004E5EB4 /* ProfileInformationView.xib */; };
+		F2F2F7391B2B4A08004E5EB4 /* ProfileInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F2F7381B2B4A08004E5EB4 /* ProfileInformationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +114,8 @@
 		F2DD3E431B1F33DA0085762F /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseUI.framework; path = Frameworks/ParseUI.framework; sourceTree = "<group>"; };
 		F2F2F7321B2B294D004E5EB4 /* SwipeLeftSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwipeLeftSegue.swift; path = Segues/SwipeLeftSegue.swift; sourceTree = "<group>"; };
 		F2F2F7331B2B294D004E5EB4 /* SwipeLeftSegueUnwind.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwipeLeftSegueUnwind.swift; path = Segues/SwipeLeftSegueUnwind.swift; sourceTree = "<group>"; };
+		F2F2F7361B2B4857004E5EB4 /* ProfileInformationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileInformationView.xib; sourceTree = "<group>"; };
+		F2F2F7381B2B4A08004E5EB4 /* ProfileInformationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileInformationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +196,8 @@
 				F2DD3D691B1EFE720085762F /* GlimpViewController.swift */,
 				F24AE9B41B2B153A000256ED /* ProfileViewController.swift */,
 				F23DF4571B287DE5002C35DC /* ImagePickerViewController.swift */,
+				F2F2F7361B2B4857004E5EB4 /* ProfileInformationView.xib */,
+				F2F2F7381B2B4A08004E5EB4 /* ProfileInformationView.swift */,
 				F2719F111B26F67600E923D5 /* EventEmiter.swift */,
 				F20F06CB1B1CA3B5007007AF /* Images.xcassets */,
 				F20F06CD1B1CA3B5007007AF /* LaunchScreen.xib */,
@@ -368,6 +374,7 @@
 				F20F06CA1B1CA3B5007007AF /* Main.storyboard in Resources */,
 				F2A77A901B29D64800E439FD /* ThumbnailCollectionViewCell.xib in Resources */,
 				F20F06CF1B1CA3B5007007AF /* LaunchScreen.xib in Resources */,
+				F2F2F7371B2B4857004E5EB4 /* ProfileInformationView.xib in Resources */,
 				F20F06CC1B1CA3B5007007AF /* Images.xcassets in Resources */,
 				F2A77A941B2AD05B00E439FD /* HeaderCollectionViewCell.xib in Resources */,
 			);
@@ -400,6 +407,7 @@
 				F2F2F7351B2B294D004E5EB4 /* SwipeLeftSegueUnwind.swift in Sources */,
 				F24AE9B51B2B153A000256ED /* ProfileViewController.swift in Sources */,
 				F2719F101B25980000E923D5 /* GlimpsCollection.swift in Sources */,
+				F2F2F7391B2B4A08004E5EB4 /* ProfileInformationView.swift in Sources */,
 				F24AE9A91B2B1100000256ED /* SwipeRightSegueUnwind.swift in Sources */,
 				F20F06C51B1CA3B5007007AF /* AppDelegate.swift in Sources */,
 				F2A77A961B2AD22A00E439FD /* HeaderCollectionViewCell.swift in Sources */,

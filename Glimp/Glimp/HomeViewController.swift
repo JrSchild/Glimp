@@ -299,6 +299,9 @@ extension HomeViewController: UICollectionViewDataSource {
                 if indexPath.row <= Friends.friends.count {
                     let friend = Friends.friends[indexPath.row - 1]
                     cell.setLabel(friend["username"] as String)
+                    if let photo = friend["photo"] as? PFFile {
+                        cell.setImage(photo)
+                    }
 
                     // If a glimp request has been sent, set it on the cell.
                     if let request = Glimps.findRequestOut(friend) {
@@ -314,13 +317,24 @@ extension HomeViewController: UICollectionViewDataSource {
                 
                 // The cell is an incoming request.
                 } else if indexPath.row <= Friends.friends.count + Requests.requestsIn.count {
-                    cell.setLabel(Requests.requestsIn[indexPath.row - Friends.friends.count - 1]["fromUser"]!["username"] as String)
+                    let fromUser = Requests.requestsIn[indexPath.row - Friends.friends.count - 1]["fromUser"]! as PFObject
+                    cell.setLabel(fromUser["username"] as String)
                     cell.requestInOverlay!.hidden = false
+                    if let photo = fromUser["photo"] as? PFFile {
+                        cell.setImage(photo)
+                    }
                     
                 // The cell is an outgoing request
                 } else {
-                    cell.setLabel(Requests.requestsOut[indexPath.row - Friends.friends.count - Requests.requestsIn.count - 1]["toUser"]!["username"] as String)
+                    let toUser = Requests.requestsOut[indexPath.row - Friends.friends.count - Requests.requestsIn.count - 1]["toUser"]! as PFObject
+                    cell.setLabel(toUser["username"] as String)
                     cell.requestOutOverlay!.hidden = false
+                    if let photo = toUser["photo"] as? PFFile {
+                        cell.setImage(photo)
+                    } else {
+                        println("none")
+                        println(toUser["username"] as String)
+                    }
                 }
             }
         }

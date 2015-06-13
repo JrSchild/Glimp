@@ -30,7 +30,7 @@
         <!--Image Picker View Controller-->
         <scene sceneID="UsN-Ix-pvd">
             <objects>
-                <viewController id="Hcg-wu-UM5" customClass="ImagePickerViewController" customModule="Glimp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ImagePickerViewController" id="Hcg-wu-UM5" customClass="ImagePickerViewController" customModule="Glimp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lgD-pR-ODx"/>
                         <viewControllerLayoutGuide type="bottom" id="9Lj-aa-Acl"/>
@@ -296,12 +296,13 @@
             <objects>
                 <viewController id="U1e-lw-FDq" customClass="ProfileViewController" customModule="Glimp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="m8e-jA-UY2"/>
-                        <viewControllerLayoutGuide type="bottom" id="wX4-K4-HVE"/>
+                        <viewControllerLayoutGuide type="top" id="zHQ-ap-KOj"/>
+                        <viewControllerLayoutGuide type="bottom" id="Dzn-lT-Jm8"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="QgS-1m-gdJ">
+                    <view key="view" contentMode="scaleToFill" id="rxs-tc-XyW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
