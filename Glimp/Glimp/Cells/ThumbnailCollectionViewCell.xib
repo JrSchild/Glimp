@@ -29,10 +29,14 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="f7H-6h-fdA"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1HY-oo-JrO">
+                        <rect key="frame" x="0.0" y="20" width="90" height="70"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
+                    </view>
                     <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="add-friend" translatesAutoresizingMaskIntoConstraints="NO" id="vNq-BW-J9N">
                         <rect key="frame" x="32" y="32" width="26" height="26"/>
                         <constraints>
@@ -75,8 +79,11 @@
             </view>
             <constraints>
                 <constraint firstAttribute="centerY" secondItem="vNq-BW-J9N" secondAttribute="centerY" id="76d-aX-jyT"/>
+                <constraint firstItem="1HY-oo-JrO" firstAttribute="leading" secondItem="OnX-Ey-8B3" secondAttribute="leading" id="7Tn-n7-BIN"/>
                 <constraint firstAttribute="bottom" secondItem="AdP-UF-sfb" secondAttribute="bottom" constant="5" id="Bsg-mQ-oEe"/>
+                <constraint firstItem="1HY-oo-JrO" firstAttribute="top" secondItem="G9a-iB-6MZ" secondAttribute="bottom" id="LJ1-6N-FGA"/>
                 <constraint firstAttribute="centerY" secondItem="bfH-fW-M9h" secondAttribute="centerY" id="NRE-HW-oXH"/>
+                <constraint firstAttribute="trailing" secondItem="1HY-oo-JrO" secondAttribute="trailing" id="Pb8-WY-Jpw"/>
                 <constraint firstAttribute="centerX" secondItem="O1g-eu-g8q" secondAttribute="centerX" id="XdD-yo-XxU"/>
                 <constraint firstAttribute="centerX" secondItem="bfH-fW-M9h" secondAttribute="centerX" id="YEz-7J-9vU"/>
                 <constraint firstAttribute="bottom" secondItem="eUw-Wp-9co" secondAttribute="bottom" id="ZdZ-XN-Ifk"/>
@@ -91,12 +98,14 @@
                 <constraint firstItem="G9a-iB-6MZ" firstAttribute="top" secondItem="OnX-Ey-8B3" secondAttribute="top" id="o1k-xL-o3m"/>
                 <constraint firstItem="G9a-iB-6MZ" firstAttribute="leading" secondItem="OnX-Ey-8B3" secondAttribute="leading" id="o41-hX-868"/>
                 <constraint firstAttribute="centerY" secondItem="O1g-eu-g8q" secondAttribute="centerY" id="qf9-d5-oJN"/>
+                <constraint firstAttribute="bottom" secondItem="1HY-oo-JrO" secondAttribute="bottom" id="tnI-Yv-DEO"/>
                 <constraint firstAttribute="centerX" secondItem="vNq-BW-J9N" secondAttribute="centerX" id="x0B-ZF-Rzc"/>
                 <constraint firstItem="eUw-Wp-9co" firstAttribute="leading" secondItem="OnX-Ey-8B3" secondAttribute="leading" id="yh6-Hi-Gnt"/>
             </constraints>
             <size key="customSize" width="174" height="166"/>
             <connections>
                 <outlet property="addFriendImage" destination="vNq-BW-J9N" id="MH3-me-ckU"/>
+                <outlet property="bottomOverlay" destination="1HY-oo-JrO" id="mY5-Zh-P6F"/>
                 <outlet property="checkFriend" destination="AdP-UF-sfb" id="Las-wl-g6X"/>
                 <outlet property="image" destination="eUw-Wp-9co" id="LYc-KD-JN9"/>
                 <outlet property="isLoading" destination="L0A-YP-tHB" id="fl5-SA-INi"/>

@@ -20,6 +20,7 @@ class ThumbnailCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var isLoading: UIActivityIndicatorView!
     @IBOutlet weak var image: ThumbnailImageView!
+    @IBOutlet weak var bottomOverlay: UIView!
     
     let calendar = NSCalendar.currentCalendar()
     var timer : NSTimer!
@@ -67,11 +68,12 @@ class ThumbnailCollectionViewCell: UICollectionViewCell {
         // Set frame of timerOverlay with width of 0, defer this until the cell is in the view.
         let time = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
         dispatch_after(time, dispatch_get_main_queue()) {
-            self.timerOverlay!.frame = CGRect(x: 0, y: 0, width: CGFloat(width), height: self.frame.height)
+            let top = self.label!.frame.height
+            self.timerOverlay!.frame = CGRect(x: 0, y: top, width: CGFloat(width), height: self.frame.height - top)
             
             // Start the animation.
             UIView.animateWithDuration(Double(endTime - currentTime), delay: 0, options: .CurveLinear, animations: {
-                self.timerOverlay!.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
+                self.timerOverlay!.frame = CGRect(x: 0, y: top, width: self.frame.width, height: self.frame.height - top)
             }, completion: {(finished: Bool) -> Void in
                 self.timerOverlay!.hidden = true
                 self.timerLabel!.hidden = true
@@ -146,6 +148,7 @@ class ThumbnailCollectionViewCell: UICollectionViewCell {
         isLoading!.hidden = true
         image!.image = nil
         image!.hidden = true
+        bottomOverlay!.hidden = true
         if timer != nil {
             timer!.invalidate()
             timer = nil

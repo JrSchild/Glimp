@@ -288,6 +288,9 @@ extension HomeViewController: UICollectionViewDataSource {
                     let request = Glimps.requestsIn[indexPath.row]
                     cell.setLabel(request["fromUser"]!["username"]! as String)
                     cell.setRequest(request)
+                    if let photo = request["fromUser"]!["photo"] as? PFFile {
+                        cell.setImage(photo)
+                    }
                     
                     return cell
                 }
@@ -320,6 +323,7 @@ extension HomeViewController: UICollectionViewDataSource {
                     let fromUser = Requests.requestsIn[indexPath.row - Friends.friends.count - 1]["fromUser"]! as PFObject
                     cell.setLabel(fromUser["username"] as String)
                     cell.requestInOverlay!.hidden = false
+                    cell.bottomOverlay!.hidden = false
                     if let photo = fromUser["photo"] as? PFFile {
                         cell.setImage(photo)
                     }
@@ -329,6 +333,7 @@ extension HomeViewController: UICollectionViewDataSource {
                     let toUser = Requests.requestsOut[indexPath.row - Friends.friends.count - Requests.requestsIn.count - 1]["toUser"]! as PFObject
                     cell.setLabel(toUser["username"] as String)
                     cell.requestOutOverlay!.hidden = false
+                    cell.bottomOverlay!.hidden = false
                     if let photo = toUser["photo"] as? PFFile {
                         cell.setImage(photo)
                     } else {
