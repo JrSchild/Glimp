@@ -22,6 +22,7 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var sendBar: UIView!
+    @IBOutlet weak var selectAllButton: UIButton!
     
     required init(coder aDecoder: NSCoder) {
         screenSize = UIScreen.mainScreen().bounds
@@ -74,6 +75,7 @@ class HomeViewController: UIViewController {
             collectionView!.frame = self.view.frame
             sendBar.hidden = true
         }
+        selectAllButton.setTitle(countElements(selectedIndexes) == Friends.friends.count ? "NONE" : "ALL", forState: UIControlState.Normal)
     }
     
     func showGlimps() {
@@ -211,7 +213,34 @@ class HomeViewController: UIViewController {
         }
     }
     
+    func toggleSelectFriend(objectId: String, select: Bool) {
+        
+        // If the cell was selected, add it to selected friends, otherwise remove it from selected friends.
+        if (select) {
+            selectedIndexes[objectId] = true
+        } else {
+            selectedIndexes.removeValueForKey(objectId)
+        }
+        setSendBar()
+    }
+    
     @IBAction func returnFromSegueActions(sender: UIStoryboardSegue) {
+    }
+    
+    @IBAction func selectAllFriends(sender: UIButton) {
+        
+        // If all are selected, remove everyone. Otherwise add everyone
+        if countElements(selectedIndexes) == Friends.friends.count {
+            for objectId in selectedIndexes.keys.array {
+                selectedIndexes.removeValueForKey(objectId)
+            }
+        } else {
+            for friend in Friends.friends {
+                selectedIndexes[friend.objectId] = true
+            }
+        }
+        self.collectionView!.reloadData()
+        setSendBar()
     }
     
     @IBAction func sendGlimpRequest(sender: UIButton) {
@@ -411,13 +440,7 @@ extension HomeViewController: UICollectionViewDataSource {
             cell.isSelected = !cell.isSelected
             cell.setSelected()
             
-            // If the cell was selected, add it to selected friends, otherwise remove it from selected friends.
-            if (cell.isSelected) {
-                selectedIndexes[Friends.friends[indexPath.row - 1].objectId] = true
-            } else {
-                selectedIndexes.removeValueForKey(Friends.friends[indexPath.row - 1].objectId)
-            }
-            setSendBar()
+            toggleSelectFriend(Friends.friends[indexPath.row - 1].objectId, select: cell.isSelected)
         }
     }
 }

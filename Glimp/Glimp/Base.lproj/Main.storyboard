@@ -168,6 +168,9 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="selectAllFriends:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="52x-Pz-OpN"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="diK-xU-O7g">
                                         <rect key="frame" x="101" y="0.0" width="274" height="60"/>
@@ -209,6 +212,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="collectionView" destination="DsL-Cl-8Wz" id="QmG-Kv-uJG"/>
+                        <outlet property="selectAllButton" destination="ZaB-aY-Dox" id="Bo0-w8-kvB"/>
                         <outlet property="sendBar" destination="5yb-pm-tmW" id="A88-Ri-XfN"/>
                         <segue destination="6on-qz-Igt" kind="custom" identifier="showGlimps" customClass="SwipeRightSegue" customModule="Glimp" customModuleProvider="target" id="tqH-dp-OEp"/>
                         <segue destination="Hcg-wu-UM5" kind="show" identifier="showImagePicker" id="liw-b8-xRL"/>
