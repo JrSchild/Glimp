@@ -142,6 +142,7 @@ class ThumbnailCollectionViewCell: UICollectionViewCell {
         addFriendImage!.hidden = true
         checkFriend!.hidden = true
         timerOverlay!.hidden = true
+        selected = false
         request = nil
         timerLabel!.hidden = true
         timerLabel!.text = ""
@@ -149,6 +150,7 @@ class ThumbnailCollectionViewCell: UICollectionViewCell {
         image!.image = nil
         image!.hidden = true
         bottomOverlay!.hidden = true
+        isSelected = false
         if timer != nil {
             timer!.invalidate()
             timer = nil
