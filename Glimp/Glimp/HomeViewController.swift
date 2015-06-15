@@ -407,18 +407,14 @@ extension HomeViewController: UICollectionViewDataSource {
 
         // When the add-friend button was tapped; create a UIAlert with input textfield.
         if indexPath.section == 3 && indexPath.row == 0 {
-            var inputTextField: UITextField?
-            var alert = UIAlertController(title: "Add a friend", message: "Enter a username", preferredStyle: UIAlertControllerStyle.Alert)
-
-            // On confirm, add the friend with text of input.
-            alert.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.Default, handler: { alertAction in
-                self.addFriend(inputTextField!.text)
-            }))
-            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
-            alert.addTextFieldWithConfigurationHandler({ textField in
-                inputTextField = textField
-            })
-            self.presentViewController(alert, animated: true, completion: nil)
+            let alert = UIAlertView()
+            alert.title = "Add a friend"
+            alert.delegate = self
+            alert.message = "Enter a username"
+            alert.alertViewStyle = UIAlertViewStyle.PlainTextInput
+            alert.addButtonWithTitle("Done")
+            alert.addButtonWithTitle("Cancel")
+            alert.show()
         
         // The cell is in the friend list.
         } else if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? ThumbnailCollectionViewCell {
@@ -468,6 +464,21 @@ extension HomeViewController: UICollectionViewDelegate {
     }
 }
 extension HomeViewController: UICollectionViewDelegateFlowLayout {}
+
+extension HomeViewController: UIAlertViewDelegate {
+    
+    func alertView(alertView: UIAlertView!, clickedButtonAtIndex buttonIndex: Int) {
+        switch buttonIndex {
+        case 0:
+            if let username = alertView.textFieldAtIndex(0)?.text {
+                self.addFriend(username)
+            }
+            break;
+        default:
+            break;
+        }
+    }
+}
 
 extension HomeViewController: UIActionSheetDelegate {
     
