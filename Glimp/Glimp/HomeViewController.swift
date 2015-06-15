@@ -19,8 +19,8 @@ class HomeViewController: UIViewController {
     var currentCellRequest: ThumbnailCollectionViewCell!
     var currentRequest: PFObject!
     let refreshControl = UIRefreshControl()
+    var collectionView: UICollectionView!
     
-    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var sendBar: UIView!
     @IBOutlet weak var selectAllButton: UIButton!
     
@@ -36,11 +36,21 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         // Set the item size on the layout of collectionView, we want four-column thumbnails
-        let layout = collectionView!.collectionViewLayout as UICollectionViewFlowLayout
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: screenWidth / columns, height: screenWidth / columns)
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
+        
+        collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
+        collectionView!.dataSource = self
+        collectionView!.delegate = self
+        collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "CollectionViewCell")
+        collectionView!.backgroundColor = UIColor.whiteColor()
+        self.view.addSubview(collectionView!)
         
         collectionView!.registerNib(UINib(nibName: "ThumbnailCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ThumbnailCollectionViewCell")
         collectionView!.registerNib(UINib(nibName: "HeaderCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "HeaderCollectionViewCell")
+        collectionView!.registerNib(UINib(nibName: "EmptyListCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "EmptyListCollectionViewCell")
         
         // Add the UIRefreshControl to the view and bind refresh event.
         refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
@@ -270,7 +280,7 @@ extension HomeViewController: UICollectionViewDataSource {
     
     // Returns the length of each section.
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-
+        
         // Section 0 and 2 are headers so have a length of 1
         if section == 0 || section == 2 {
             return 1
@@ -312,7 +322,7 @@ extension HomeViewController: UICollectionViewDataSource {
             
             if indexPath.section == 1 {
                 if Glimps.requestsIn.count == 0 {
-                    return collectionView.dequeueReusableCellWithReuseIdentifier("NoGlimpRequestsCell", forIndexPath: indexPath) as UICollectionViewCell
+                    return collectionView.dequeueReusableCellWithReuseIdentifier("EmptyListCollectionViewCell", forIndexPath: indexPath) as UICollectionViewCell
                 } else {
                     let request = Glimps.requestsIn[indexPath.row]
                     cell.setLabel(request["fromUser"]!["username"]! as String)
