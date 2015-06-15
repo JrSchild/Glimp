@@ -26,6 +26,9 @@ class LoginViewController: UIViewController, PFLogInViewControllerDelegate {
     override func viewDidAppear(animated: Bool) {
         
         if let currentUser = PFUser.currentUser() {
+            let installation = PFInstallation.currentInstallation()
+            installation["User"] = PFUser.currentUser()
+            installation.saveInBackground()
             
             // https://www.parse.com/questions/build-friend-relations-into-pfuser
             Friends.load({
