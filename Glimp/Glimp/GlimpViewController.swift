@@ -37,13 +37,9 @@ class GlimpViewController: UIViewController {
     // Reload all data.
     // TODO: These methods can be run in paralel.
     func refresh(sender: AnyObject) {
-        Friends.load({ () -> Void in
-            Requests.load({ () -> Void in
-                Glimps.load({ () -> Void in
-                    self.refreshControl.endRefreshing()
-                    self.collectionView!.reloadData()
-                })
-            })
+        RefreshData({ () -> Void in
+            self.refreshControl.endRefreshing()
+            self.collectionView!.reloadData()
         })
     }
 }

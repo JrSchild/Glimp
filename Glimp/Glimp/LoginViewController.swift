@@ -30,13 +30,8 @@ class LoginViewController: UIViewController, PFLogInViewControllerDelegate {
             installation["User"] = PFUser.currentUser()
             installation.saveInBackground()
             
-            // https://www.parse.com/questions/build-friend-relations-into-pfuser
-            Friends.load({
-                Requests.load({
-                    Glimps.load({
-                        self.performSegueWithIdentifier("dismissLogin", sender: nil)
-                    })
-                })
+            RefreshData({ () -> Void in
+                self.performSegueWithIdentifier("dismissLogin", sender: nil)
             })
         } else {
             logInController = PFLogInViewController()

@@ -29,6 +29,7 @@
 		F2A77A941B2AD05B00E439FD /* HeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2A77A931B2AD05B00E439FD /* HeaderCollectionViewCell.xib */; };
 		F2A77A961B2AD22A00E439FD /* HeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A77A951B2AD22A00E439FD /* HeaderCollectionViewCell.swift */; };
 		F2A7A03C1B304EF000928DEF /* ThumbnailCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A7A03B1B304EF000928DEF /* ThumbnailCollectionView.swift */; };
+		F2A7A03E1B30569700928DEF /* RefreshData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A7A03D1B30569700928DEF /* RefreshData.swift */; };
 		F2D6491F1B2F0A6E005AB6EE /* EmptyListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D6491D1B2F0A6E005AB6EE /* EmptyListCollectionViewCell.swift */; };
 		F2D649201B2F0A6E005AB6EE /* EmptyListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2D6491E1B2F0A6E005AB6EE /* EmptyListCollectionViewCell.xib */; };
 		F2D649241B30284A005AB6EE /* SharedGlimpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D649231B30284A005AB6EE /* SharedGlimpViewController.swift */; };
@@ -97,6 +98,7 @@
 		F2A77A931B2AD05B00E439FD /* HeaderCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HeaderCollectionViewCell.xib; path = Cells/HeaderCollectionViewCell.xib; sourceTree = "<group>"; };
 		F2A77A951B2AD22A00E439FD /* HeaderCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HeaderCollectionViewCell.swift; path = Cells/HeaderCollectionViewCell.swift; sourceTree = "<group>"; };
 		F2A7A03B1B304EF000928DEF /* ThumbnailCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailCollectionView.swift; sourceTree = "<group>"; };
+		F2A7A03D1B30569700928DEF /* RefreshData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RefreshData.swift; path = Models/RefreshData.swift; sourceTree = "<group>"; };
 		F2D6491D1B2F0A6E005AB6EE /* EmptyListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmptyListCollectionViewCell.swift; path = Cells/EmptyListCollectionViewCell.swift; sourceTree = "<group>"; };
 		F2D6491E1B2F0A6E005AB6EE /* EmptyListCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EmptyListCollectionViewCell.xib; path = Cells/EmptyListCollectionViewCell.xib; sourceTree = "<group>"; };
 		F2D649231B30284A005AB6EE /* SharedGlimpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedGlimpViewController.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 				F20D36191B2219E7000C7937 /* FriendsCollection.swift */,
 				F20D361B1B221A07000C7937 /* FriendRequestsCollection.swift */,
 				F2719F0F1B25980000E923D5 /* GlimpsCollection.swift */,
+				F2A7A03D1B30569700928DEF /* RefreshData.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -428,6 +431,7 @@
 				F2D649241B30284A005AB6EE /* SharedGlimpViewController.swift in Sources */,
 				F2A77A961B2AD22A00E439FD /* HeaderCollectionViewCell.swift in Sources */,
 				F24AE9A81B2B1100000256ED /* SwipeRightSegue.swift in Sources */,
+				F2A7A03E1B30569700928DEF /* RefreshData.swift in Sources */,
 				F23DF4511B2877D1002C35DC /* BABCropperView.m in Sources */,
 				F2DD3D6A1B1EFE720085762F /* GlimpViewController.swift in Sources */,
 			);
