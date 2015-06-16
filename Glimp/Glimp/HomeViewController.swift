@@ -54,10 +54,14 @@ class HomeViewController: UIViewController {
         var swipeLeftGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "showProfile")
         swipeLeftGestureRecognizer.direction = UISwipeGestureRecognizerDirection.Left
         collectionView!.addGestureRecognizer(swipeLeftGestureRecognizer)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadData", name: NotificationDataFriendRequests, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadData", name: NotificationDataFriends, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadData", name: NotificationDataGlimps, object: nil)
     }
     
     override func viewDidAppear(animated: Bool) {
-        self.collectionView!.reloadData()
+        reloadData()
     }
     
     // Hides or shows the sendbar based on selected friends.
@@ -107,11 +111,7 @@ class HomeViewController: UIViewController {
     
     // Add friend by username, on success reload the data.
     func addFriend(username: String) {
-        Requests.invite(username, callback: { (success, error) -> Void in
-            if success {
-                self.collectionView!.reloadData()
-            }
-        })
+        Requests.invite(username, callback: {(success, error) -> Void in})
     }
     
     // Create UIActionSheet for options on incoming friend request
@@ -140,44 +140,18 @@ class HomeViewController: UIViewController {
     }
     
     // Accept incoming friend request.
-    // TODO:
-    //  - It would be more reliable to pass the request and find the index in the Request array. This breaks if the data has changed in between.
-    //  - Move to FriendRequestsCollection.
     func acceptFriendRequestIn(requestIndex: Int) {
-        var user = PFUser.currentUser()!
-        var request: AnyObject = Requests.requestsIn[requestIndex]
-        var friend = request["fromUser"] as PFObject
-        
-        // Update data in memory
-        user["Friends"].addObject(friend.objectId)
-        Friends.friends.append(friend)
-        Requests.requestsIn.removeAtIndex(requestIndex)
-        
-        // Persist changes to the database
-        user.saveInBackground()
-        request.deleteInBackground()
-        
-        collectionView!.reloadData()
+        Requests.acceptFriendRequestIn(Requests.requestsIn[requestIndex])
     }
     
     // Delete incoming friend request.
     func deleteFriendRequestIn(requestIndex: Int) {
-        Requests.requestsIn[requestIndex].deleteInBackground()
-        Requests.requestsIn.removeAtIndex(requestIndex)
-        
-        collectionView!.reloadData()
+        Requests.deleteFriendRequestIn(Requests.requestsIn[requestIndex])
     }
     
     // Delete outgoing friend request.
     func deleteFriendRequestOut(requestIndex: Int) {
-        let user = PFUser.currentUser()
-        user.removeObject(Requests.requestsOut[requestIndex]["toUser"].objectId, forKey: "Friends")
-        user.saveInBackground()
-        
-        Requests.requestsOut[requestIndex].deleteInBackground()
-        Requests.requestsOut.removeAtIndex(requestIndex)
-        
-        collectionView!.reloadData()
+        Requests.deleteFriendRequestOut(Requests.requestsOut[requestIndex])
     }
     
     // Reload all data.
@@ -185,7 +159,6 @@ class HomeViewController: UIViewController {
     func refresh(sender: AnyObject) {
         RefreshData({ () -> Void in
             self.refreshControl.endRefreshing()
-            self.collectionView!.reloadData()
         })
     }
     
@@ -199,9 +172,7 @@ class HomeViewController: UIViewController {
                     
                     // Show loading indicator on cell and answer the glimp.
                     self.currentCellRequest.isLoading!.hidden = false
-                    Glimps.answerGlimpRequestIn(self.currentRequest, image: image!, callback: { () -> Void in
-                        self.collectionView!.reloadData()
-                    })
+                    Glimps.answerGlimpRequestIn(self.currentRequest, image: image!, callback: {})
                 }
                 self.currentCellRequest = nil
                 self.currentRequest = nil
@@ -239,7 +210,7 @@ class HomeViewController: UIViewController {
                 selectedIndexes[friend.objectId] = true
             }
         }
-        self.collectionView!.reloadData()
+        reloadData()
         setSendBar()
     }
     
@@ -250,13 +221,11 @@ class HomeViewController: UIViewController {
         setSendBar()
         
         // Send the actual Glimp requests. For now time is 60 minutes.
-        Glimps.sendRequests(friendIds, time: 60, callback: {() -> Void in
-            self.collectionView!.reloadData()
-        })
+        Glimps.sendRequests(friendIds, time: 60, callback: {})
     }
     
     @IBAction func unwindToImagePickerViewController(segue: UIStoryboardSegue) {
-        println("unwinnnndddd")
+        println("unwind")
         println(segue)
     }
     
@@ -272,6 +241,10 @@ class HomeViewController: UIViewController {
                 performSegueWithIdentifier("showSharedGlimps", sender: self)
             }
         }
+    }
+    
+    func reloadData() {
+        self.collectionView!.reloadData()
     }
 }
 

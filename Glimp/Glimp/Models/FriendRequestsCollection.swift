@@ -13,6 +13,10 @@ import Parse
 class FriendRequestsCollection : Collection {
     var requestsIn = [PFObject]()
     var requestsOut = [PFObject]()
+
+    init() {
+        super.init(notificationKey: NotificationDataFriendRequests)
+    }
     
     override func query(callback: (() -> Void)!) {
         
@@ -73,6 +77,7 @@ class FriendRequestsCollection : Collection {
                     }
                 }
             }
+            self.notify()
             callback()
         })
     }
@@ -112,14 +117,53 @@ class FriendRequestsCollection : Collection {
                     self.user!.saveInBackground()
                 }
 
-                return callback(success: true, error: nil)
+                self.notify()
+                callback(success: true, error: nil)
             })
         })
     }
     
+    func acceptFriendRequestIn(request: PFObject) {
+        var friend = request["fromUser"] as PFObject
+        
+        // Update data in memory
+        user!["Friends"].addObject(friend.objectId)
+        Friends.friends.append(friend)
+        if let index = find(requestsIn, request) {
+            Requests.requestsIn.removeAtIndex(index)
+        }
+        
+        // Persist changes to the database
+        user!.saveInBackground()
+        request.deleteInBackground()
+        
+        notify()
+    }
+    
+    func deleteFriendRequestIn(request: PFObject) {
+        request.deleteInBackground()
+        if let index = find(requestsIn, request) {
+            Requests.requestsIn.removeAtIndex(index)
+        }
+        
+        notify()
+    }
+    
+    func deleteFriendRequestOut(request: PFObject) {
+        user!.removeObject(request["toUser"].objectId, forKey: "Friends")
+        user!.saveInBackground()
+        request.deleteInBackground()
+        
+        if let index = find(requestsOut, request) {
+            Requests.requestsOut.removeAtIndex(index)
+        }
+        
+        notify()
+    }
+    
     override func destroy() {
-        super.destroy()
         requestsIn = []
         requestsOut = []
+        super.destroy()
     }
 }

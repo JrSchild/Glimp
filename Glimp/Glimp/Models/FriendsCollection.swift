@@ -13,8 +13,9 @@ import Parse
 class FriendsCollection : Collection {
     var friends = [PFObject]()
     
-    // Subscribe to events when friends have been updated.
-    let friendsUpdated = Event<[PFObject]>()
+    init() {
+        super.init(notificationKey: NotificationDataFriends)
+    }
     
     override func query(callback: (() -> Void)!) {
         
@@ -34,14 +35,14 @@ class FriendsCollection : Collection {
             }
             
             // Notifify subscribers and run the callback.
-            self.friendsUpdated.raise(self.friends)
+            self.notify()
             callback()
         })
     }
     
     override func destroy() {
-        super.destroy()
         friends = []
+        super.destroy()
     }
     
     func findById(objectId: String) -> PFObject? {

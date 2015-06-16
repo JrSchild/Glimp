@@ -17,6 +17,10 @@ class GlimpsCollection : Collection {
     var glimpsIn = [PFObject]()
     var glimpsOut = [PFObject]()
     
+    init() {
+        super.init(notificationKey: NotificationDataGlimps)
+    }
+    
     override func query(callback: (() -> Void)!) {
         
         // Retrieve all in- and outcoming requests, plus received and sent Glimps.
@@ -72,6 +76,7 @@ class GlimpsCollection : Collection {
                     }
                 }
             }
+            self.notify()
             callback()
         })
     }
@@ -96,6 +101,7 @@ class GlimpsCollection : Collection {
             for request in requests {
                 self.addRequestOut(request)
             }
+            self.notify()
             callback()
         })
     }
@@ -110,6 +116,7 @@ class GlimpsCollection : Collection {
                         self.glimpsOut.append(request)
                     }
                 }
+                self.notify()
                 callback()
             })
         }
@@ -177,10 +184,10 @@ class GlimpsCollection : Collection {
     }
     
     override func destroy() {
-        super.destroy()
         requestsIn = []
         requestsOut = []
         glimpsIn = []
         glimpsOut = []
+        super.destroy()
     }
 }

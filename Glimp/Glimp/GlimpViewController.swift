@@ -28,6 +28,8 @@ class GlimpViewController: UIViewController {
         var swipeGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "hideGlimps")
         swipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.Left
         self.view.addGestureRecognizer(swipeGestureRecognizer)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadData", name: NotificationDataGlimps, object: nil)
     }
     
     func hideGlimps() {
@@ -35,12 +37,14 @@ class GlimpViewController: UIViewController {
     }
     
     // Reload all data.
-    // TODO: These methods can be run in paralel.
     func refresh(sender: AnyObject) {
         RefreshData({ () -> Void in
             self.refreshControl.endRefreshing()
-            self.collectionView!.reloadData()
         })
+    }
+    
+    func reloadData() {
+        self.collectionView!.reloadData()
     }
 }
 

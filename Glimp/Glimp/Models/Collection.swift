@@ -12,8 +12,11 @@ import Parse
 
 class Collection {
     var user: PFUser?
+    let notificationKey: String
     
-    init() {}
+    init(notificationKey: String) {
+        self.notificationKey = notificationKey
+    }
     
     func load() {
         return load(nil)
@@ -35,5 +38,10 @@ class Collection {
     // Destroy must be overwritten to reset the data.
     func destroy() {
         user = nil
+        self.notify()
+    }
+    
+    func notify() {
+        NSNotificationCenter.defaultCenter().postNotificationName(self.notificationKey, object: self)
     }
 }

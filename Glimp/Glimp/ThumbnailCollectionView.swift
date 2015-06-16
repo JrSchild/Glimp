@@ -13,7 +13,6 @@ class ThumbnailCollectionView: UICollectionView {
     let width: CGFloat!
     let height: CGFloat!
     let thumbnailSize: CGSize!
-    let columns = CGFloat(4)
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -22,7 +21,7 @@ class ThumbnailCollectionView: UICollectionView {
     override init(frame: CGRect) {
         width = frame.width
         height = frame.height
-        thumbnailSize = CGSize(width: width / columns, height: width / columns)
+        thumbnailSize = CGSize(width: width / COLUMNS, height: width / COLUMNS)
         
         // Set the item size on the layout of collectionView, we want four-column thumbnails
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
