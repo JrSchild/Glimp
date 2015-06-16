@@ -152,6 +152,30 @@ class GlimpsCollection : Collection {
         return nil
     }
     
+    // Return a list of glimps the current user shares with given friend.
+    func findSharedGlimps(friend: PFObject) -> [PFObject] {
+        var glimps = [PFObject]()
+        
+        if self.user == nil {
+            return glimps
+        }
+        
+        for glimp in glimpsIn {
+            if glimp["toUser"].objectId == friend.objectId {
+                glimps.append(glimp)
+            }
+        }
+        for glimp in glimpsOut {
+            if glimp["fromUser"].objectId == friend.objectId {
+                glimps.append(glimp)
+            }
+        }
+        
+        glimps.sort({ $1.createdAt.compare($0.createdAt) == NSComparisonResult.OrderedAscending })
+        
+        return glimps
+    }
+    
     override func destroy() {
         super.destroy()
         requestsIn = []

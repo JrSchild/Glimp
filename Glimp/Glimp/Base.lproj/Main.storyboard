@@ -276,6 +276,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="headerView" destination="n1m-az-dVk" id="jAf-qP-B3a"/>
                         <outlet property="profileImage" destination="ZdW-qC-bzX" id="t9M-hS-Y5e"/>
                         <outlet property="usernameLabel" destination="u8Z-jg-dBd" id="fmh-AB-fhJ"/>
                         <segue destination="Dfz-Xr-51L" kind="unwind" identifier="hideSharedGlimps" unwindAction="returnFromSegueActions:" id="Iye-pA-nBV"/>
