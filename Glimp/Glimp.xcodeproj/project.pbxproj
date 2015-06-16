@@ -28,6 +28,7 @@
 		F2A77A901B29D64800E439FD /* ThumbnailCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2A77A8F1B29D64800E439FD /* ThumbnailCollectionViewCell.xib */; };
 		F2A77A941B2AD05B00E439FD /* HeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2A77A931B2AD05B00E439FD /* HeaderCollectionViewCell.xib */; };
 		F2A77A961B2AD22A00E439FD /* HeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A77A951B2AD22A00E439FD /* HeaderCollectionViewCell.swift */; };
+		F2A7A03C1B304EF000928DEF /* ThumbnailCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A7A03B1B304EF000928DEF /* ThumbnailCollectionView.swift */; };
 		F2D6491F1B2F0A6E005AB6EE /* EmptyListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D6491D1B2F0A6E005AB6EE /* EmptyListCollectionViewCell.swift */; };
 		F2D649201B2F0A6E005AB6EE /* EmptyListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2D6491E1B2F0A6E005AB6EE /* EmptyListCollectionViewCell.xib */; };
 		F2D649241B30284A005AB6EE /* SharedGlimpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D649231B30284A005AB6EE /* SharedGlimpViewController.swift */; };
@@ -95,6 +96,7 @@
 		F2A77A8F1B29D64800E439FD /* ThumbnailCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ThumbnailCollectionViewCell.xib; path = Cells/ThumbnailCollectionViewCell.xib; sourceTree = "<group>"; };
 		F2A77A931B2AD05B00E439FD /* HeaderCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HeaderCollectionViewCell.xib; path = Cells/HeaderCollectionViewCell.xib; sourceTree = "<group>"; };
 		F2A77A951B2AD22A00E439FD /* HeaderCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HeaderCollectionViewCell.swift; path = Cells/HeaderCollectionViewCell.swift; sourceTree = "<group>"; };
+		F2A7A03B1B304EF000928DEF /* ThumbnailCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailCollectionView.swift; sourceTree = "<group>"; };
 		F2D6491D1B2F0A6E005AB6EE /* EmptyListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmptyListCollectionViewCell.swift; path = Cells/EmptyListCollectionViewCell.swift; sourceTree = "<group>"; };
 		F2D6491E1B2F0A6E005AB6EE /* EmptyListCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EmptyListCollectionViewCell.xib; path = Cells/EmptyListCollectionViewCell.xib; sourceTree = "<group>"; };
 		F2D649231B30284A005AB6EE /* SharedGlimpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedGlimpViewController.swift; sourceTree = "<group>"; };
@@ -200,11 +202,12 @@
 				F2DD3E3F1B1F29370085762F /* LoginViewController.swift */,
 				F20F06C61B1CA3B5007007AF /* HomeViewController.swift */,
 				F2DD3D691B1EFE720085762F /* GlimpViewController.swift */,
-				F24AE9B41B2B153A000256ED /* ProfileViewController.swift */,
 				F2D649231B30284A005AB6EE /* SharedGlimpViewController.swift */,
+				F24AE9B41B2B153A000256ED /* ProfileViewController.swift */,
 				F23DF4571B287DE5002C35DC /* ImagePickerViewController.swift */,
 				F2F2F7361B2B4857004E5EB4 /* ProfileInformationView.xib */,
 				F2F2F7381B2B4A08004E5EB4 /* ProfileInformationView.swift */,
+				F2A7A03B1B304EF000928DEF /* ThumbnailCollectionView.swift */,
 				F2719F111B26F67600E923D5 /* EventEmiter.swift */,
 				F20F06CB1B1CA3B5007007AF /* Images.xcassets */,
 				F20F06CD1B1CA3B5007007AF /* LaunchScreen.xib */,
@@ -407,6 +410,7 @@
 				F2719F121B26F67600E923D5 /* EventEmiter.swift in Sources */,
 				F2DD3E401B1F29370085762F /* LoginViewController.swift in Sources */,
 				F20D361C1B221A07000C7937 /* FriendRequestsCollection.swift in Sources */,
+				F2A7A03C1B304EF000928DEF /* ThumbnailCollectionView.swift in Sources */,
 				F2719F0E1B22205800E923D5 /* Collection.swift in Sources */,
 				F24AE9A31B2ADC70000256ED /* ThumbnailImageView.swift in Sources */,
 				F2F2F7341B2B294D004E5EB4 /* SwipeLeftSegue.swift in Sources */,

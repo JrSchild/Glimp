@@ -10,47 +10,24 @@ import UIKit
 import Parse
 
 class HomeViewController: UIViewController {
-    let screenSize: CGRect
-    let screenWidth: CGFloat!
-    let screenHeight: CGFloat!
-    let columns = CGFloat(4)
     var selectedIndexes = [String:Bool]()
     var currentActionSheet: String!
     var currentCellRequest: ThumbnailCollectionViewCell!
     var currentRequest: PFObject!
     var currentFriend: PFObject!
     let refreshControl = UIRefreshControl()
-    var collectionView: UICollectionView!
+    var collectionView: ThumbnailCollectionView!
     
     @IBOutlet weak var sendBar: UIView!
     @IBOutlet weak var selectAllButton: UIButton!
     
-    required init(coder aDecoder: NSCoder) {
-        screenSize = UIScreen.mainScreen().bounds
-        screenWidth = screenSize.width
-        screenHeight = screenSize.height
-        
-        super.init(coder: aDecoder)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Set the item size on the layout of collectionView, we want four-column thumbnails
-        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: screenWidth / columns, height: screenWidth / columns)
-        layout.minimumInteritemSpacing = 0
-        layout.minimumLineSpacing = 0
-        
-        collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
+        collectionView = ThumbnailCollectionView(frame: self.view.frame)
         collectionView!.dataSource = self
         collectionView!.delegate = self
-        collectionView!.backgroundColor = UIColor.whiteColor()
         self.view.addSubview(collectionView!)
-        
-        collectionView!.registerNib(UINib(nibName: "ThumbnailCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ThumbnailCollectionViewCell")
-        collectionView!.registerNib(UINib(nibName: "HeaderCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "HeaderCollectionViewCell")
-        collectionView!.registerNib(UINib(nibName: "EmptyListCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "EmptyListCollectionViewCell")
         
         // Add the Long press gesture recognizer.
         // http://stackoverflow.com/questions/18848725/long-press-gesture-on-uicollectionviewcell
@@ -418,20 +395,20 @@ extension HomeViewController: UICollectionViewDataSource {
     }
     
     // Returns size of cell.
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(collectionView: ThumbnailCollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         
         // If the cell is a header, render with full width
         if indexPath.section == 0 || indexPath.section == 2
         {
-            return CGSize(width: screenWidth, height: 46)
+            return CGSize(width: collectionView.width, height: 46)
         }
         
         if indexPath.section == 1 && Glimps.requestsIn.count == 0 {
-            return CGSize(width: screenWidth, height: 46)
+            return CGSize(width: collectionView.width, height: 46)
         }
         
         // Otherwise create four column thumbnails.
-        return CGSize(width: screenWidth / columns, height: screenWidth / columns);
+        return collectionView.thumbnailSize;
     }
     
     // When a sell was selected.

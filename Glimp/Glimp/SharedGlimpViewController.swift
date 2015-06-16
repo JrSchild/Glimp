@@ -15,42 +15,19 @@ class SharedGlimpViewController: UIViewController {
     @IBOutlet weak var profileImage: ThumbnailImageView!
     @IBOutlet weak var headerView: UIView!
     
-    let screenSize: CGRect
-    let screenWidth: CGFloat!
-    let screenHeight: CGFloat!
-    let columns = CGFloat(4)
     var friend: PFObject!
     var glimps: [PFObject]!
-    var collectionView: UICollectionView!
-    
-    required init(coder aDecoder: NSCoder) {
-        screenSize = UIScreen.mainScreen().bounds
-        screenWidth = screenSize.width
-        screenHeight = screenSize.height
-        
-        super.init(coder: aDecoder)
-    }
+    var collectionView: ThumbnailCollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         glimps = Glimps.findSharedGlimps(friend)
         
-        // Set the item size on the layout of collectionView, we want four-column thumbnails
-        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: screenWidth / columns, height: screenWidth / columns)
-        layout.minimumInteritemSpacing = 0
-        layout.minimumLineSpacing = 0
-        
-        collectionView = UICollectionView(frame: CGRect(x: 0, y: headerView.frame.height, width: view.frame.width, height: view.frame.height - headerView.frame.height), collectionViewLayout: layout)
+        collectionView = ThumbnailCollectionView(frame: CGRect(x: 0, y: headerView.frame.height, width: view.frame.width, height: view.frame.height - headerView.frame.height))
         collectionView!.dataSource = self
         collectionView!.delegate = self
-        collectionView!.backgroundColor = UIColor.whiteColor()
-        collectionView!.alwaysBounceVertical = true
         self.view.addSubview(collectionView!)
-        
-        collectionView!.registerNib(UINib(nibName: "ThumbnailCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ThumbnailCollectionViewCell")
-        collectionView!.registerNib(UINib(nibName: "HeaderCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "HeaderCollectionViewCell")
         
         var swipeGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "hideSharedGlimps")
         swipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.Right
@@ -108,14 +85,14 @@ extension SharedGlimpViewController: UICollectionViewDataSource {
     }
     
     // Returns size of cell.
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(collectionView: ThumbnailCollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         
         if indexPath.section == 0 {
-            return CGSize(width: screenWidth, height: 47)
+            return CGSize(width: collectionView.width, height: 47)
         }
         
         // Otherwise create four column thumbnails.
-        return CGSize(width: screenWidth / columns, height: screenWidth / columns);
+        return collectionView.thumbnailSize
     }
 }
 

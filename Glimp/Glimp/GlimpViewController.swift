@@ -10,43 +10,20 @@ import UIKit
 import Parse
 
 class GlimpViewController: UIViewController {
-    let screenSize: CGRect
-    let screenWidth: CGFloat!
-    let screenHeight: CGFloat!
-    let columns = CGFloat(4)
     let refreshControl = UIRefreshControl()
-    var collectionView: UICollectionView!
-    
-    required init(coder aDecoder: NSCoder) {
-        screenSize = UIScreen.mainScreen().bounds
-        screenWidth = screenSize.width
-        screenHeight = screenSize.height
-        
-        super.init(coder: aDecoder)
-    }
+    var collectionView: ThumbnailCollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Set the item size on the layout of collectionView, we want four-column thumbnails
-        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: screenWidth / columns, height: screenWidth / columns)
-        layout.minimumInteritemSpacing = 0
-        layout.minimumLineSpacing = 0
-        
-        collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
+        collectionView = ThumbnailCollectionView(frame: self.view.frame)
         collectionView!.dataSource = self
         collectionView!.delegate = self
-        collectionView!.backgroundColor = UIColor.whiteColor()
         self.view.addSubview(collectionView!)
-        
-        collectionView!.registerNib(UINib(nibName: "ThumbnailCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ThumbnailCollectionViewCell")
-        collectionView!.registerNib(UINib(nibName: "HeaderCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "HeaderCollectionViewCell")
         
         // Add the UIRefreshControl to the view and bind refresh event.
         refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         collectionView.addSubview(refreshControl)
-        collectionView.alwaysBounceVertical = true
         
         var swipeGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "hideGlimps")
         swipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.Left
@@ -108,14 +85,14 @@ extension GlimpViewController: UICollectionViewDataSource {
     }
     
     // Returns size of cell.
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(collectionView: ThumbnailCollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         
         if indexPath.section == 0 {
-            return CGSize(width: screenWidth, height: 47)
+            return CGSize(width: collectionView.width, height: 47)
         }
         
         // Otherwise create four column thumbnails.
-        return CGSize(width: screenWidth / columns, height: screenWidth / columns);
+        return collectionView.thumbnailSize
     }
 }
 
