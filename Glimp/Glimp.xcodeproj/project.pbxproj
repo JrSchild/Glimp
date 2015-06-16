@@ -30,6 +30,7 @@
 		F2A77A961B2AD22A00E439FD /* HeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A77A951B2AD22A00E439FD /* HeaderCollectionViewCell.swift */; };
 		F2D6491F1B2F0A6E005AB6EE /* EmptyListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D6491D1B2F0A6E005AB6EE /* EmptyListCollectionViewCell.swift */; };
 		F2D649201B2F0A6E005AB6EE /* EmptyListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2D6491E1B2F0A6E005AB6EE /* EmptyListCollectionViewCell.xib */; };
+		F2D649241B30284A005AB6EE /* SharedGlimpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D649231B30284A005AB6EE /* SharedGlimpViewController.swift */; };
 		F2DD3D6A1B1EFE720085762F /* GlimpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DD3D691B1EFE720085762F /* GlimpViewController.swift */; };
 		F2DD3E1F1B1F24F00085762F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2DD3E1E1B1F24F00085762F /* AudioToolbox.framework */; };
 		F2DD3E211B1F25020085762F /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F2DD3E201B1F25020085762F /* libsqlite3.0.dylib */; };
@@ -96,6 +97,7 @@
 		F2A77A951B2AD22A00E439FD /* HeaderCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HeaderCollectionViewCell.swift; path = Cells/HeaderCollectionViewCell.swift; sourceTree = "<group>"; };
 		F2D6491D1B2F0A6E005AB6EE /* EmptyListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmptyListCollectionViewCell.swift; path = Cells/EmptyListCollectionViewCell.swift; sourceTree = "<group>"; };
 		F2D6491E1B2F0A6E005AB6EE /* EmptyListCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EmptyListCollectionViewCell.xib; path = Cells/EmptyListCollectionViewCell.xib; sourceTree = "<group>"; };
+		F2D649231B30284A005AB6EE /* SharedGlimpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedGlimpViewController.swift; sourceTree = "<group>"; };
 		F2DD3D691B1EFE720085762F /* GlimpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlimpViewController.swift; sourceTree = "<group>"; };
 		F2DD3E1E1B1F24F00085762F /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		F2DD3E201B1F25020085762F /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
@@ -199,6 +201,7 @@
 				F20F06C61B1CA3B5007007AF /* HomeViewController.swift */,
 				F2DD3D691B1EFE720085762F /* GlimpViewController.swift */,
 				F24AE9B41B2B153A000256ED /* ProfileViewController.swift */,
+				F2D649231B30284A005AB6EE /* SharedGlimpViewController.swift */,
 				F23DF4571B287DE5002C35DC /* ImagePickerViewController.swift */,
 				F2F2F7361B2B4857004E5EB4 /* ProfileInformationView.xib */,
 				F2F2F7381B2B4A08004E5EB4 /* ProfileInformationView.swift */,
@@ -418,6 +421,7 @@
 				F2F2F7391B2B4A08004E5EB4 /* ProfileInformationView.swift in Sources */,
 				F24AE9A91B2B1100000256ED /* SwipeRightSegueUnwind.swift in Sources */,
 				F20F06C51B1CA3B5007007AF /* AppDelegate.swift in Sources */,
+				F2D649241B30284A005AB6EE /* SharedGlimpViewController.swift in Sources */,
 				F2A77A961B2AD22A00E439FD /* HeaderCollectionViewCell.swift in Sources */,
 				F24AE9A81B2B1100000256ED /* SwipeRightSegue.swift in Sources */,
 				F23DF4511B2877D1002C35DC /* BABCropperView.m in Sources */,

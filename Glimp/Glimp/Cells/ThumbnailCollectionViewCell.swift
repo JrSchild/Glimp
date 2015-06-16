@@ -27,6 +27,7 @@ class ThumbnailCollectionViewCell: UICollectionViewCell {
     var canSelect = false
     var isSelected = false
     var request: PFObject!
+    var friend: PFObject!
     let greyBackground = UIColor(red: CGFloat(228) / 255.0, green: CGFloat(228) / 255.0, blue: CGFloat(228) / 255.0, alpha: 1.0)
     
     // Show or hide selected-image.
@@ -144,6 +145,7 @@ class ThumbnailCollectionViewCell: UICollectionViewCell {
         timerOverlay!.hidden = true
         selected = false
         request = nil
+        friend = nil
         timerLabel!.hidden = true
         timerLabel!.text = ""
         isLoading!.hidden = true

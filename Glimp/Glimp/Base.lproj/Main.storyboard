@@ -174,6 +174,7 @@
                         <segue destination="6on-qz-Igt" kind="custom" identifier="showGlimps" customClass="SwipeRightSegue" customModule="Glimp" customModuleProvider="target" id="tqH-dp-OEp"/>
                         <segue destination="Hcg-wu-UM5" kind="show" identifier="showImagePicker" id="liw-b8-xRL"/>
                         <segue destination="U1e-lw-FDq" kind="custom" identifier="showProfile" customClass="SwipeLeftSegue" customModule="Glimp" customModuleProvider="target" id="C5m-Dc-Omw"/>
+                        <segue destination="Nka-6g-t1M" kind="custom" identifier="showSharedGlimps" customClass="SwipeLeftSegue" customModule="Glimp" customModuleProvider="target" id="K4i-3G-wtt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -204,6 +205,87 @@
             </objects>
             <point key="canvasLocation" x="711.5" y="136.5"/>
         </scene>
+        <!--Shared Glimp View Controller-->
+        <scene sceneID="4ZU-cj-oRc">
+            <objects>
+                <viewController id="Nka-6g-t1M" customClass="SharedGlimpViewController" customModule="Glimp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="m25-8u-0qa"/>
+                        <viewControllerLayoutGuide type="bottom" id="q3F-Wi-gtg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wUc-eb-4Yd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n1m-az-dVk">
+                                <rect key="frame" x="0.0" y="20" width="375" height="50"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LGD-dL-k3V">
+                                        <rect key="frame" x="0.0" y="49" width="375" height="1"/>
+                                        <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="GwZ-1z-ZDJ"/>
+                                        </constraints>
+                                    </view>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user-profile" translatesAutoresizingMaskIntoConstraints="NO" id="ZdW-qC-bzX" customClass="ThumbnailImageView" customModule="Glimp" customModuleProvider="target">
+                                        <rect key="frame" x="325" y="0.0" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="Ali-wU-lve"/>
+                                            <constraint firstAttribute="width" constant="50" id="qby-5b-i4s"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user" translatesAutoresizingMaskIntoConstraints="NO" id="KfC-LK-5y8">
+                                        <rect key="frame" x="8" y="7" width="32" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="32" id="3Ew-oX-7nK"/>
+                                            <constraint firstAttribute="height" constant="32" id="bBt-bv-DBa"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u8Z-jg-dBd">
+                                        <rect key="frame" x="41" y="7" width="285" height="31"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="31" id="LQ6-2S-0rH"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="u8Z-jg-dBd" firstAttribute="leading" secondItem="KfC-LK-5y8" secondAttribute="trailing" constant="1" id="2xg-Wo-q0r"/>
+                                    <constraint firstItem="ZdW-qC-bzX" firstAttribute="top" secondItem="n1m-az-dVk" secondAttribute="top" id="BLa-yy-XSu"/>
+                                    <constraint firstAttribute="height" constant="50" id="Ifs-JN-CnJ"/>
+                                    <constraint firstItem="KfC-LK-5y8" firstAttribute="leading" secondItem="n1m-az-dVk" secondAttribute="leading" constant="8" id="Kg2-9f-cgo"/>
+                                    <constraint firstItem="ZdW-qC-bzX" firstAttribute="leading" secondItem="u8Z-jg-dBd" secondAttribute="trailing" constant="-1" id="QmD-7H-6RV"/>
+                                    <constraint firstAttribute="trailing" secondItem="LGD-dL-k3V" secondAttribute="trailing" id="Wa2-hH-SJj"/>
+                                    <constraint firstItem="LGD-dL-k3V" firstAttribute="leading" secondItem="n1m-az-dVk" secondAttribute="leading" id="cHg-He-7Qo"/>
+                                    <constraint firstItem="KfC-LK-5y8" firstAttribute="top" secondItem="n1m-az-dVk" secondAttribute="top" constant="7" id="gkD-ua-2dE"/>
+                                    <constraint firstAttribute="bottom" secondItem="LGD-dL-k3V" secondAttribute="bottom" id="irR-bL-jgc"/>
+                                    <constraint firstItem="u8Z-jg-dBd" firstAttribute="top" secondItem="n1m-az-dVk" secondAttribute="top" constant="7" id="vro-Sq-LxX"/>
+                                    <constraint firstAttribute="trailing" secondItem="ZdW-qC-bzX" secondAttribute="trailing" id="xof-kj-Sis"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="n1m-az-dVk" firstAttribute="top" secondItem="m25-8u-0qa" secondAttribute="bottom" id="MJ1-cE-L5J"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="n1m-az-dVk" secondAttribute="trailing" constant="-16" id="UvM-l5-6UM"/>
+                            <constraint firstItem="n1m-az-dVk" firstAttribute="leading" secondItem="wUc-eb-4Yd" secondAttribute="leadingMargin" constant="-16" id="mEi-Ry-8h5"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="profileImage" destination="ZdW-qC-bzX" id="t9M-hS-Y5e"/>
+                        <outlet property="usernameLabel" destination="u8Z-jg-dBd" id="fmh-AB-fhJ"/>
+                        <segue destination="Dfz-Xr-51L" kind="unwind" identifier="hideSharedGlimps" unwindAction="returnFromSegueActions:" id="Iye-pA-nBV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SIm-he-eRB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Dfz-Xr-51L" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="160.5" y="1011.5"/>
+        </scene>
         <!--Profile View Controller-->
         <scene sceneID="S0x-iv-MV2">
             <objects>
@@ -228,4 +310,8 @@
             <point key="canvasLocation" x="711.5" y="1011.5"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="user" width="512" height="512"/>
+        <image name="user-profile" width="512" height="512"/>
+    </resources>
 </document>

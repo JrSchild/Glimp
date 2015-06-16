@@ -18,6 +18,7 @@ class HomeViewController: UIViewController {
     var currentActionSheet: String!
     var currentCellRequest: ThumbnailCollectionViewCell!
     var currentRequest: PFObject!
+    var currentFriend: PFObject!
     let refreshControl = UIRefreshControl()
     var collectionView: UICollectionView!
     
@@ -51,6 +52,15 @@ class HomeViewController: UIViewController {
         collectionView!.registerNib(UINib(nibName: "ThumbnailCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ThumbnailCollectionViewCell")
         collectionView!.registerNib(UINib(nibName: "HeaderCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "HeaderCollectionViewCell")
         collectionView!.registerNib(UINib(nibName: "EmptyListCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "EmptyListCollectionViewCell")
+        
+        // Add the Long press gesture recognizer.
+        // http://stackoverflow.com/questions/18848725/long-press-gesture-on-uicollectionviewcell
+        let lpgr = UILongPressGestureRecognizer(target: self, action: Selector("handleLongPress:"))
+        lpgr.minimumPressDuration = 0.5
+        lpgr.delegate = self
+        lpgr.delaysTouchesBegan = true
+        
+        collectionView!.addGestureRecognizer(lpgr)
         
         // Add the UIRefreshControl to the view and bind refresh event.
         refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
@@ -106,6 +116,10 @@ class HomeViewController: UIViewController {
                 })
                 return unwindSegue
             } else if id == "hideProfile" {
+                let unwindSegue = SwipeLeftSegueUnwind(identifier: id, source: fromViewController, destination: toViewController, performHandler: { () -> Void in
+                })
+                return unwindSegue
+            } else if id == "hideSharedGlimps" {
                 let unwindSegue = SwipeLeftSegueUnwind(identifier: id, source: fromViewController, destination: toViewController, performHandler: { () -> Void in
                 })
                 return unwindSegue
@@ -205,7 +219,7 @@ class HomeViewController: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showImagePicker" {
-            var imagePickerViewController = segue.destinationViewController as ImagePickerViewController
+            let imagePickerViewController = segue.destinationViewController as ImagePickerViewController
             
             // Attach callback to ImagePickerViewController, when it returns.
             imagePickerViewController.callback = {(image: UIImage!) -> Void in
@@ -220,6 +234,10 @@ class HomeViewController: UIViewController {
                 self.currentCellRequest = nil
                 self.currentRequest = nil
             }
+        } else if segue.identifier == "showSharedGlimps" && currentFriend != nil {
+            let sharedGlimpViewController = segue.destinationViewController as SharedGlimpViewController
+            sharedGlimpViewController.friend = currentFriend
+            currentFriend = nil
         }
     }
     
@@ -268,6 +286,20 @@ class HomeViewController: UIViewController {
     @IBAction func unwindToImagePickerViewController(segue: UIStoryboardSegue) {
         println("unwinnnndddd")
         println(segue)
+    }
+    
+    func handleLongPress(gestureRecognizer: UILongPressGestureRecognizer) {
+        if gestureRecognizer.state != UIGestureRecognizerState.Began {
+            return
+        }
+        let p = gestureRecognizer.locationInView(self.collectionView!)
+        if let indexPath = self.collectionView!.indexPathForItemAtPoint(p) {
+            let cell = collectionView!.cellForItemAtIndexPath(indexPath) as ThumbnailCollectionViewCell
+            if let friend = cell.friend {
+                currentFriend = friend
+                performSegueWithIdentifier("showSharedGlimps", sender: self)
+            }
+        }
     }
 }
 
@@ -344,6 +376,7 @@ extension HomeViewController: UICollectionViewDataSource {
                     if let photo = friend["photo"] as? PFFile {
                         cell.setImage(photo)
                     }
+                    cell.friend = friend
 
                     // If a glimp request has been sent, set it on the cell.
                     if let request = Glimps.findRequestOut(friend) {
@@ -463,7 +496,10 @@ extension HomeViewController: UICollectionViewDelegate {
         return false
     }
 }
+
 extension HomeViewController: UICollectionViewDelegateFlowLayout {}
+
+extension HomeViewController: UIGestureRecognizerDelegate {}
 
 extension HomeViewController: UIAlertViewDelegate {
     
