@@ -58,6 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
         PFPush.handlePush(userInfo)
+        RefreshData()
     }
 
     func applicationWillResignActive(application: UIApplication) {

@@ -96,7 +96,6 @@ class FriendRequestsCollection : Collection {
             if friend == nil {
                 return callback(success: false, error: "FriendNotFound")
             }
-            
             if Requests.requestsOut.filter({ $0["toUser"].objectId == friend!.objectId}).count > 0 {
                 return callback(success: false, error: "UserAlreadyFriends")
             }
