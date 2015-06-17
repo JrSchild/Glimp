@@ -60,6 +60,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PFPush.handlePush(userInfo)
         RefreshData()
     }
+    
+    func logOut() {
+        Friends.destroy()
+        Requests.destroy()
+        Glimps.destroy()
+        
+        let installation = PFInstallation.currentInstallation()
+        installation.removeObjectForKey("User")
+        installation.saveInBackground()
+        
+        PFUser.logOutInBackgroundWithBlock { (error) -> Void in
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let controller = storyboard.instantiateViewControllerWithIdentifier("LoginViewController") as LoginViewController
+            self.window!.rootViewController = controller
+        }
+    }
 
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

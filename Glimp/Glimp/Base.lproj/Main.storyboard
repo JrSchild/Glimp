@@ -9,7 +9,7 @@
         <!--Login View Controller-->
         <scene sceneID="2wD-6f-slA">
             <objects>
-                <viewController id="601-t9-oAY" customClass="LoginViewController" customModule="Glimp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="601-t9-oAY" customClass="LoginViewController" customModule="Glimp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iaM-eb-ePP"/>
                         <viewControllerLayoutGuide type="bottom" id="Muc-Qh-bY4"/>
@@ -298,7 +298,25 @@
                     <view key="view" contentMode="scaleToFill" id="rxs-tc-XyW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ivj-Mw-Yax">
+                                <rect key="frame" x="163" y="617" width="49" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="49" id="XJg-Ai-Xfz"/>
+                                </constraints>
+                                <state key="normal" title="Logout">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="logOut:" destination="U1e-lw-FDq" eventType="touchUpInside" id="6Zh-5g-ZcN"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Dzn-lT-Jm8" firstAttribute="top" secondItem="ivj-Mw-Yax" secondAttribute="bottom" constant="20" id="VPq-Gy-QiO"/>
+                            <constraint firstAttribute="centerX" secondItem="ivj-Mw-Yax" secondAttribute="centerX" id="qBe-yn-zwh"/>
+                        </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>

@@ -31,15 +31,15 @@ class ProfileViewController: UIViewController {
         
         let view = NSBundle.mainBundle().loadNibNamed("ProfileInformationView", owner: self, options: nil)[0] as ProfileInformationView
         view.frame = CGRect(x: 0, y: imageView.frame.height, width: self.view.frame.width, height: view.frame.height)
-        view.usernameLabel.text = user["username"] as? String
-        view.emailLabel.text = user["email"] as? String ?? "no email given"
+        view.usernameLabel.text = user?["username"] as? String ?? ""
+        view.emailLabel.text = user?["email"] as? String ?? ""
         self.view.addSubview(view)
         
         // Add tap event to image.
         imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "changeProfilePicture:"))
         imageView.userInteractionEnabled = true
         
-        if let photo = user.objectForKey("photo") as? PFFile {
+        if let photo = user?.objectForKey("photo") as? PFFile {
             imageView.file = photo
             imageView.loadInBackground()
         }
@@ -62,5 +62,9 @@ class ProfileViewController: UIViewController {
             })
         }
         self.presentViewController(controller, animated: true, completion: nil)
+    }
+    
+    @IBAction func logOut(sender: UIButton) {
+        (UIApplication.sharedApplication().delegate as AppDelegate).logOut()
     }
 }
