@@ -155,7 +155,6 @@ class HomeViewController: UIViewController {
     }
     
     // Reload all data.
-    // TODO: These methods can be run in paralel.
     func refresh(sender: AnyObject) {
         RefreshData({ () -> Void in
             self.refreshControl.endRefreshing()
