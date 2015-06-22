@@ -50,21 +50,38 @@ class ProfileViewController: UIViewController {
     }
 
     func changeProfilePicture(gesture: UIGestureRecognizer) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let controller = storyboard.instantiateViewControllerWithIdentifier("ImagePickerViewController") as ImagePickerViewController
-        controller.callback = {(image) -> Void in
-            self.user["photo"] = PFFile(data: UIImageJPEGRepresentation(image, 0.9))
-            self.user.saveInBackgroundWithBlock({ (success, error) -> Void in
-                if success {
-                    self.imageView.file = self.user["photo"] as PFFile
-                    self.imageView.loadInBackground()
-                }
-            })
-        }
-        self.presentViewController(controller, animated: true, completion: nil)
+        let sheet: UIActionSheet = UIActionSheet();
+        sheet.delegate = self;
+        sheet.addButtonWithTitle("Take Picture");
+        sheet.addButtonWithTitle("From Camera Roll");
+        sheet.addButtonWithTitle("Cancel");
+        sheet.cancelButtonIndex = 2;
+        sheet.showInView(self.view);
     }
     
     @IBAction func logOut(sender: UIButton) {
         (UIApplication.sharedApplication().delegate as AppDelegate).logOut()
+    }
+}
+
+extension ProfileViewController: UIActionSheetDelegate {
+    
+    // When an actionsheet is closed.
+    func actionSheet(sheet: UIActionSheet!, clickedButtonAtIndex buttonIndex: Int) {
+        if buttonIndex != 2 {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let controller = storyboard.instantiateViewControllerWithIdentifier("ImagePickerViewController") as ImagePickerViewController
+            controller.method = buttonIndex == 0 ? .Camera : .PhotoLibrary
+            controller.callback = {(image) -> Void in
+                self.user["photo"] = PFFile(data: UIImageJPEGRepresentation(image, 0.9))
+                self.user.saveInBackgroundWithBlock({ (success, error) -> Void in
+                    if success {
+                        self.imageView.file = self.user["photo"] as PFFile
+                        self.imageView.loadInBackground()
+                    }
+                })
+            }
+            self.presentViewController(controller, animated: true, completion: nil)
+        }
     }
 }

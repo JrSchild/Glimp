@@ -16,6 +16,7 @@ class ImagePickerViewController: UIViewController, UIImagePickerControllerDelega
     var callback: ((UIImage!) -> ())!
     var croppedImage: UIImage!
     var didUserCancel = false
+    var method = UIImagePickerControllerSourceType.Camera
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,23 +27,23 @@ class ImagePickerViewController: UIViewController, UIImagePickerControllerDelega
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        
         if didUserCancel && self.cropperView.image == nil {
             self.dismissViewControllerAnimated(true, completion: nil)
         } else if self.cropperView.image == nil {
-            self.showImagePicker()
+            self.useImagePicker()
         }
     }
     
-    func showImagePicker() {
+    func useImagePicker() {
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
-        imagePickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        imagePickerController.sourceType = method
+        imagePickerController.allowsEditing = false
         presentViewController(imagePickerController, animated: true, completion: nil)
     }
     
     @IBAction func cropButtonPressed(sender: UIButton) {
-        showImagePicker()
+        useImagePicker()
     }
     
     @IBAction func chooseCurrentImage(sender: UIButton) {
