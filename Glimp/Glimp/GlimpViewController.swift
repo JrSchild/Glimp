@@ -63,7 +63,7 @@ extension GlimpViewController: UICollectionViewDataSource {
         }
         
         // For now we return use the glimps currentUser has sent
-        return Glimps.glimpsOut.count
+        return Glimps.glimpsIn.count
     }
     
     // Returns the cell to be rendered.
@@ -79,7 +79,7 @@ extension GlimpViewController: UICollectionViewDataSource {
         // Use a thumbnail for the other cells and reset the properties, it might have been re-used.
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ThumbnailCollectionViewCell", forIndexPath: indexPath) as ThumbnailCollectionViewCell
         cell.reset()
-        cell.setImage((Glimps.glimpsOut[indexPath.row] as PFObject)["photo"] as PFFile)
+        cell.setImage((Glimps.glimpsIn[indexPath.row] as PFObject)["photo"] as PFFile)
         
         return cell
     }
