@@ -77,6 +77,7 @@
 - (void)imageCropper:(VPImageCropperViewController *)cropperViewController didFinished:(UIImage *)editedImage {
     [cropperViewController dismissViewControllerAnimated:YES completion:^{
         [self dismissViewControllerAnimated:true completion:^{
+            [UIApplication sharedApplication].statusBarHidden = true;
             if (self.delegate && [self.delegate conformsToProtocol:@protocol(VPViewControllerDelegate)]) {
                 [self.delegate imageCropper:self didFinished:editedImage];
             }
@@ -86,13 +87,16 @@
 
 - (void)imageCropperDidCancel:(VPImageCropperViewController *)cropperViewController {
     [cropperViewController dismissViewControllerAnimated:YES completion:^{
-        [self dismissViewControllerAnimated:true completion:nil];
+        [self dismissViewControllerAnimated:true completion:^{
+            [UIApplication sharedApplication].statusBarHidden = true;
+        }];
     }];
 }
 
 - (void)imageCropperShouldRetake:(VPImageCropperViewController *)cropperViewController {
     [cropperViewController dismissViewControllerAnimated:YES completion:^{
         [self editPortrait];
+        [UIApplication sharedApplication].statusBarHidden = true;
     }];
 }
 
@@ -106,13 +110,14 @@
         VPImageCropperViewController *imgCropperVC = [[VPImageCropperViewController alloc] initWithImage:portraitImg cropFrame:CGRectMake(0, 100.0f, self.view.frame.size.width, self.view.frame.size.width) limitScaleRatio:3.0];
         imgCropperVC.delegate = self;
         [self presentViewController:imgCropperVC animated:YES completion:^{
-            // TO DO
+            [UIApplication sharedApplication].statusBarHidden = true;
         }];
     }];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [picker dismissViewControllerAnimated:YES completion:^(){
+        [UIApplication sharedApplication].statusBarHidden = true;
     }];
 }
 
