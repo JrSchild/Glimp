@@ -75,7 +75,7 @@ class HomeViewController: UIViewController {
             collectionView!.frame = self.view.frame
             sendBar.hidden = true
         }
-        selectAllButton.setTitle(countElements(selectedIndexes) == Friends.friends.count ? "NONE" : "ALL", forState: UIControlState.Normal)
+        selectAllButton.setTitle(countElements(selectedIndexes) >= (Friends.friends.count - Glimps.requestsOut.count) ? "NONE" : "ALL", forState: UIControlState.Normal)
     }
     
     func showGlimps() {
@@ -190,13 +190,15 @@ class HomeViewController: UIViewController {
     @IBAction func selectAllFriends(sender: UIButton) {
         
         // If all are selected, remove everyone. Otherwise add everyone
-        if countElements(selectedIndexes) == Friends.friends.count {
+        if countElements(selectedIndexes) >= (Friends.friends.count - Glimps.requestsOut.count) {
             for objectId in selectedIndexes.keys.array {
                 selectedIndexes.removeValueForKey(objectId)
             }
         } else {
             for friend in Friends.friends {
-                selectedIndexes[friend.objectId] = true
+                if Glimps.findRequestOut(friend) == nil {
+                    selectedIndexes[friend.objectId] = true
+                }
             }
         }
         reloadData()
