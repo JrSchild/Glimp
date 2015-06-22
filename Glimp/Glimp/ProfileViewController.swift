@@ -70,18 +70,22 @@ extension ProfileViewController: UIActionSheetDelegate {
     func actionSheet(sheet: UIActionSheet!, clickedButtonAtIndex buttonIndex: Int) {
         if buttonIndex != 2 {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let controller = storyboard.instantiateViewControllerWithIdentifier("ImagePickerViewController") as ImagePickerViewController
-            controller.method = buttonIndex == 0 ? .Camera : .PhotoLibrary
-            controller.callback = {(image) -> Void in
-                self.user["photo"] = PFFile(data: UIImageJPEGRepresentation(image, 0.9))
-                self.user.saveInBackgroundWithBlock({ (success, error) -> Void in
-                    if success {
-                        self.imageView.file = self.user["photo"] as PFFile
-                        self.imageView.loadInBackground()
-                    }
-                })
-            }
+            let controller = storyboard.instantiateViewControllerWithIdentifier("ImagePickerViewController") as VPViewController
+            controller.method = buttonIndex == 0 ? "Camera" : "PhotoLibrary"
+            controller.delegate = self
             self.presentViewController(controller, animated: true, completion: nil)
         }
+    }
+}
+
+extension ProfileViewController: VPViewControllerDelegate {
+    func imageCropper(cropperViewController: VPViewController!, didFinished editedImage: UIImage!) {
+        self.user["photo"] = PFFile(data: UIImageJPEGRepresentation(editedImage, 0.9))
+        self.user.saveInBackgroundWithBlock({ (success, error) -> Void in
+            if success {
+                self.imageView.file = self.user["photo"] as PFFile
+                self.imageView.loadInBackground()
+            }
+        })
     }
 }
