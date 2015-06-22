@@ -163,19 +163,9 @@ class HomeViewController: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showImagePicker" {
-            let imagePickerViewController = segue.destinationViewController as ImagePickerViewController
-            
-            // Attach callback to ImagePickerViewController, when it returns.
-            imagePickerViewController.callback = {(image: UIImage!) -> Void in
-                if image != nil && self.currentCellRequest != nil && self.currentRequest != nil {
-                    
-                    // Show loading indicator on cell and answer the glimp.
-                    self.currentCellRequest.isLoading!.hidden = false
-                    Glimps.answerGlimpRequestIn(self.currentRequest, image: image!, callback: {})
-                }
-                self.currentCellRequest = nil
-                self.currentRequest = nil
-            }
+            let vpViewController = segue.destinationViewController as VPViewController
+            vpViewController.delegate = self
+            vpViewController.method = "PhotoLibrary"
         } else if segue.identifier == "showSharedGlimps" && currentFriend != nil {
             let sharedGlimpViewController = segue.destinationViewController as SharedGlimpViewController
             sharedGlimpViewController.friend = currentFriend
@@ -479,5 +469,18 @@ extension HomeViewController: UIActionSheetDelegate {
                 deleteFriendRequestOut(sheet.tag)
             }
         }
+    }
+}
+
+extension HomeViewController: VPViewControllerDelegate {
+    func imageCropper(cropperViewController: VPViewController!, didFinished editedImage: UIImage!) {
+        if editedImage != nil && self.currentCellRequest != nil && self.currentRequest != nil {
+            
+            // Show loading indicator on cell and answer the glimp.
+            self.currentCellRequest.isLoading!.hidden = false
+            Glimps.answerGlimpRequestIn(self.currentRequest, image: editedImage!, callback: {})
+        }
+        self.currentCellRequest = nil
+        self.currentRequest = nil
     }
 }

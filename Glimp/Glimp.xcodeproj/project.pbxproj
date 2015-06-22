@@ -15,6 +15,8 @@
 		F20F06CC1B1CA3B5007007AF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F20F06CB1B1CA3B5007007AF /* Images.xcassets */; };
 		F20F06CF1B1CA3B5007007AF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F20F06CD1B1CA3B5007007AF /* LaunchScreen.xib */; };
 		F20F06DB1B1CA3B6007007AF /* GlimpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20F06DA1B1CA3B6007007AF /* GlimpTests.swift */; };
+		F213699D1B382A6E00261D45 /* VPImageCropperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F213699A1B382A6E00261D45 /* VPImageCropperViewController.m */; };
+		F213699E1B382A6E00261D45 /* VPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F213699C1B382A6E00261D45 /* VPViewController.m */; };
 		F23DF4511B2877D1002C35DC /* BABCropperView.m in Sources */ = {isa = PBXBuildFile; fileRef = F23DF4501B2877D1002C35DC /* BABCropperView.m */; };
 		F23DF4581B287DE5002C35DC /* ImagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23DF4571B287DE5002C35DC /* ImagePickerViewController.swift */; };
 		F24AE9A31B2ADC70000256ED /* ThumbnailImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AE9A21B2ADC70000256ED /* ThumbnailImageView.swift */; };
@@ -82,6 +84,10 @@
 		F20F06D41B1CA3B6007007AF /* GlimpTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GlimpTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F20F06D91B1CA3B6007007AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F20F06DA1B1CA3B6007007AF /* GlimpTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlimpTests.swift; sourceTree = "<group>"; };
+		F21369991B382A6E00261D45 /* VPImageCropperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPImageCropperViewController.h; sourceTree = "<group>"; };
+		F213699A1B382A6E00261D45 /* VPImageCropperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPImageCropperViewController.m; sourceTree = "<group>"; };
+		F213699B1B382A6E00261D45 /* VPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPViewController.h; sourceTree = "<group>"; };
+		F213699C1B382A6E00261D45 /* VPViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPViewController.m; sourceTree = "<group>"; };
 		F23DF44E1B2877D0002C35DC /* Glimp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Glimp-Bridging-Header.h"; sourceTree = "<group>"; };
 		F23DF44F1B2877D1002C35DC /* BABCropperView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BABCropperView.h; path = BABCropperView/BABCropperView.h; sourceTree = "<group>"; };
 		F23DF4501B2877D1002C35DC /* BABCropperView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BABCropperView.m; path = BABCropperView/BABCropperView.m; sourceTree = "<group>"; };
@@ -197,6 +203,7 @@
 		F20F06C11B1CA3B5007007AF /* Glimp */ = {
 			isa = PBXGroup;
 			children = (
+				F21369981B382A5D00261D45 /* VPImageCropper */,
 				F20D36121B221878000C7937 /* Models */,
 				F2A77A8A1B29D5B200E439FD /* Cells */,
 				F24AE9A51B2B10C9000256ED /* Segues */,
@@ -224,6 +231,7 @@
 		F20F06C21B1CA3B5007007AF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F23DF44E1B2877D0002C35DC /* Glimp-Bridging-Header.h */,
 				F20F06C31B1CA3B5007007AF /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -246,12 +254,22 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		F21369981B382A5D00261D45 /* VPImageCropper */ = {
+			isa = PBXGroup;
+			children = (
+				F21369991B382A6E00261D45 /* VPImageCropperViewController.h */,
+				F213699A1B382A6E00261D45 /* VPImageCropperViewController.m */,
+				F213699B1B382A6E00261D45 /* VPViewController.h */,
+				F213699C1B382A6E00261D45 /* VPViewController.m */,
+			);
+			name = VPImageCropper;
+			sourceTree = "<group>";
+		};
 		F23DF44D1B2877AD002C35DC /* BABCropperView */ = {
 			isa = PBXGroup;
 			children = (
 				F23DF44F1B2877D1002C35DC /* BABCropperView.h */,
 				F23DF4501B2877D1002C35DC /* BABCropperView.m */,
-				F23DF44E1B2877D0002C35DC /* Glimp-Bridging-Header.h */,
 			);
 			name = BABCropperView;
 			sourceTree = "<group>";
@@ -410,6 +428,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F213699E1B382A6E00261D45 /* VPViewController.m in Sources */,
 				F2DD3E401B1F29370085762F /* LoginViewController.swift in Sources */,
 				F20D361C1B221A07000C7937 /* FriendRequestsCollection.swift in Sources */,
 				F2A7A03C1B304EF000928DEF /* ThumbnailCollectionView.swift in Sources */,
@@ -430,6 +449,7 @@
 				F2D649241B30284A005AB6EE /* SharedGlimpViewController.swift in Sources */,
 				F2A77A961B2AD22A00E439FD /* HeaderCollectionViewCell.swift in Sources */,
 				F24AE9A81B2B1100000256ED /* SwipeRightSegue.swift in Sources */,
+				F213699D1B382A6E00261D45 /* VPImageCropperViewController.m in Sources */,
 				F2A7A03E1B30569700928DEF /* RefreshData.swift in Sources */,
 				F23DF4511B2877D1002C35DC /* BABCropperView.m in Sources */,
 				F2A7A0401B30612500928DEF /* Constants.swift in Sources */,

@@ -28,6 +28,25 @@
             </objects>
             <point key="canvasLocation" x="-375.5" y="136.5"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="59a-tV-gmG">
+            <objects>
+                <viewController id="kdY-AK-EmD" customClass="VPViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wYZ-sG-6a1"/>
+                        <viewControllerLayoutGuide type="bottom" id="gCi-X0-sfu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gNh-wc-hwo">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GVi-hU-P4Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="160.5" y="-677.5"/>
+        </scene>
         <!--Image Picker View Controller-->
         <scene sceneID="UsN-Ix-pvd">
             <objects>
@@ -172,9 +191,10 @@
                         <outlet property="selectAllButton" destination="ZaB-aY-Dox" id="Bo0-w8-kvB"/>
                         <outlet property="sendBar" destination="5yb-pm-tmW" id="A88-Ri-XfN"/>
                         <segue destination="6on-qz-Igt" kind="custom" identifier="showGlimps" customClass="SwipeRightSegue" customModule="Glimp" customModuleProvider="target" id="tqH-dp-OEp"/>
-                        <segue destination="Hcg-wu-UM5" kind="show" identifier="showImagePicker" id="liw-b8-xRL"/>
+                        <segue destination="Hcg-wu-UM5" kind="show" identifier="showImagePicker_" id="liw-b8-xRL"/>
                         <segue destination="U1e-lw-FDq" kind="custom" identifier="showProfile" customClass="SwipeLeftSegue" customModule="Glimp" customModuleProvider="target" id="C5m-Dc-Omw"/>
                         <segue destination="Nka-6g-t1M" kind="custom" identifier="showSharedGlimps" customClass="SwipeLeftSegue" customModule="Glimp" customModuleProvider="target" id="K4i-3G-wtt"/>
+                        <segue destination="kdY-AK-EmD" kind="show" identifier="showImagePicker" id="zBf-A3-zq3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
