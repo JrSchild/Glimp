@@ -148,7 +148,7 @@ class GlimpsCollection : Collection {
         let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
         requestsIn.append(request)
         dispatch_after(time, dispatch_get_main_queue()) {
-            if let index = find(self.requestsOut, request) {
+            if let index = find(self.requestsIn, request) {
                 self.requestsIn.removeAtIndex(index)
             }
             self.notify()
