@@ -212,8 +212,11 @@ class HomeViewController: UIViewController {
         selectedIndexes = [:]
         setSendBar()
         
-        // Send the actual Glimp requests. For now time is 60 minutes.
-        Glimps.sendRequests(friendIds, time: 60, callback: {})
+        // Get the cell with the chosen time stored on it.
+        let cell = collectionView!.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 2)) as HeaderCollectionViewCell    
+        
+        // Send the actual Glimp requests. Use the time from cell, default to 15 minutes.
+        Glimps.sendRequests(friendIds, time: cell.time, callback: {})
     }
     
     @IBAction func unwindToImagePickerViewController(segue: UIStoryboardSegue) {
@@ -274,7 +277,14 @@ extension HomeViewController: UICollectionViewDataSource {
         // Render Header cell.
         if indexPath.section == 0 || indexPath.section == 2 {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("HeaderCollectionViewCell", forIndexPath: indexPath) as HeaderCollectionViewCell
-            cell.headerText!.text = indexPath.section == 0 ? "ANSWER A GLIMP" : "ASK A GLIMP"
+            cell.reset()
+            
+            if indexPath.section == 0 {
+                cell.headerText!.text = "ANSWER A GLIMP"
+            } else {
+                cell.headerText!.text = "ASK A GLIMP"
+                cell.setTimerButton()
+            }
             
             return cell
         }
