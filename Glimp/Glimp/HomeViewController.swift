@@ -166,7 +166,7 @@ class HomeViewController: UIViewController {
         if segue.identifier == "showImagePicker" {
             let vpViewController = segue.destinationViewController as VPViewController
             vpViewController.delegate = self
-            vpViewController.method = "PhotoLibrary"
+            vpViewController.method = "Camera"
         } else if segue.identifier == "showSharedGlimps" && currentFriend != nil {
             let sharedGlimpViewController = segue.destinationViewController as SharedGlimpViewController
             sharedGlimpViewController.friend = currentFriend

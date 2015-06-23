@@ -16,9 +16,9 @@ class HeaderCollectionViewCell: UICollectionViewCell {
     let defaults = NSUserDefaults.standardUserDefaults()
     
     let times = [
-        [15, "15 min", "15m"],
-        [30, "30 min", "30m"],
-        [60, "1 hour", "1H"],
+        [15,  "15 min", "15m"],
+        [30,  "30 min", "30m"],
+        [60,  "1 hour", "1H"],
         [120, "2 hour", "2H"],
         [300, "5 hour", "5H"]
     ]
