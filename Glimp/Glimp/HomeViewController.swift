@@ -201,8 +201,8 @@ class HomeViewController: UIViewController {
                 }
             }
         }
-        setSendBar()
         reloadData()
+        setSendBar()
     }
     
     @IBAction func sendGlimpRequest(sender: UIButton) {
@@ -323,7 +323,7 @@ extension HomeViewController: UICollectionViewDataSource {
                     if selectedIndexes[friend.objectId] != nil {
                         cell.isSelected = true
                         cell.setSelected()
-                        setSendBar()
+//                        setSendBar()
                     }
                 
                 // The cell is an incoming request.
@@ -344,9 +344,6 @@ extension HomeViewController: UICollectionViewDataSource {
                     cell.bottomOverlay!.hidden = false
                     if let photo = toUser["photo"] as? PFFile {
                         cell.setImage(photo)
-                    } else {
-                        println("none")
-                        println(toUser["username"] as String)
                     }
                 }
             }

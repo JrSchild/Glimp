@@ -24,7 +24,6 @@ class ThumbnailCollectionViewCell: UICollectionViewCell {
     
     let calendar = NSCalendar.currentCalendar()
     var timer : NSTimer!
-    var canSelect = false
     var isSelected = false
     var request: PFObject!
     var friend: PFObject!
@@ -63,27 +62,23 @@ class ThumbnailCollectionViewCell: UICollectionViewCell {
         
         let (currentTime, endTime) = getTimeLeft()!
         let width = (currentTime / endTime) * Float(self.frame.width)
+        let top = self.label!.frame.height
+        self.timerOverlay!.frame = CGRect(x: 0, y: top, width: CGFloat(width), height: self.frame.height - top)
         
-        self.resetTimerOverlaySize()
-        
-        // Set frame of timerOverlay with width of 0, defer this until the cell is in the view.
-        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
-        dispatch_after(time, dispatch_get_main_queue()) {
-            let top = self.label!.frame.height
-            self.timerOverlay!.frame = CGRect(x: 0, y: top, width: CGFloat(width), height: self.frame.height - top)
-            
-            // Start the animation.
-            UIView.animateWithDuration(Double(endTime - currentTime), delay: 0, options: .CurveLinear, animations: {
-                self.timerOverlay!.frame = CGRect(x: 0, y: top, width: self.frame.width, height: self.frame.height - top)
-            }, completion: {(finished: Bool) -> Void in
+        // Start the animation.
+        UIView.animateWithDuration(Double(endTime - currentTime), delay: 0, options: .CurveLinear, animations: {
+            self.timerOverlay!.frame = CGRect(x: 0, y: top, width: self.frame.width, height: self.frame.height - top)
+        }, completion: {(finished: Bool) -> Void in
+            if finished {
                 self.timerOverlay!.hidden = true
                 self.timerLabel!.hidden = true
-                self.resetTimerOverlaySize()
+                self.timerOverlay!.frame = CGRect(x: 0, y: top, width: 0, height: self.frame.height - top)
                 self.request = nil
-            })
-        }
+            }
+        })
         
         // Start the clock.
+        updateTime()
         self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateTime", userInfo: nil, repeats: true)
     }
     
@@ -150,6 +145,7 @@ class ThumbnailCollectionViewCell: UICollectionViewCell {
         timerLabel!.text = ""
         isLoading!.hidden = true
         image!.image = nil
+        image!.file = nil
         image!.hidden = true
         bottomOverlay!.hidden = true
         isSelected = false
