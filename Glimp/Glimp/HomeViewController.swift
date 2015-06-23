@@ -43,6 +43,7 @@ class HomeViewController: UIViewController {
         collectionView.addSubview(refreshControl)
         collectionView.alwaysBounceVertical = true
         
+        Friends.sort()
         setSendBar()
         
         // Initialize swipe right.

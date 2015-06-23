@@ -53,4 +53,17 @@ class FriendsCollection : Collection {
         }
         return nil
     }
+    
+    // Sort friends: Most shared glimps to the top, but anyone with an outgoing request to the bottom.
+    func sort() {
+        friends.sort({ lhs, rhs in
+            return Glimps.findSharedGlimps(lhs).count > Glimps.findSharedGlimps(rhs).count
+        })
+        friends.sort({ lhs, rhs in
+            if Glimps.findRequestOut(rhs) != nil {
+                return true
+            }
+            return Glimps.findSharedGlimps(lhs).count > Glimps.findSharedGlimps(rhs).count
+        })
+    }
 }

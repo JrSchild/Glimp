@@ -101,6 +101,7 @@ class GlimpsCollection : Collection {
             for request in requests {
                 self.addRequestOut(request)
             }
+            Friends.sort()
             self.notify()
             callback()
         })
@@ -116,6 +117,7 @@ class GlimpsCollection : Collection {
                         self.glimpsOut.append(request)
                     }
                 }
+                Friends.sort()
                 self.notify()
                 callback()
             })
@@ -133,6 +135,8 @@ class GlimpsCollection : Collection {
             if let index = find(self.requestsOut, request) {
                 self.requestsOut.removeAtIndex(index)
             }
+            Friends.sort()
+            self.notify()
         }
     }
     
@@ -147,6 +151,7 @@ class GlimpsCollection : Collection {
             if let index = find(self.requestsOut, request) {
                 self.requestsIn.removeAtIndex(index)
             }
+            self.notify()
         }
     }
     
