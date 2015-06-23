@@ -201,8 +201,8 @@ class HomeViewController: UIViewController {
                 }
             }
         }
-        reloadData()
         setSendBar()
+        reloadData()
     }
     
     @IBAction func sendGlimpRequest(sender: UIButton) {
