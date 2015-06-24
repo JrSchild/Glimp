@@ -52,9 +52,7 @@
             controller.delegate = self;
             [self presentViewController:controller
                                animated:YES
-                             completion:^(void){
-                                 NSLog(@"Picker View Controller is presented: Take Picture");
-                             }];
+                             completion:nil];
         }
     } else if ([self.method  isEqual: @"PhotoLibrary"]) {
         if ([self isPhotoLibraryAvailable]) {
@@ -66,9 +64,7 @@
             controller.delegate = self;
             [self presentViewController:controller
                                animated:YES
-                             completion:^(void){
-                                 NSLog(@"Picker View Controller is presented: Camera Roll");
-                             }];
+                             completion:nil];
         }
     }
 }
