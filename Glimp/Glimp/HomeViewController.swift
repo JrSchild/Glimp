@@ -334,7 +334,6 @@ extension HomeViewController: UICollectionViewDataSource {
                     if selectedIndexes[friend.objectId] != nil {
                         cell.isSelected = true
                         cell.setSelected()
-//                        setSendBar()
                     }
                 
                 // The cell is an incoming request.

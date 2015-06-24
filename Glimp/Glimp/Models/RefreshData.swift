@@ -18,11 +18,13 @@ func RefreshData (callback: () -> Void) {
     
     dispatch_group_enter(group)
     Requests.load({
+        Friends.sort()
         dispatch_group_leave(group)
     })
     
     dispatch_group_enter(group)
     Glimps.load({
+        Friends.sort()
         dispatch_group_leave(group)
     })
     

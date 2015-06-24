@@ -35,6 +35,7 @@ class FriendsCollection : Collection {
             }
             
             // Notifify subscribers and run the callback.
+            self.sort()
             self.notify()
             callback()
         })
