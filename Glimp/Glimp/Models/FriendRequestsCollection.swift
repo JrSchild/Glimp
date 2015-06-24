@@ -90,11 +90,11 @@ class FriendRequestsCollection : Collection {
             .whereKey("username", equalTo: username)
         
         query.getFirstObjectInBackgroundWithBlock({ (friend: PFObject?, error: NSError?) -> Void in
-            if error != nil {
-                return callback(success: false, error: "Found error retrieving user: \(error)")
-            }
             if friend == nil {
                 return callback(success: false, error: "FriendNotFound")
+            }
+            if error != nil {
+                return callback(success: false, error: "Found error retrieving user: \(error!.userInfo)")
             }
             if Requests.requestsOut.filter({ $0["toUser"].objectId == friend!.objectId}).count > 0 {
                 return callback(success: false, error: "UserAlreadyFriends")

@@ -112,7 +112,15 @@ class HomeViewController: UIViewController {
     
     // Add friend by username, on success reload the data.
     func addFriend(username: String) {
-        Requests.invite(username, callback: {(success, error) -> Void in})
+        Requests.invite(username, callback: {(success, error) -> Void in
+            if error != nil && error == "FriendNotFound" {
+                let alert = UIAlertView()
+                alert.title = "Error"
+                alert.message = "User not found"
+                alert.addButtonWithTitle("OK")
+                alert.show()
+            }
+        })
     }
     
     // Create UIActionSheet for options on incoming friend request
