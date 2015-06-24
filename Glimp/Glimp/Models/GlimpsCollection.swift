@@ -16,6 +16,7 @@ class GlimpsCollection : Collection {
     var requestsOut = [PFObject]()
     var glimpsIn = [PFObject]()
     var glimpsOut = [PFObject]()
+    var isAnsweringGlimp = [String:Bool]()
     
     init() {
         super.init(notificationKey: NotificationDataGlimps)
@@ -109,6 +110,8 @@ class GlimpsCollection : Collection {
     
     func answerGlimpRequestIn(request: PFObject, image: UIImage, callback: () -> Void) {
         if contains(requestsIn, request) {
+            let username = request["fromUser"]!["username"] as String
+            isAnsweringGlimp[username] = true
             request["photo"] = PFFile(data: UIImageJPEGRepresentation(image, 0.9))
             request.saveInBackgroundWithBlock({ (success, error) -> Void in
                 if success {
@@ -117,6 +120,7 @@ class GlimpsCollection : Collection {
                         self.glimpsOut.append(request)
                     }
                 }
+                self.isAnsweringGlimp.removeValueForKey(username)
                 Friends.sort()
                 self.notify()
                 callback()

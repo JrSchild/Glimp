@@ -217,6 +217,7 @@ class HomeViewController: UIViewController {
         
         // Send the actual Glimp requests. Use the time from cell, default to 15 minutes.
         Glimps.sendRequests(friendIds, time: cell.time, callback: {})
+        reloadData()
     }
     
     @IBAction func unwindToImagePickerViewController(segue: UIStoryboardSegue) {
@@ -304,10 +305,15 @@ extension HomeViewController: UICollectionViewDataSource {
                     return collectionView.dequeueReusableCellWithReuseIdentifier("EmptyListCollectionViewCell", forIndexPath: indexPath) as UICollectionViewCell
                 } else {
                     let request = Glimps.requestsIn[indexPath.row]
-                    cell.setLabel(request["fromUser"]!["username"]! as String)
+                    let username = request["fromUser"]!["username"]! as String
+                    cell.setLabel(username)
                     cell.setRequest(request)
                     if let photo = request["fromUser"]!["photo"] as? PFFile {
                         cell.setImage(photo)
+                    }
+                    if Glimps.isAnsweringGlimp[username] != nil {
+                        println("is loading")
+                        cell.isLoading!.hidden = false
                     }
                     
                     return cell
@@ -334,7 +340,6 @@ extension HomeViewController: UICollectionViewDataSource {
                     if selectedIndexes[friend.objectId] != nil {
                         cell.isSelected = true
                         cell.setSelected()
-//                        setSendBar()
                     }
                 
                 // The cell is an incoming request.
