@@ -1,68 +1,12 @@
-## Glimp Proposal
-A social app that turns social media around.
-
-### The idea
+## Glimp
 Glimp lets users ask for a glimp (glimpse) in someone’s life. The user is in control of who he/she wants content from and when. The content sent is unique because users are only able to send the pictures to one person. The glimps are from a speficifc moment and the user the user can set a timer for how much time the responded has to answer. All Glimps are collected and can only be seen by the user him/her self.
 
-#### Advantages
-- Catch a glimpse into someone’s life whenever you want
-- Unique content
-- 1 on 1 personal content
-- Only content from users you selected
-- Playful and exciting
-- No longer a Facebook-feed with stuff you don’t want
-- Interest-span is always high
+##### Screenshots
+![Glimp Screenshots](/doc/screenshots.jpg)
 
-#### Functionalities
-- User login/registration
-- Add friends
-- Add a profile picture
-- Ask for a glimp with a timer
-- Answer a glimp (take a photo)
-- View received glimps
+### External Sources
+Parse/ParseUI https://parse.com/
+Custom Segue's by Gabriel Theodoropoulos http://www.appcoda.com/custom-segue-animations/
+Image Cropper by Vinson D. Warm https://github.com/windshg/VPImageCropper
 
-### Possible Complications
-This is a timesensitive project, so there is not much room for error. A requirement of the project is the implementation of a server. At this time it is unknown how much time the implementation of these features will take. This results in a tight schedule. The following features are more prone to complications:
-- User login
-- Sending images; Answer glimp and profile picture
-- Push notifications
-- Cropping images to a square
-
-### Planning
-| Week | Schedule | Features |
-|:------:|:------:|---------|
-|1 | Prototype UI | Set up views, basic interface elements/controllers, log in, add and see friends. |
-|2 | Beta version | Ask for a glimp, answer a glimp, profile pictures, received glimps view |
-|3 | Minimum Viable Product | Push notifications, profile view, delayed features |
-|4 | Final release | Clean up code and refactor where necessary |
-
-### Sketches
-![Sketches](/doc/sketches.png)
-
-#### Login View
-The first view where the user can login or sign up for an account. After logging in, the Home View will appear.
-
-#### Main View
-Contains most of the apps core functionality. In this view the user can send answer a Glimp and ask for a glimp. When a single friend is selected, a send bar appears with two buttons. All: To select all friends, Send: to send the request.  
-The timer can be set with in the 'Ask a Glimp'-bar. In the 'Answer a Glimp'-bar are the friends that currently asked you for a Glimp. Each thumbnail has an animated overview showing how much time you have left to answer.
-By pressing the 'Plus' button, the user can add new friends. When sliding left the Glimp View will appear.
-
-#### Glimp View
-Provides an overview of all Glimps received. There is a tab menu on the top that shows either the Glimps sent or the Glimps received. When tapping the profile picture on the top right, the Profile View will appear.
-
-#### Profile View
-Shows the user information and settings.
-
-### Kittens
-![Kittens](/doc/kittens.gif)
-
-### Links
-- http://stackoverflow.com/questions/28325277/how-to-set-cell-spacing-and-uicollectionview-uicollectionviewflowlayout-size-r
-- https://www.parse.com/tutorials/anypic#model
-- https://www.parse.com/questions/build-friend-relations-into-pfuser
-- http://blog.parse.com/announcements/queries-for-relational-data/
-- http://stackoverflow.com/questions/28100847/checking-for-multiple-asynchronous-responses-from-alamofire-and-swift
-- http://stackoverflow.com/questions/12590471/uitableview-registernibforcellreuseidentifier
-- http://stackoverflow.com/questions/27182023/getting-the-difference-between-two-nsdates-in-months-days-hours-minutes-seconds
-- http://rshankar.com/simple-stopwatch-app-in-swift/
-- http://blog.parse.com/learn/engineering/loading-remote-images-stored-on-parse/
+Copyright 2015 Joram Ruitenschild
