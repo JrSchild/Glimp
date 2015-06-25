@@ -24,7 +24,6 @@
 		F23C8F141B3BEBDF00E2C199 /* ProfileInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23C8F111B3BEBDF00E2C199 /* ProfileInformationView.swift */; };
 		F23C8F151B3BEBDF00E2C199 /* ProfileInformationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F23C8F121B3BEBDF00E2C199 /* ProfileInformationView.xib */; };
 		F23C8F161B3BEBDF00E2C199 /* ThumbnailCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23C8F131B3BEBDF00E2C199 /* ThumbnailCollectionView.swift */; };
-		F23C8F1C1B3BEE0C00E2C199 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F23C8F1B1B3BEE0C00E2C199 /* Info.plist */; };
 		F24AE9A31B2ADC70000256ED /* ThumbnailImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AE9A21B2ADC70000256ED /* ThumbnailImageView.swift */; };
 		F24AE9A81B2B1100000256ED /* SwipeRightSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AE9A61B2B1100000256ED /* SwipeRightSegue.swift */; };
 		F24AE9A91B2B1100000256ED /* SwipeRightSegueUnwind.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AE9A71B2B1100000256ED /* SwipeRightSegueUnwind.swift */; };
@@ -405,7 +404,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F23C8F1C1B3BEE0C00E2C199 /* Info.plist in Resources */,
 				F2D649201B2F0A6E005AB6EE /* EmptyListCollectionViewCell.xib in Resources */,
 				F20F06CA1B1CA3B5007007AF /* Main.storyboard in Resources */,
 				F23C8F151B3BEBDF00E2C199 /* ProfileInformationView.xib in Resources */,
