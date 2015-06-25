@@ -16,6 +16,7 @@ class GlimpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Initialize Thumbnail view in full size
         collectionView = ThumbnailCollectionView(frame: self.view.frame)
         collectionView!.dataSource = self
         collectionView!.delegate = self
@@ -25,10 +26,11 @@ class GlimpViewController: UIViewController {
         refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         collectionView.addSubview(refreshControl)
         
-        var swipeGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "hideGlimps")
+        let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "hideGlimps")
         swipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.Left
         self.view.addGestureRecognizer(swipeGestureRecognizer)
         
+        // Attach notification listener
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadData", name: NotificationDataGlimps, object: nil)
     }
     

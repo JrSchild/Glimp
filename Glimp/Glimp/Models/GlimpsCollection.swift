@@ -47,9 +47,6 @@ class GlimpsCollection : Collection {
             .includeKey("toUser")
         
         query.findObjectsInBackgroundWithBlock({ (glimps: [AnyObject]?, error: NSError?) -> Void in
-            if error != nil {
-                println("ERROR \(error)")
-            }
             self.requestsIn = []
             self.requestsOut = []
             self.glimpsIn = []
@@ -69,9 +66,9 @@ class GlimpsCollection : Collection {
                         }
                     } else {
                         if toUserId == self.user!.objectId {
-                            self.addRequestIn(glimp)
+                            self.addGlimpRequestIn(glimp)
                         } else {
-                            self.addRequestOut(glimp)
+                            self.addGlimpRequestOut(glimp)
                         }
                     }
                 }
@@ -81,10 +78,13 @@ class GlimpsCollection : Collection {
         })
     }
     
-    func sendRequests(friends: [String], time: Int, callback: (() -> Void)) {
+    // Ask a friend for a Glimp with the specified time.
+    func sendGlimpRequests(friends: [String], time: Int, callback: (() -> Void)) {
         let expiresAt = NSDate().dateByAddingTimeInterval((Double(time) * 60.0))
         let user = PFUser.currentUser()
         var requests = [PFObject]()
+        
+        // Create a request object for each friend.
         for friend in friends {
             if let friend = Friends.findById(friend) {
                 var request = PFObject(className: "Glimp")
@@ -95,11 +95,10 @@ class GlimpsCollection : Collection {
             }
         }
         
-        println("Send requests to: \(friends)")
+        // Save all requests in the server.
         PFObject.saveAllInBackground(requests, block: { (success, error) -> Void in
-            println("Saved glimp requests")
             for request in requests {
-                self.addRequestOut(request)
+                self.addGlimpRequestOut(request)
             }
             Friends.sort()
             self.notify()
@@ -107,6 +106,7 @@ class GlimpsCollection : Collection {
         })
     }
     
+    // Answer an incoming Glimp-Request with an image.
     func answerGlimpRequestIn(request: PFObject, image: UIImage, callback: () -> Void) {
         if let index = find(self.requestsIn, request) {
             request["photo"] = PFFile(data: UIImageJPEGRepresentation(image, 0.9))
@@ -120,7 +120,8 @@ class GlimpsCollection : Collection {
         }
     }
     
-    func addRequestOut(request: PFObject) {
+    // Add an outgoing Glimp Request to the internal data, automatically remove when the time is finished.
+    func addGlimpRequestOut(request: PFObject) {
         let expiresAt = request["expiresAt"] as NSDate
         let seconds = calendar.components(NSCalendarUnit.CalendarUnitSecond, fromDate: NSDate(), toDate: expiresAt, options: nil).second
 
@@ -136,7 +137,8 @@ class GlimpsCollection : Collection {
         }
     }
     
-    func addRequestIn(request: PFObject) {
+    // Add an incoming Glimp Request to the internal data, automatically remove when the time is finished.
+    func addGlimpRequestIn(request: PFObject) {
         let expiresAt = request["expiresAt"] as NSDate
         let seconds = calendar.components(NSCalendarUnit.CalendarUnitSecond, fromDate: NSDate(), toDate: expiresAt, options: nil).second
         
@@ -151,7 +153,7 @@ class GlimpsCollection : Collection {
         }
     }
     
-    func findRequestOut(friend: PFObject) -> PFObject? {
+    func findGlimpRequestOut(friend: PFObject) -> PFObject? {
         for request in requestsOut {
             if request["toUser"].objectId == friend.objectId {
                 return request
@@ -160,7 +162,7 @@ class GlimpsCollection : Collection {
         return nil
     }
     
-    // Return a list of glimps the current user shares with given friend.
+    // Return a list of Glimps the current user shares with given friend.
     func findSharedGlimps(friend: PFObject) -> [PFObject] {
         var glimps = [PFObject]()
         
@@ -179,6 +181,7 @@ class GlimpsCollection : Collection {
             }
         }
         
+        // Sort the Glimps on their created date.
         glimps.sort({ $1.createdAt.compare($0.createdAt) == NSComparisonResult.OrderedAscending })
         
         return glimps

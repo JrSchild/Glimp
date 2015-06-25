@@ -48,14 +48,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         currentInstallation.saveInBackground()
     }
     
-    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
-        if error.code == 3010 {
-            println("Push notifications are not supported in simulator")
-        } else {
-            println("application:didFailToRegisterForRemoteNotificationsWithError: \(error)")
-        }
-    }
-    
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
         PFPush.handlePush(userInfo)
         RefreshData()

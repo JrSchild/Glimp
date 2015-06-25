@@ -30,7 +30,7 @@ class ThumbnailCollectionViewCell: UICollectionViewCell {
     let greyBackground = UIColor(red: CGFloat(228) / 255.0, green: CGFloat(228) / 255.0, blue: CGFloat(228) / 255.0, alpha: 1.0)
     
     // Show or hide selected-image.
-    func setSelected() {
+    func setCheckmark() {
         if selected {
             checkFriend.hidden = false
         } else {
@@ -38,6 +38,7 @@ class ThumbnailCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    // Shows a grey background with the plus icon for adding a friend.
     func isAddFriendButton() {
         backgroundColor = greyBackground
         addFriendImage.hidden = false
@@ -48,11 +49,7 @@ class ThumbnailCollectionViewCell: UICollectionViewCell {
         label!.text = text
     }
     
-    func setRandomBackgroundColor() {
-        backgroundColor = UIColor(red: CGFloat(drand48()), green: CGFloat(drand48()), blue: CGFloat(drand48()), alpha: 1.0)
-    }
-    
-    // Work in Progress
+    // Set a pending request with timer and animating overlay.
     func setRequest(request: PFObject) {
         
         // Set request, calculate time left.
@@ -60,15 +57,20 @@ class ThumbnailCollectionViewCell: UICollectionViewCell {
         timerOverlay!.hidden = false
         timerLabel!.hidden = false
         
+        // Get the time left, current width of overlay and top of the overlay.
         let (currentTime, endTime) = getTimeLeft()!
         let width = (currentTime / endTime) * Float(self.frame.width)
         let top = self.label!.frame.height
+        
+        // Set the initial position and size of overlay.
         self.timerOverlay!.frame = CGRect(x: 0, y: top, width: CGFloat(width), height: self.frame.height - top)
         
         // Start the animation.
         UIView.animateWithDuration(Double(endTime - currentTime), delay: 0, options: .CurveLinear, animations: {
             self.timerOverlay!.frame = CGRect(x: 0, y: top, width: self.frame.width, height: self.frame.height - top)
         }, completion: {(finished: Bool) -> Void in
+            
+            // When the animation is finished, remove the request object and hide the overlay.
             if finished {
                 self.timerOverlay!.hidden = true
                 self.timerLabel!.hidden = true
@@ -77,11 +79,12 @@ class ThumbnailCollectionViewCell: UICollectionViewCell {
             }
         })
         
-        // Start the clock.
+        // Start the clock, update every second.
         updateTime()
         self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateTime", userInfo: nil, repeats: true)
     }
     
+    // Set a file on backgroundImage, show a grey background and spinner while it's loading.
     func setImage(backgroundImage: PFFile) {
         backgroundColor = greyBackground
         isLoading!.hidden = false
@@ -92,19 +95,33 @@ class ThumbnailCollectionViewCell: UICollectionViewCell {
         })
     }
     
+    // Set an incoming Glimp-Request: The label, timer and background picture.
+    func setGlimpRequestIn(request: PFObject) {
+        setLabel(request["fromUser"]!["username"]! as String)
+        setRequest(request)
+        if let photo = request["fromUser"]!["photo"] as? PFFile {
+            setImage(photo)
+        }
+    }
+    
+    // Update the countdown timer.
     func updateTime() {
         let timeLeft = getTimeLeft()
+        
         if timeLeft == nil {
             return
         }
         
         let (currentTime, endTime) = timeLeft!
         let elapsedTime = Int(endTime) - Int(currentTime)
+        
+        // Calculate hours, minutes and seconds left.
         let hours = Int(elapsedTime / 3600)
         let minutes = Int((elapsedTime - hours * 3600) / 60)
         let seconds = Int(elapsedTime - hours * 3600 - minutes * 60)
         var strTimeLeft : String
         
+        // Format the string for time left.
         if hours > 0 {
             strTimeLeft = "\(hours)h\(minutes)m"
         } else if minutes > 0 {
@@ -116,10 +133,7 @@ class ThumbnailCollectionViewCell: UICollectionViewCell {
         timerLabel!.text = strTimeLeft
     }
     
-    func resetTimerOverlaySize() {
-        self.timerOverlay!.frame = CGRect(x: 0, y: 0, width: 0, height: self.frame.height)
-    }
-    
+    // Returns the current- and endtime of the cell's request object.
     func getTimeLeft() -> (Float, Float)? {
         if request == nil {
             return nil
@@ -130,6 +144,7 @@ class ThumbnailCollectionViewCell: UICollectionViewCell {
         return (currentTime, endTime)
     }
     
+    // Set everything back to the initial state, used for re-using the cell.
     func reset() {
         label!.text = ""
         label!.hidden = true

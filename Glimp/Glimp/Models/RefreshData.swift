@@ -11,6 +11,7 @@ import Foundation
 func RefreshData (callback: () -> Void) {
     let group = dispatch_group_create()
     
+    // Load all data in parallel, use dispatch to keep track of finished requests.
     dispatch_group_enter(group)
     Friends.load({
         dispatch_group_leave(group)
@@ -28,6 +29,7 @@ func RefreshData (callback: () -> Void) {
         dispatch_group_leave(group)
     })
     
+    // When all requests have been loaded, call the callback.
     dispatch_group_notify(group, dispatch_get_main_queue()) {
         callback()
     }

@@ -24,16 +24,19 @@ class SharedGlimpViewController: UIViewController {
         
         glimps = Glimps.findSharedGlimps(friend)
         
+        // Initialize Thumbnail view below the headerView.
         collectionView = ThumbnailCollectionView(frame: CGRect(x: 0, y: headerView.frame.height, width: view.frame.width, height: view.frame.height - headerView.frame.height))
         collectionView!.dataSource = self
         collectionView!.delegate = self
         self.view.addSubview(collectionView!)
         
-        var swipeGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "hideSharedGlimps")
+        // Attach swipe back handler.
+        let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "hideSharedGlimps")
         swipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.Right
         self.view.addGestureRecognizer(swipeGestureRecognizer)
     }
     
+    // When view appears, set the friend's information in the View.
     override func viewDidAppear(animated: Bool) {
         if friend != nil {
             usernameLabel!.text = friend["username"] as? String
@@ -58,17 +61,18 @@ extension SharedGlimpViewController: UICollectionViewDataSource {
     // Returns the length of each section.
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
+        // The first section is a header.
         if section == 0 {
             return 1
         }
         
-        // For now we return use the glimps currentUser has sent
         return glimps.count
     }
     
     // Returns the cell to be rendered.
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
+        // The first section is a Header.
         if indexPath.section == 0 {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("HeaderCollectionViewCell", forIndexPath: indexPath) as HeaderCollectionViewCell
             cell.headerText!.text = "SHARED GLIMPS"
@@ -87,6 +91,7 @@ extension SharedGlimpViewController: UICollectionViewDataSource {
     // Returns size of cell.
     func collectionView(collectionView: ThumbnailCollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         
+        // First section is a Header.
         if indexPath.section == 0 {
             return CGSize(width: collectionView.width, height: 47)
         }

@@ -15,14 +15,7 @@ class HeaderCollectionViewCell: UICollectionViewCell {
     
     let defaults = NSUserDefaults.standardUserDefaults()
     
-    let times = [
-        [15,  "15 min", "15m"],
-        [30,  "30 min", "30m"],
-        [60,  "1 hour", "1H"],
-        [120, "2 hour", "2H"],
-        [300, "5 hour", "5H"]
-    ]
-    var time = 60
+    var time = DEFAULT_ANSWER_TIME
     
     func setTimerButton() {
         timerButton!.hidden = false
@@ -34,7 +27,7 @@ class HeaderCollectionViewCell: UICollectionViewCell {
     }
     
     func updateTimeButton() {
-        let timeIndex = times.filter({ $0[0] == self.time })
+        let timeIndex = ANSWER_TIMES_GLIMP_REQUEST.filter({ $0[0] == self.time })
         
         if timeIndex.count > 0 {
             timerButton!.setTitle(timeIndex[0][2] as? String, forState: .Normal)
@@ -44,11 +37,11 @@ class HeaderCollectionViewCell: UICollectionViewCell {
     @IBAction func selectTime(sender: UIButton) {
         let sheet: UIActionSheet = UIActionSheet();
         sheet.delegate = self;
-        for time in times {
+        for time in ANSWER_TIMES_GLIMP_REQUEST {
             sheet.addButtonWithTitle(time[1] as String);
         }
         sheet.addButtonWithTitle("Cancel");
-        sheet.cancelButtonIndex = times.count;
+        sheet.cancelButtonIndex = ANSWER_TIMES_GLIMP_REQUEST.count;
         sheet.showInView(self.superview);
     }
     
@@ -61,8 +54,8 @@ extension HeaderCollectionViewCell: UIActionSheetDelegate {
     
     // When an actionsheet is closed.
     func actionSheet(sheet: UIActionSheet!, clickedButtonAtIndex buttonIndex: Int) {
-        if buttonIndex < times.count {
-            time = times[buttonIndex][0] as Int
+        if buttonIndex < ANSWER_TIMES_GLIMP_REQUEST.count {
+            time = ANSWER_TIMES_GLIMP_REQUEST[buttonIndex][0] as Int
             defaults.setObject(time, forKey: "countdown-time")
             defaults.synchronize()
             updateTimeButton()

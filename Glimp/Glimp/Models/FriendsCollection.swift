@@ -27,9 +27,6 @@ class FriendsCollection : Collection {
             .whereKey("objectId", notEqualTo: user!.objectId)
         
         query.findObjectsInBackgroundWithBlock({ (friends: [AnyObject]?, error: NSError?) -> Void in
-            if error != nil {
-                println("ERROR \(error)")
-            }
             if friends != nil {
                 self.friends = friends as [PFObject]
             }
@@ -61,7 +58,7 @@ class FriendsCollection : Collection {
             return Glimps.findSharedGlimps(lhs).count > Glimps.findSharedGlimps(rhs).count
         })
         friends.sort({ lhs, rhs in
-            if Glimps.findRequestOut(rhs) != nil {
+            if Glimps.findGlimpRequestOut(rhs) != nil {
                 return true
             }
             return Glimps.findSharedGlimps(lhs).count > Glimps.findSharedGlimps(rhs).count

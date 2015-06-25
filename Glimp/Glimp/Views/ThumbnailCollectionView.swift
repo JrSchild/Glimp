@@ -33,6 +33,8 @@ class ThumbnailCollectionView: UICollectionView {
         
         backgroundColor = UIColor.whiteColor()
         alwaysBounceVertical = true
+        
+        // Register most used cell classes for fast re-use.
         registerNib(UINib(nibName: "ThumbnailCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ThumbnailCollectionViewCell")
         registerNib(UINib(nibName: "HeaderCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "HeaderCollectionViewCell")
         registerNib(UINib(nibName: "EmptyListCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "EmptyListCollectionViewCell")

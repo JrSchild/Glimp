@@ -24,6 +24,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Initialize Thumbnail view in full size
         collectionView = ThumbnailCollectionView(frame: self.view.frame)
         collectionView!.dataSource = self
         collectionView!.delegate = self
@@ -47,15 +48,16 @@ class HomeViewController: UIViewController {
         setSendBar()
         
         // Initialize swipe right.
-        let swipeRightGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "showGlimps")
+        let swipeRightGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "showGlimps")
         swipeRightGestureRecognizer.direction = UISwipeGestureRecognizerDirection.Right
         collectionView!.addGestureRecognizer(swipeRightGestureRecognizer)
         
         // Initialize swipe left.
-        let swipeLeftGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "showProfile")
+        let swipeLeftGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "showProfile")
         swipeLeftGestureRecognizer.direction = UISwipeGestureRecognizerDirection.Left
         collectionView!.addGestureRecognizer(swipeLeftGestureRecognizer)
         
+        // Attach notification listeners
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadData", name: NotificationDataFriendRequests, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadData", name: NotificationDataFriends, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadData", name: NotificationDataGlimps, object: nil)
@@ -93,17 +95,11 @@ class HomeViewController: UIViewController {
         
         if let id = identifier {
             if id == "hideGlimps" {
-                let unwindSegue = SwipeRightSegueUnwind(identifier: id, source: fromViewController, destination: toViewController, performHandler: { () -> Void in
-                })
-                return unwindSegue
+                return SwipeRightSegueUnwind(identifier: id, source: fromViewController, destination: toViewController, performHandler: {})
             } else if id == "hideProfile" {
-                let unwindSegue = SwipeLeftSegueUnwind(identifier: id, source: fromViewController, destination: toViewController, performHandler: { () -> Void in
-                })
-                return unwindSegue
+                return SwipeLeftSegueUnwind(identifier: id, source: fromViewController, destination: toViewController, performHandler: {})
             } else if id == "hideSharedGlimps" {
-                let unwindSegue = SwipeLeftSegueUnwind(identifier: id, source: fromViewController, destination: toViewController, performHandler: { () -> Void in
-                })
-                return unwindSegue
+                return SwipeLeftSegueUnwind(identifier: id, source: fromViewController, destination: toViewController, performHandler: {})
             }
         }
         
@@ -171,10 +167,14 @@ class HomeViewController: UIViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        // showImagePicker is used when answering a Glimp request.
         if segue.identifier == "showImagePicker" {
             let vpViewController = segue.destinationViewController as VPViewController
             vpViewController.delegate = self
-            vpViewController.method = "Camera"
+            vpViewController.method = "PhotoLibrary"
+
+        // Set the friend on SharedGlimpViewController
         } else if segue.identifier == "showSharedGlimps" && currentFriend != nil {
             let sharedGlimpViewController = segue.destinationViewController as SharedGlimpViewController
             sharedGlimpViewController.friend = currentFriend
@@ -182,9 +182,8 @@ class HomeViewController: UIViewController {
         }
     }
     
+    // If the cell was selected, add it to selected friends, otherwise remove it.
     func toggleSelectFriend(objectId: String, select: Bool) {
-        
-        // If the cell was selected, add it to selected friends, otherwise remove it from selected friends.
         if (select) {
             selectedIndexes[objectId] = true
         } else {
@@ -193,19 +192,18 @@ class HomeViewController: UIViewController {
         setSendBar()
     }
     
-    @IBAction func returnFromSegueActions(sender: UIStoryboardSegue) {
-    }
+    // Method required for returning from segue
+    @IBAction func returnFromSegueActions(sender: UIStoryboardSegue) {}
     
+    // If all friends are selected, unselect everyone. Otherwise select everyone.
     @IBAction func selectAllFriends(sender: UIButton) {
-        
-        // If all are selected, remove everyone. Otherwise add everyone
         if countElements(selectedIndexes) >= (Friends.friends.count - Glimps.requestsOut.count) {
             for objectId in selectedIndexes.keys.array {
                 selectedIndexes.removeValueForKey(objectId)
             }
         } else {
             for friend in Friends.friends {
-                if Glimps.findRequestOut(friend) == nil {
+                if Glimps.findGlimpRequestOut(friend) == nil {
                     selectedIndexes[friend.objectId] = true
                 }
             }
@@ -214,7 +212,9 @@ class HomeViewController: UIViewController {
         setSendBar()
     }
     
+    // Send the Glimp requests.
     @IBAction func sendGlimpRequest(sender: UIButton) {
+        
         // Save copy of selected friends, clear selected friends and sendbar.
         let friendIds = selectedIndexes.keys.array
         selectedIndexes = [:]
@@ -223,21 +223,19 @@ class HomeViewController: UIViewController {
         // Get the cell with the chosen time stored on it.
         let cell = collectionView!.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 2)) as HeaderCollectionViewCell    
         
-        // Send the actual Glimp requests. Use the time from cell, default to 15 minutes.
-        Glimps.sendRequests(friendIds, time: cell.time, callback: {})
+        // Send the actual Glimp requests. Use the time from cell.
+        Glimps.sendGlimpRequests(friendIds, time: cell.time, callback: {})
     }
     
-    @IBAction func unwindToImagePickerViewController(segue: UIStoryboardSegue) {
-        println("unwind")
-        println(segue)
-    }
-    
+    // When a long press is triggered on a ThumbnailViewCell
     func handleLongPress(gestureRecognizer: UILongPressGestureRecognizer) {
         if gestureRecognizer.state != UIGestureRecognizerState.Began {
             return
         }
-        let p = gestureRecognizer.locationInView(self.collectionView!)
-        if let indexPath = self.collectionView!.indexPathForItemAtPoint(p) {
+        
+        // Retrieve the corresponding cell, get the friend from cell and perform the Segue.
+        let location = gestureRecognizer.locationInView(self.collectionView!)
+        if let indexPath = self.collectionView!.indexPathForItemAtPoint(location) {
             let cell = collectionView!.cellForItemAtIndexPath(indexPath) as ThumbnailCollectionViewCell
             if let friend = cell.friend {
                 currentFriend = friend
@@ -246,6 +244,7 @@ class HomeViewController: UIViewController {
         }
     }
     
+    // Helper method to refresh the CollectionView.
     func reloadData() {
         self.collectionView!.reloadData()
     }
@@ -272,11 +271,9 @@ extension HomeViewController: UICollectionViewDataSource {
         }
         
         // Section 1 is incoming glimp requests: Use dummy data.
-        // If there are no requests, show a cell explaining there are no requests.
-        if Glimps.requestsIn.count == 0 {
-            return 1
-        }
-        return Glimps.requestsIn.count
+        // If there are no requests, show a cell explaining there are no requests, thus still making the length 1)
+        let requestsInCount = Glimps.requestsIn.count
+        return requestsInCount == 0 ? 1 : requestsInCount
     }
     
     // Returns the cell to be rendered.
@@ -287,10 +284,13 @@ extension HomeViewController: UICollectionViewDataSource {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("HeaderCollectionViewCell", forIndexPath: indexPath) as HeaderCollectionViewCell
             cell.reset()
             
+            // Set the text for the first and second header.
             if indexPath.section == 0 {
                 cell.headerText!.text = "ANSWER A GLIMP"
             } else {
                 cell.headerText!.text = "ASK A GLIMP"
+                
+                // Show the button for modifying time-to-reply.
                 cell.setTimerButton()
             }
             
@@ -301,68 +301,63 @@ extension HomeViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ThumbnailCollectionViewCell", forIndexPath: indexPath) as ThumbnailCollectionViewCell
         cell.reset()
         
-        // The first button is an add-friend button.
-        if indexPath.section == 3 && indexPath.row == 0 {
-            cell.isAddFriendButton()
-        } else {
-            cell.setRandomBackgroundColor()
+        // Section one are the incoming Glimp-Requests.
+        if indexPath.section == 1 {
             
-            if indexPath.section == 1 {
-                if Glimps.requestsIn.count == 0 {
-                    return collectionView.dequeueReusableCellWithReuseIdentifier("EmptyListCollectionViewCell", forIndexPath: indexPath) as UICollectionViewCell
-                } else {
-                    let request = Glimps.requestsIn[indexPath.row]
-                    cell.setLabel(request["fromUser"]!["username"]! as String)
+            // If there are no incoming Glimp-Requests, return a cell with feedback.
+            if Glimps.requestsIn.count == 0 {
+                return collectionView.dequeueReusableCellWithReuseIdentifier("EmptyListCollectionViewCell", forIndexPath: indexPath) as UICollectionViewCell
+            
+            // Otherwise retrieve the incoming request-data and set it on the cell.
+            } else {
+                cell.setGlimpRequestIn(Glimps.requestsIn[indexPath.row])
+            }
+            
+        // The first button of the bottom section is the add-a-new-friend button.
+        } else if indexPath.section == 3 && indexPath.row == 0 {
+            cell.isAddFriendButton()
+        
+        // Otherwise the cell is a friend button. It must be section 3, and row higher higher than 0.
+        } else {
+            
+            // The cell is a friend.
+            if indexPath.row <= Friends.friends.count {
+                let friend = Friends.friends[indexPath.row - 1]
+                cell.setLabel(friend["username"] as String)
+                if let photo = friend["photo"] as? PFFile {
+                    cell.setImage(photo)
+                }
+                cell.friend = friend
+
+                // If a glimp request has been sent, set it on the cell.
+                if let request = Glimps.findGlimpRequestOut(friend) {
                     cell.setRequest(request)
-                    if let photo = request["fromUser"]!["photo"] as? PFFile {
-                        cell.setImage(photo)
-                    }
-                    
-                    return cell
                 }
                 
-            // If the cell is in the last section and is not the add-friend button...
-            } else if indexPath.section == 3 && indexPath.row > 0 {
+                // If it was selected (before collectionView.reloadData()), select it again.
+                if selectedIndexes[friend.objectId] != nil {
+                    cell.isSelected = true
+                    cell.setCheckmark()
+                }
+            
+            // The cell is an incoming Friend-Request.
+            } else if indexPath.row <= Friends.friends.count + Requests.requestsIn.count {
+                let fromUser = Requests.requestsIn[indexPath.row - Friends.friends.count - 1]["fromUser"]! as PFObject
+                cell.setLabel(fromUser["username"] as String)
+                cell.requestInOverlay!.hidden = false
+                cell.bottomOverlay!.hidden = false
+                if let photo = fromUser["photo"] as? PFFile {
+                    cell.setImage(photo)
+                }
                 
-                // The cell is a friend.
-                if indexPath.row <= Friends.friends.count {
-                    let friend = Friends.friends[indexPath.row - 1]
-                    cell.setLabel(friend["username"] as String)
-                    if let photo = friend["photo"] as? PFFile {
-                        cell.setImage(photo)
-                    }
-                    cell.friend = friend
-
-                    // If a glimp request has been sent, set it on the cell.
-                    if let request = Glimps.findRequestOut(friend) {
-                        cell.setRequest(request)
-                    }
-                    
-                    // If it was selected (before collectionView.reloadData()), select it again.
-                    if selectedIndexes[friend.objectId] != nil {
-                        cell.isSelected = true
-                        cell.setSelected()
-                    }
-                
-                // The cell is an incoming request.
-                } else if indexPath.row <= Friends.friends.count + Requests.requestsIn.count {
-                    let fromUser = Requests.requestsIn[indexPath.row - Friends.friends.count - 1]["fromUser"]! as PFObject
-                    cell.setLabel(fromUser["username"] as String)
-                    cell.requestInOverlay!.hidden = false
-                    cell.bottomOverlay!.hidden = false
-                    if let photo = fromUser["photo"] as? PFFile {
-                        cell.setImage(photo)
-                    }
-                    
-                // The cell is an outgoing request
-                } else {
-                    let toUser = Requests.requestsOut[indexPath.row - Friends.friends.count - Requests.requestsIn.count - 1]["toUser"]! as PFObject
-                    cell.setLabel(toUser["username"] as String)
-                    cell.requestOutOverlay!.hidden = false
-                    cell.bottomOverlay!.hidden = false
-                    if let photo = toUser["photo"] as? PFFile {
-                        cell.setImage(photo)
-                    }
+            // The cell is an outgoing Friend-Request
+            } else {
+                let toUser = Requests.requestsOut[indexPath.row - Friends.friends.count - Requests.requestsIn.count - 1]["toUser"]! as PFObject
+                cell.setLabel(toUser["username"] as String)
+                cell.requestOutOverlay!.hidden = false
+                cell.bottomOverlay!.hidden = false
+                if let photo = toUser["photo"] as? PFFile {
+                    cell.setImage(photo)
                 }
             }
         }
@@ -375,18 +370,19 @@ extension HomeViewController: UICollectionViewDataSource {
         // If the cell is a header, render with full width
         if indexPath.section == 0 || indexPath.section == 2
         {
-            return CGSize(width: collectionView.width, height: 46)
+            return CGSize(width: collectionView.width, height: HEADER_ROW_HEIGHT)
         }
         
+        // If the cell is the feedback-cell with the message: 'No current glimp requests'
         if indexPath.section == 1 && Glimps.requestsIn.count == 0 {
-            return CGSize(width: collectionView.width, height: 46)
+            return CGSize(width: collectionView.width, height: HEADER_ROW_HEIGHT)
         }
         
         // Otherwise create four column thumbnails.
         return collectionView.thumbnailSize;
     }
     
-    // When a sell was selected.
+    // When a sell was tapped (selected).
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
 
         // When the add-friend button was tapped; create a UIAlert with input textfield.
@@ -403,22 +399,23 @@ extension HomeViewController: UICollectionViewDataSource {
         // The cell is in the friend list.
         } else if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? ThumbnailCollectionViewCell {
 
-            // Use ImagePickerViewController to grab a square photo.
+            // Use ImagePickerViewController to grab a square photo for cells in section 1.
             if indexPath.section == 1 {
-                self.performSegueWithIdentifier("showImagePicker", sender: nil)
-                
                 if let request = cell.request {
                     currentCellRequest = cell
                     currentRequest = request
                 }
+                
+                self.performSegueWithIdentifier("showImagePicker", sender: nil)
+                
                 return
             }
             
-            // If the cell is an incoming request.
+            // If the cell is an incoming Friend-Request.
             if indexPath.row > Friends.friends.count && indexPath.row <= Friends.friends.count + Requests.requestsIn.count {
                 return addOrIgnoreFriendRequestIn(indexPath.row - Friends.friends.count - 1)
                 
-            // If the cell is an outgoing request.
+            // If the cell is an outgoing Friend-Request.
             } else if indexPath.row > Friends.friends.count + Requests.requestsIn.count {
                 return addOrIgnoreFriendRequestOut(indexPath.row - Friends.friends.count - Requests.requestsIn.count - 1)
             }
@@ -428,7 +425,7 @@ extension HomeViewController: UICollectionViewDataSource {
                 return
             }
             cell.isSelected = !cell.isSelected
-            cell.setSelected()
+            cell.setCheckmark()
             
             toggleSelectFriend(Friends.friends[indexPath.row - 1].objectId, select: cell.isSelected)
         }
@@ -448,21 +445,17 @@ extension HomeViewController: UICollectionViewDelegate {
     }
 }
 
-extension HomeViewController: UICollectionViewDelegateFlowLayout {}
-
+// Delegate required for gestures.
 extension HomeViewController: UIGestureRecognizerDelegate {}
 
 extension HomeViewController: UIAlertViewDelegate {
     
+    // AlertView for adding new friends by username.
     func alertView(alertView: UIAlertView!, clickedButtonAtIndex buttonIndex: Int) {
-        switch buttonIndex {
-        case 0:
+        if buttonIndex == 0 {
             if let username = alertView.textFieldAtIndex(0)?.text {
                 self.addFriend(username)
             }
-            break;
-        default:
-            break;
         }
     }
 }
@@ -489,12 +482,12 @@ extension HomeViewController: UIActionSheetDelegate {
     }
 }
 
+// Delegate for callbacks on CropperView
 extension HomeViewController: VPViewControllerDelegate {
     func imageCropper(cropperViewController: VPViewController!, didFinished editedImage: UIImage!) {
+        
+        // When an image is successfully returned, answer the Glimp-Request.
         if editedImage != nil && self.currentCellRequest != nil && self.currentRequest != nil {
-            
-            // Show loading indicator on cell and answer the glimp.
-            self.currentCellRequest.isLoading!.hidden = false
             Glimps.answerGlimpRequestIn(self.currentRequest, image: editedImage!, callback: {})
         }
         self.currentCellRequest = nil

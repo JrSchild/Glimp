@@ -33,9 +33,6 @@ class FriendRequestsCollection : Collection {
             .includeKey("toUser")
         
         query.findObjectsInBackgroundWithBlock({ (requests: [AnyObject]?, error: NSError?) -> Void in
-            if error != nil {
-                println("ERROR \(error)")
-            }
             
             // Reset the data arrays.
             self.requestsIn = []
