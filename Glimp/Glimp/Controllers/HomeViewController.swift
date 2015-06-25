@@ -47,12 +47,12 @@ class HomeViewController: UIViewController {
         setSendBar()
         
         // Initialize swipe right.
-        var swipeRightGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "showGlimps")
+        let swipeRightGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "showGlimps")
         swipeRightGestureRecognizer.direction = UISwipeGestureRecognizerDirection.Right
         collectionView!.addGestureRecognizer(swipeRightGestureRecognizer)
         
         // Initialize swipe left.
-        var swipeLeftGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "showProfile")
+        let swipeLeftGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "showProfile")
         swipeLeftGestureRecognizer.direction = UISwipeGestureRecognizerDirection.Left
         collectionView!.addGestureRecognizer(swipeLeftGestureRecognizer)
         
