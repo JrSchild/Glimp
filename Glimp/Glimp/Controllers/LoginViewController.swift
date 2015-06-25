@@ -35,12 +35,15 @@ class LoginViewController: UIViewController, PFLogInViewControllerDelegate, PFSi
                 self.performSegueWithIdentifier("dismissLogin", sender: nil)
             })
         } else {
+            let logo = UIImageView(image: UIImage(named: "login-logo"))
             signUpViewController = PFSignUpViewController()
             signUpViewController.delegate = self
+            (signUpViewController.signUpView.logo as UIImageView).image = logo.image
             
             logInController = PFLogInViewController()
             logInController.delegate = self
             logInController.signUpController = signUpViewController
+            logInController.logInView.logo = logo
             presentViewController(logInController, animated: false, completion: nil)
         }
     }
