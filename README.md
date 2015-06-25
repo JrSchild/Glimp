@@ -5,8 +5,8 @@ Glimp lets users ask for a glimp (glimpse) in someone’s life. The user is in c
 ![Glimp Screenshots](/doc/screenshots.jpg)
 
 ### External Sources
-- Parse/ParseUI https://parse.com/
-- Custom Segue's by Gabriel Theodoropoulos http://www.appcoda.com/custom-segue-animations/
-- Image Cropper by Vinson D. Warm https://github.com/windshg/VPImageCropper
+- [Parse/ParseUI](https://parse.com/)
+- [Custom Segue's by Gabriel Theodoropoulos](http://www.appcoda.com/custom-segue-animations/)
+- [Image Cropper by Vinson D. Warm](https://github.com/windshg/VPImageCropper)
 
 Copyright 2015 Joram Ruitenschild
