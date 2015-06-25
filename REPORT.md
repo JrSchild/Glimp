@@ -24,9 +24,6 @@ RefreshData is a global method used to reload all the collections described abov
 The focus of this project lies in app development. Creating an API, setting up and maintaining a server would be time consuming and outside of the scope of this project. Parse provides a great abstraction for anything related with data. It provides a login screen, querying, file uploading, caching and much more. This made the development so much smoother because it made me focus on the app and user experience, rather than the database.
 
 ### Design Decissions
-	Changes with regard to design document.
-	Argument them, why, is it an improvement, how?
-
 ##### Notifying Views
 Data in the app is stored across different collections. This abstracts the data handling away from the views and makes it easier to use in separate  places. The problem this brings is that views need to know when the data is updated so it can be recalculated. The collections need to notify every class that is dependent of that data. I have looked at several implementations for an EventEmitter, I have found that none of them suited my needs. Eventually I have decided to settle with the native NSNotificationsCenter. The syntax is a little bit verbose, but I decided to user it because it provides a powerful set of features for notifications and automatically cleans up listeners.  
 Each collection has its own notification-key. When a ViewController is instantiated it attaches a listener with that key. When a notification comes in, the view knows it needs to update its content to keep the data synchronized between memory and view.
