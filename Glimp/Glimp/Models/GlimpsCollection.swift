@@ -108,19 +108,15 @@ class GlimpsCollection : Collection {
     }
     
     func answerGlimpRequestIn(request: PFObject, image: UIImage, callback: () -> Void) {
-        if contains(requestsIn, request) {
+        if let index = find(self.requestsIn, request) {
             request["photo"] = PFFile(data: UIImageJPEGRepresentation(image, 0.9))
             request.saveInBackgroundWithBlock({ (success, error) -> Void in
-                if success {
-                    if let index = find(self.requestsIn, request) {
-                        self.requestsIn.removeAtIndex(index)
-                        self.glimpsOut.append(request)
-                    }
-                }
-                Friends.sort()
-                self.notify()
                 callback()
             })
+            self.requestsIn.removeAtIndex(index)
+            self.glimpsOut.append(request)
+            Friends.sort()
+            self.notify()
         }
     }
     
