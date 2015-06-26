@@ -15,6 +15,10 @@ class ThumbnailCollectionView: UICollectionView {
     let height: CGFloat!
     let thumbnailSize: CGSize!
     
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
     override init(frame: CGRect) {
         width = frame.width
         height = frame.height
