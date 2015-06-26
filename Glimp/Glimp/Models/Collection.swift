@@ -5,7 +5,7 @@
 //  Created by Joram Ruitenschild on 05-06-15.
 //  Copyright (c) 2015 Joram Ruitenschild. All rights reserved.
 //
-//  Base Collection class.
+//  Base Collection class. Does basic data handling. Intended to be subclassed.
 
 import Foundation
 import Parse

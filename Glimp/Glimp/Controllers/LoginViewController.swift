@@ -5,6 +5,7 @@
 //  Created by Joram Ruitenschild on 01-06-15.
 //  Copyright (c) 2015 Joram Ruitenschild. All rights reserved.
 //
+//  The first View that gets bootstrapped, makes sure the user is logged in or shows the Login screen.
 
 import UIKit
 import Parse

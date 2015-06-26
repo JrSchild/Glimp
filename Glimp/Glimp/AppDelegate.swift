@@ -20,8 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         UIApplication.sharedApplication().statusBarHidden = true
         
-        // [Optional] Power your app with Local Datastore. For more info, go to
-        // https://parse.com/docs/ios_guide#localdatastore/iOS
+        // Set up the local Parse Datastore.
         Parse.enableLocalDatastore()
         
         // Initialize Parse.
@@ -30,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // [Optional] Track statistics around application opens.
         PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
         
+        // Register push notifications for both iOS 7.1 and 8.0+.
         if application.respondsToSelector(Selector("registerUserNotificationSettings:")) {
             let notificationTypes = UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound
             let settings = UIUserNotificationSettings(forTypes: notificationTypes, categories: nil)
@@ -42,17 +42,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    // Save the current device to the server when notifications are registered.
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
         let currentInstallation = PFInstallation.currentInstallation()
         currentInstallation.setDeviceTokenFromData(deviceToken)
         currentInstallation.saveInBackground()
     }
     
+    // Handle incoming push notifications.
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
         PFPush.handlePush(userInfo)
         RefreshData()
     }
     
+    // To log out: All data needs to be destroyed, the user will be deleted from the device settings.
     func logOut() {
         Friends.destroy()
         Requests.destroy()
@@ -62,6 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         installation.removeObjectForKey("User")
         installation.saveInBackground()
         
+        // Log the user out from Parse and go back to the LoginViewController.
         PFUser.logOutInBackgroundWithBlock { (error) -> Void in
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let controller = storyboard.instantiateViewControllerWithIdentifier("LoginViewController") as LoginViewController

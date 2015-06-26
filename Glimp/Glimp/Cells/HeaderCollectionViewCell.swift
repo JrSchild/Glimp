@@ -5,6 +5,7 @@
 //  Created by Joram Ruitenschild on 12-06-15.
 //  Copyright (c) 2015 Joram Ruitenschild. All rights reserved.
 //
+//  A Header Cell for in the CollectionView.
 
 import UIKit
 
@@ -17,6 +18,7 @@ class HeaderCollectionViewCell: UICollectionViewCell {
     
     var time = DEFAULT_ANSWER_TIME
     
+    // Show the button to change the time-to-reply for a Glimp-Request.
     func setTimerButton() {
         timerButton!.hidden = false
         timerButton!.layer.borderColor = UIColor.blackColor().CGColor
@@ -26,6 +28,7 @@ class HeaderCollectionViewCell: UICollectionViewCell {
         updateTimeButton()
     }
     
+    // Change the text of the timer button.
     func updateTimeButton() {
         let timeIndex = ANSWER_TIMES_GLIMP_REQUEST.filter({ $0[0] == self.time })
         
@@ -34,6 +37,7 @@ class HeaderCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    // Set the time for time-to-reply a Glimp-Request.
     @IBAction func selectTime(sender: UIButton) {
         let sheet: UIActionSheet = UIActionSheet();
         sheet.delegate = self;
@@ -52,7 +56,7 @@ class HeaderCollectionViewCell: UICollectionViewCell {
 
 extension HeaderCollectionViewCell: UIActionSheetDelegate {
     
-    // When an actionsheet is closed.
+    // When an actionsheet is closed, set the new time and update the button.
     func actionSheet(sheet: UIActionSheet!, clickedButtonAtIndex buttonIndex: Int) {
         if buttonIndex < ANSWER_TIMES_GLIMP_REQUEST.count {
             time = ANSWER_TIMES_GLIMP_REQUEST[buttonIndex][0] as Int

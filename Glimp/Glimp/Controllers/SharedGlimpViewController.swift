@@ -5,6 +5,7 @@
 //  Created by Joram Ruitenschild on 16-06-15.
 //  Copyright (c) 2015 Joram Ruitenschild. All rights reserved.
 //
+//  Shows all the Glimps current user has shared with a specified friend.
 
 import UIKit
 import Parse

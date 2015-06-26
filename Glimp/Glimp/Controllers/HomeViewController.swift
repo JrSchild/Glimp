@@ -5,6 +5,7 @@
 //  Created by Joram Ruitenschild on 01-06-15.
 //  Copyright (c) 2015 Joram Ruitenschild. All rights reserved.
 //
+//  This View shows all your friends, incoming/outgoing Glimp requests and incoming/outgoing Friend requests.
 
 import UIKit
 import Parse

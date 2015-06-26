@@ -5,6 +5,7 @@
 //  Created by Joram Ruitenschild on 16-06-15.
 //  Copyright (c) 2015 Joram Ruitenschild. All rights reserved.
 //
+//  Refreshes data in parallel, optional callback can be passed for when action is completed.
 
 import Foundation
 

@@ -5,7 +5,7 @@
 //  Created by Joram Ruitenschild on 04-06-15.
 //  Copyright (c) 2015 Joram Ruitenschild. All rights reserved.
 //
-//  A cell for thumbnail. Implements different properties and methods for different types of cells.
+//  A Cell for thumbnail. Implements different properties and methods for different types of cells.
 
 import UIKit
 import Parse

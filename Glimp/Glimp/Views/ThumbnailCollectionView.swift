@@ -5,6 +5,7 @@
 //  Created by Joram Ruitenschild on 16-06-15.
 //  Copyright (c) 2015 Joram Ruitenschild. All rights reserved.
 //
+//  A CollectionView with a four column layout.
 
 import UIKit
 
@@ -13,10 +14,6 @@ class ThumbnailCollectionView: UICollectionView {
     let width: CGFloat!
     let height: CGFloat!
     let thumbnailSize: CGSize!
-    
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
     
     override init(frame: CGRect) {
         width = frame.width
