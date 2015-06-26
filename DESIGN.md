@@ -199,4 +199,4 @@ All of the features above are considered to be part of the MVP (unless indicated
 - Customize login and register view. (Left bottom)
 
 ### And now the Design!
-![Design](/doc/design.jpg)
+![Design](/docs/design.jpg)
